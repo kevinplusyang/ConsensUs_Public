@@ -13,17 +13,17 @@
         <td></td>
         <td></td>
         <td>Total Score</td>
-        {{#each cellFindRow 0}}
+        {{#each cellFindRow -1}}
         {{> cellshow}}
         {{/each}}
-      </tr>
-     	
+      </tr>  	
      		<tr>
      		<th></th>
      		<th>Weight</th>
      		<th>Normalized Weight</th>
-     		<th>Hawaii</th>
-     		<th>New York</th>
+     		{{#each cellFindRow 0}}
+        {{> cellshow}}
+        {{/each}}
      		</tr>
      	</thead>
      	<tbody>
@@ -50,15 +50,18 @@
   </template>
 
 <template name = "cellshow">
-  	<td>
+  <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}}
   </td>
   <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>
 
 <template name = "celllist">
-    <li>{{row}},{{column}},{{data}}
-    <!-- <a href="#" class="delete-cell">Delete</a> -->
+    <li>row: {{> editableText collection="cells" field="row" saveOnFocusout=true}}
+    column: {{> editableText collection="cells" field="col" saveOnFocusout=true}}
+    data: {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+    <!-- {{row}},{{column}},{{data}} -->
+    <a href="#" class="delete-cell">Delete</a>
     </li>
   <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>

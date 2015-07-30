@@ -31,7 +31,7 @@ var updateWeight = function(){
       // });
 }
 var updateTotal = function(){
-      var totalArray = cellFindRow(0);
+      var totalArray = cellFindRow(-1);
  //     var norWeight = cellFindCol(2);
       //(0,3) (0,4) 
     //  console.log('here');
@@ -42,7 +42,7 @@ var updateTotal = function(){
         //(:,3)
         scoreCol.forEach(function(cellInside){
 
-          if (Number(cellInside.row)!== 0) {
+          if (Number(cellInside.row)>= 1) {
 
             sum =sum + Number(cellFindOne(cellInside.row,2).data ) * Number(cellInside.data) ;
 
@@ -66,7 +66,10 @@ var updateTotal = function(){
     totalScore: function(columnNo,rowTotal){
       var totalValue = cellFindOne(2, 2);
       return totalValue.data;
-    }
+    },
+    factorCo: 2,
+    candidateCo:2
+
 
 
 
