@@ -51,7 +51,10 @@ var updateTotal = function(){
         Cells.update(cell._id,{$set: {data: sum}});
      });
 }
+//var factorCo=2;
+//var candidateCo=2;
 
+var proID='p4tETnfgHArySKLGJ';
 
   Template.matrix.helpers({
     cell: function () {
@@ -67,20 +70,82 @@ var updateTotal = function(){
       var totalValue = cellFindOne(2, 2);
       return totalValue.data;
     },
-    factorCo: 2,
-    candidateCo:2
-
-
-
-
-
+    //factorCo: 2,
+    //candidateCo:2
+  });
+  Template.test.helpers({
+    project: function () {
+      
+      return Projects.find();
+    }
+    //factorCo: 2,
+    //candidateCo:2
   });
 
-  Template.celllist.events({
+Template.celllist.events({
    'click .delete-cell': function(event) {
  
     event.preventDefault();
     var documentID = this._id;
     Cells.remove({_id: documentID});
+    }
+  });
+
+Template.addingCan.events({
+    'submit form': function(event){
+    event.preventDefault();
+    var thisProject = Projects.findOne({_id: proID});
+    var canName = $('[name="canName"]').val();
+    for (var i=-1;i<=Number(thisProject.rows);i++){
+      if(i===0){
+        Cells.insert({
+        data: canName,
+        row: 0,
+        createdAt: new Date(),
+        column: Number(thisProject.columns)+3
+        });
+      }else{
+        Cells.insert({
+        data: 0,
+        row: i,
+        createdAt: new Date(),
+        column: Number(thisProject.columns)+3
+        });
+      }
+    }
+    Projects.update(
+      proID,
+      {$set: 
+        {columns: 
+          Number(thisProject.columns)+1
+        }
+      }
+      );
+    
+    //console.log(candidateCo);
+  }
+});
+Template.adding.events({
+    'submit form': function(event){
+    event.preventDefault();
+
+    var rno = Number($('[name="rowNo"]').val());
+    var cno = Number($('[name="colNo"]').val());
+    Cells.insert({
+    data: 0,
+    row: rno,
+    createdAt: new Date(),
+    column: cno,
+    projectID:"p4tETnfgHArySKLGJ"
+    });
+  }
+});
+
+Template.projectlist.events({
+   'click .delete-project': function(event) {
+ 
+    event.preventDefault();
+    var documentID = this._id;
+    Projects.remove({_id: documentID});
     }
   });

@@ -1,12 +1,4 @@
 <template name = 'matrix'>
-<!--      <table class="table table-bordered">
-       <tr>
-        <td>Total Score</td>
-        {{#each cellFindRow 0}}
-        {{> cellshow}}
-        {{/each}}
-      </tr>
-      </table> -->
      <table class="table table-bordered">
       <thead>
       <tr>
@@ -27,14 +19,12 @@
      		</tr>
      	</thead>
      	<tbody>
-     	<tr>
-     		
+     	<tr>  		
      		{{#each cellFindRow 1}}
    			{{> cellshow}}
    			{{/each}}
      	</tr>
      	<tr>
-     		
      		{{#each cellFindRow 2}}
    			{{> cellshow}}
    			{{/each}}
@@ -43,25 +33,48 @@
    		</tbody>
    	</table>
   
-  <ul>{{#each cell}}
+<!--   <ul>{{#each cell}}
   {{> celllist}}
   {{/each}} 
-  </ul>		
-  </template>
+  </ul> -->
+
+
+
+<!--   {{> adding}} -->
+  {{> addingCan}}
+
+
+</template>
 
 <template name = "cellshow">
   <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}}
   </td>
-  <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>
 
 <template name = "celllist">
     <li>row: {{> editableText collection="cells" field="row" saveOnFocusout=true}}
-    column: {{> editableText collection="cells" field="col" saveOnFocusout=true}}
+    column: {{> editableText collection="cells" field="column" saveOnFocusout=true}}
     data: {{> editableText collection="cells" field="data" saveOnFocusout=true}}
-    <!-- {{row}},{{column}},{{data}} -->
+    project: {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}
     <a href="#" class="delete-cell">Delete</a>
     </li>
-  <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>
+
+<template name="addingCan">
+    <form>
+        Add a candidate:
+        <input type="text" placeholder="Type a candidate here..." name="canName">
+    </form>
+</template>
+<template name="adding">
+    <form>
+        Add a cell in project "p4tETnfgHArySKLGJ":
+        <input type="text" placeholder="row" name="rowNo" />
+        <br/>
+        <input type="text" placeholder="col" name="colNo" />
+        <br/>
+        <input type="submit" value="Submit" />
+    </form>
+</template> 
+
