@@ -70,16 +70,26 @@ var proID='p4tETnfgHArySKLGJ';
       var totalValue = cellFindOne(2, 2);
       return totalValue.data;
     },
+    rowNum: function(){
+      var col0 = cellFindCol(0);
+      return col0;
+    }
     //factorCo: 2,
     //candidateCo:2
   });
+
+  Template.matBody.helpers({
+    cellFindRow: function(rowNo){
+      return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+    }
+});
+
+
   Template.test.helpers({
     project: function () {
       
       return Projects.find();
     }
-    //factorCo: 2,
-    //candidateCo:2
   });
 
 Template.celllist.events({
@@ -91,7 +101,7 @@ Template.celllist.events({
     }
   });
 
-Template.addingCan.events({
+Template.addCandidate.events({
     'submit form': function(event){
     event.preventDefault();
     var thisProject = Projects.findOne({_id: proID});
@@ -102,14 +112,16 @@ Template.addingCan.events({
         data: canName,
         row: 0,
         createdAt: new Date(),
-        column: Number(thisProject.columns)+3
+        column: Number(thisProject.columns)+3,
+        projectID:proID
         });
       }else{
         Cells.insert({
         data: 0,
         row: i,
         createdAt: new Date(),
-        column: Number(thisProject.columns)+3
+        column: Number(thisProject.columns)+3,
+        projectID:proID
         });
       }
     }
@@ -125,6 +137,46 @@ Template.addingCan.events({
     //console.log(candidateCo);
   }
 });
+
+Template.addFactor.events({
+    'submit form': function(event){
+    event.preventDefault();
+    var thisProject = Projects.findOne({_id: proID});
+    var facName = $('[name="facName"]').val();
+    for (var i=0;i<=Number(thisProject.columns)+2;i++){
+      if(i===0){
+        Cells.insert({
+        data: facName,
+        row: thisProject.rows+1,
+        createdAt: new Date(),
+        column: 0,
+        projectID:proID
+        });
+      }else{
+        Cells.insert({
+        data: 0,
+        row: thisProject.rows+1,
+        createdAt: new Date(),
+        column: i,
+        projectID:proID
+        });
+      }
+    }
+    Projects.update(
+      proID,
+      {$set: 
+        {rows: 
+          Number(thisProject.rows)+1
+        }
+      }
+      );
+    
+    //console.log(candidateCo);
+  }
+});
+
+
+
 Template.adding.events({
     'submit form': function(event){
     event.preventDefault();
