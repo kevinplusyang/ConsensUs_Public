@@ -32,20 +32,14 @@ var updateWeight = function(){
 }
 var updateTotal = function(){
       var totalArray = cellFindRow(-1);
- //     var norWeight = cellFindCol(2);
-      //(0,3) (0,4) 
-    //  console.log('here');
+
       totalArray.forEach(function(cell){
         var sum = 0;
         Col=cell.column;
         var scoreCol = cellFindCol(Col);
-        //(:,3)
         scoreCol.forEach(function(cellInside){
-
           if (Number(cellInside.row)>= 1) {
-
             sum =sum + Number(cellFindOne(cellInside.row,2).data ) * Number(cellInside.data) ;
-
           };
         });
         Cells.update(cell._id,{$set: {data: sum}});
