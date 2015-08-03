@@ -1,6 +1,10 @@
 // Accounts.ui.config({
 //     passwordSignupFields: "USERNAME_ONLY"
 //   });
+var projAddUser=function(cuserID,userName,proID){
+
+	return Projects.update(proID,{$push: {users: {userID:cuserID,username:userName}}});
+};
 Template.register.events({
     'submit form': function(){
         event.preventDefault();
@@ -8,8 +12,21 @@ Template.register.events({
         var password = $('[name=password]').val();
         Accounts.createUser({
             username: username,
-            password: password
-        });
+            password: password},
+            function(err){
+        	if(err)
+        		console.log(err);
+        	else
+        	{
+        	var proID = "p4tETnfgHArySKLGJ";
+        	var currentUserID = Meteor.userId();
+        //console.log(Meteor.userId());
+        	console.log(currentUserID);
+ 			projAddUser(currentUserID,username,proID);
+        	}
+    	});
+        
+
         Router.go('user');
     }
 });
@@ -23,9 +40,13 @@ Template.navigation.events({
 Template.login.events({
     'submit form': function(event){
         event.preventDefault();
-        var username = $('[name=username]').val();
-        var password = $('[name=password]').val();
-        Meteor.loginWithPassword(username, password);
+        var username = $('#username').val();
+        var password = $('#password').val();
+        Meteor.loginWithPassword(username, password,function(err){
+        	if(err){
+        		console.log(err);
+        	}
+        });
         Router.go('user');
     }
 });

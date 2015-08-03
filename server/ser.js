@@ -38,7 +38,8 @@ var updateTotal = function(){
 var destroy = function() {
 	Cells.remove({});
 	Projects.remove({});
-	Projects.insert({_id:"p4tETnfgHArySKLGJ",rows:2,columns:2,createdAt: new Date(),name:"P1"});
+	Meteor.users.remove({});
+	Projects.insert({_id:"p4tETnfgHArySKLGJ",rows:2,columns:2,createdAt: new Date(),name:"P1",users:[]});
 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:3,data:0,createdAt: new Date()});
 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:4,data:0,createdAt: new Date()});
 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:0,column:3,data:'New York',createdAt: new Date()});

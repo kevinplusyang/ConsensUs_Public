@@ -1,6 +1,7 @@
 <template name="project">
   {{> navigation}}
   <h2>Project </h2>
+  
   <p>The matrix will self reconstruct every 2 minutes.</p>
 	{{> matrix}}
 	<!-- {{> test}} -->
@@ -13,8 +14,9 @@
     <a class="navbar-brand" href="#">ConsensUS</a>
     </div>
     <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/">Home</a></li>
         {{#if currentUser}}
+        <!-- windows.confirm(currentUser); -->
         <li><a href="#" class="logout">Logout</a></li>
         {{/if}}
     </ul>
