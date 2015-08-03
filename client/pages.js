@@ -42,7 +42,7 @@ var updateTotal = function(){
 
 var proID='p4tETnfgHArySKLGJ';
 
-  Template.matrix.helpers({
+Template.matrix.helpers({
     cell: function () {
       updateWeight();
       updateTotal();
@@ -64,14 +64,14 @@ var proID='p4tETnfgHArySKLGJ';
     //candidateCo:2
   });
 
-  Template.matBody.helpers({
+Template.matBody.helpers({
     cellFindRow: function(rowNo){
       return Cells.find({ row: rowNo },{ sort:{column: 1 }});
     }
 });
 
 
-  Template.test.helpers({
+Template.test.helpers({
     project: function () {
       
       return Projects.find();

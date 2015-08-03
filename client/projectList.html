@@ -3,17 +3,13 @@
 
     <ul>
         {{#each project}}
-            <li>{{name}}</li>
+            <li><a href="{{pathFor route='project'}}">{{name}}</a></li>
         {{/each}}
     </ul>
 
-
-
     <a href="/project">Project</a>
 
-
 </template>
-
 
 
 <template name="addProject">
