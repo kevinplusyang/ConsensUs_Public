@@ -1,12 +1,4 @@
 
-  // counter starts at 0
-  // Session.setDefault('counter', 0);
-
-  // Template.hello.helpers({
-  //   counter: function () {
-  //     return Session.get('counter');
-  //   }
-  // });
 
 var cellFindOne = function(rowNo, columnNo){
       return Cells.findOne({ row: rowNo, column:columnNo});
