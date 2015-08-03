@@ -179,11 +179,39 @@ Template.adding.events({
   }
 });
 
-Template.projectlist.events({
-   'click .delete-project': function(event) {
- 
-    event.preventDefault();
-    var documentID = this._id;
-    Projects.remove({_id: documentID});
+//Template.projectlist.events({
+//   'click .delete-project': function(event) {
+//
+//    event.preventDefault();
+//    var documentID = this._id;
+//    Projects.remove({_id: documentID});
+//    }
+//  });
+
+Template.projectList.helpers({
+    'project': function(){
+        return Projects.find({}, {sort:{createdAt:1}});
     }
-  });
+});
+
+
+Template.addProject.events({
+    'submit form': function(event){
+        event.preventDefault();
+        var projectName = $('[name=projectName]').val();
+        var currentUser = Meteor.userId();
+        var names = Meteor.user().username;
+        Projects.insert({
+            name : projectName,
+            createdby: currentUser,
+            columns:2,
+            rows:2,
+            users:[{userId:currentUser,username:names}],
+            createdAt:new Date()
+        }, function(error, result){
+            Router.go('projectPage', {_id: results })
+        });
+
+        $('[name=projectName]').val();
+    }
+});
