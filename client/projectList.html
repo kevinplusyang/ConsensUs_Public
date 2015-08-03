@@ -1,5 +1,14 @@
 <template name="projectList">
     {{> addProject}}
+
+    <ul>
+        {{#each project}}
+            <li>{{name}}</li>
+        {{/each}}
+    </ul>
+
+
+
     <a href="/project">Project</a>
 
 
@@ -10,6 +19,5 @@
 <template name="addProject">
     <form>New Project Name:
         <input type="text" placeholder="Enter a Project Name Here" name="projectName">
-
     </form>
 </template>

@@ -179,14 +179,21 @@ Template.adding.events({
   }
 });
 
-Template.projectlist.events({
-   'click .delete-project': function(event) {
- 
-    event.preventDefault();
-    var documentID = this._id;
-    Projects.remove({_id: documentID});
+//Template.projectlist.events({
+//   'click .delete-project': function(event) {
+//
+//    event.preventDefault();
+//    var documentID = this._id;
+//    Projects.remove({_id: documentID});
+//    }
+//  });
+
+Template.projectList.helpers({
+    'project': function(){
+        return Projects.find({}, {sort:{createdAt:1}});
     }
-  });
+});
+
 
 Template.addProject.events({
     'submit form': function(event){
