@@ -1,8 +1,10 @@
 <template name="user">
 {{> navigation}}
 {{#if currentUser}}
-<a href="/project">Project</a>
+    {{> projectList}}
 {{else}}
 <p>please login</p>
 {{/if}}
 </template>
+
+
