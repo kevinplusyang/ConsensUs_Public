@@ -55,3 +55,18 @@ Template.login.events({
 
 
 
+Template.joinProject.events({
+    'submit form': function(event){
+        event.preventDefault();
+        var name = Meteor.user().username;
+        console.log(name);
+        var currentUser = Meteor.userId();
+        var joinproject = $('[name=joinproject]').val();
+        $('[name=joinproject]').val('');
+
+        Projects.update({_id:joinproject},{$push: {users: {userId:currentUser,username:name}}});
+
+    }
+});
+
+
