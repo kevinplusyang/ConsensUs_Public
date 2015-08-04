@@ -1,18 +1,26 @@
 <template name="projectList">
+    <!--Show the project list in control panel-->
+
     {{> addProject}}
+    <!--Show addProject template-->
+
 
     <ul>
         {{#each project}}
             <li><a href="{{pathFor route='project'}}">{{name}}</a></li>
         {{/each}}
     </ul>
+    <!--Show the existing project list-->
+
 
     <a href="/project">Project</a>
+    <!--Only for test use-->
 
 </template>
 
 
 <template name="addProject">
+    <!--Input container for adding user template-->
     <form>New Project Name:
         <input type="text" placeholder="Enter a Project Name Here" name="projectName">
     </form>

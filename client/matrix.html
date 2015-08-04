@@ -1,6 +1,7 @@
 <template name = 'matrix'>
      <table class="table table-bordered">
       <thead>
+
       <tr>
         <td></td>
         <td></td>
@@ -9,23 +10,30 @@
         {{> cellshow}}
         {{/each}}
       </tr>
-     		<tr>
-     		<th></th>
-     		<th>Weight</th>
-     		<th>Normalized Weight</th>
-     		{{#each cellFindRow 0}}
-        {{> cellshow}}
-        {{/each}}
-     		</tr>
-     	</thead>
-     	<tbody>
-      {{#each rowNum}}
-      {{> matBody}}
-      {{/each}}
-   		</tbody>
-   	</table>
+
+      <tr>
+          <th></th>
+          <th>Weight</th>
+          <th>Normalized Weight</th>
+          {{#each cellFindRow 0}}
+            {{> cellshow}}
+          {{/each}}
+      </tr>
+
+      </thead>
+
+
+         <tbody>
+            {{#each rowNum}}
+                {{> matBody}}
+            {{/each}}
+         </tbody>
+     </table>
+
   {{> addCandidate}}
-  {{> addFactor}} 
+
+  {{> addFactor}}
+
   <h3>test</h3>
   
   <ul>{{#each cell}}
@@ -37,7 +45,6 @@
 
 </template>
 
-
 <template name = "matBody">
       <tr>      
         {{#each cellFindRow row}}
@@ -45,7 +52,6 @@
         {{/each}}
       </tr>
 </template>
-    
 
 <template name = "cellshow">
   <td>
@@ -75,7 +81,6 @@
         <input type="text" placeholder="Type a factor here..." name="facName">
     </form>
 </template>
-
 
 <template name="adding">
     <form>
