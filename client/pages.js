@@ -1,42 +1,66 @@
+Meteor.subscribe("cells");
+Meteor.subscribe("projects");
+Meteor.subscribe("chatroom");
 
 
-var cellFindOne = function(rowNo, columnNo){
-      return Cells.findOne({ row: rowNo, column:columnNo});
+var cellFindOne = function(rowNo, columnNo,proID){
+      return Cells.findOne({ row: rowNo, column:columnNo, projectID:proID});
 }
-var cellFindCol= function(colNo){
-      return Cells.find({ column: colNo },{ sort:{row: 1 }});
+var cellFindCol= function(colNo,proID){
+      return Cells.find({ column: colNo, projectID:proID},{ sort:{row: 1 }});
 }
-var cellFindRow= function(rowNo){
-      return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+var cellFindRow= function(rowNo,proID){
+      return Cells.find({ row: rowNo, projectID:proID},{ sort:{column: 1 }});
 }
-var updateWeight = function(){
-      var weightArray = cellFindCol(1);
+var updateWeight = function(proID){
+      var weightArray = cellFindCol(1,proID);
       var sum = 0;
       weightArray.forEach(function(cell){
         sum =sum + Number(cell.data);
       });
-      cellFindCol(2).forEach(function(cell){
-        Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1).data/sum}});
+      cellFindCol(2,proID).forEach(function(cell){
+        Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID).data/sum}});
       });
       // norWeightArray.forEach(function(cell){
       //   cell.data=Number(cell.data)/sum;
       // });
 }
-var updateTotal = function(){
-      var totalArray = cellFindRow(-1);
+var updateTotal = function(proID){
+      var totalArray = cellFindRow(-1,proID);
 
       totalArray.forEach(function(cell){
         var sum = 0;
         Col=cell.column;
-        var scoreCol = cellFindCol(Col);
+        var scoreCol = cellFindCol(Col,proID);
         scoreCol.forEach(function(cellInside){
           if (Number(cellInside.row)>= 1) {
-            sum =sum + Number(cellFindOne(cellInside.row,2).data ) * Number(cellInside.data) ;
+            sum =sum + Number(cellFindOne(cellInside.row,2,proID).data ) * Number(cellInside.data) ;
           };
         });
         Cells.update(cell._id,{$set: {data: sum}});
      });
 }
+
+var initialProject = function(proID){
+ Cells.insert({projectID:proID,row:-1,column:3,data:0,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:-1,column:4,data:0,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:0,column:3,data:'New York',createdAt: new Date()});
+ Cells.insert({projectID:proID,row:0,column:4,data:'Hawaii',createdAt: new Date()});
+ Cells.insert({projectID:proID,row:1,column:0,data:'Cost',createdAt: new Date()});
+ Cells.insert({projectID:proID,row:2,column:0,data:'Safety',createdAt: new Date()});
+ Cells.insert({projectID:proID,row:1,column:1,data:3,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:1,column:2,data:1,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:1,column:3,data:2,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:1,column:4,data:3,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:2,column:1,data:1,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:2,column:2,data:2,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:2,column:3,data:3,createdAt: new Date()});
+ Cells.insert({projectID:proID,row:2,column:4,data:1,createdAt: new Date()});
+ updateWeight(proID);
+ updateTotal(proID);
+}
+
+
 //var factorCo=2;
 //var candidateCo=2;
 
@@ -44,20 +68,23 @@ var proID='p4tETnfgHArySKLGJ';
 
 Template.matrix.helpers({
     cell: function () {
-      updateWeight();
-      updateTotal();
+      updateWeight(this._id);
+      updateTotal(this._id);
       return Cells.find();
     },
+    cellthis:function(){
+      return Cells.find({projectID: this._id});
+    },
     cellFindRow: function(rowNo){
-      return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+      //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+      return cellFindRow(rowNo,this._id);
     },
-
-    totalScore: function(columnNo,rowTotal){
-      var totalValue = cellFindOne(2, 2);
-      return totalValue.data;
-    },
+    // cellFindCol: function(colNo){
+    //   //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+    //   return cellFindCol(colNo,this._id);
+    // },
     rowNum: function(){
-      var col0 = cellFindCol(0);
+      var col0 = cellFindCol(0,this._id);
       return col0;
     }
     //factorCo: 2,
@@ -65,18 +92,18 @@ Template.matrix.helpers({
   });
 
 Template.matBody.helpers({
-    cellFindRow: function(rowNo){
-      return Cells.find({ row: rowNo },{ sort:{column: 1 }});
+    cellFindRow: function(rowNo, projectID){
+      return cellFindRow(rowNo,projectID);
     }
 });
 
 
-Template.test.helpers({
-    project: function () {
+// Template.test.helpers({
+//     project: function () {
       
-      return Projects.find();
-    }
-  });
+//       return Projects.find();
+//     }
+//   });
 
 Template.celllist.events({
    'click .delete-cell': function(event) {
@@ -111,10 +138,6 @@ Template.addCandidate.events({
         });
       }
     }
-
-        $('[name="canName"]').val('');
-
-
     Projects.update(
       proID,
       {$set: 
@@ -152,9 +175,6 @@ Template.addFactor.events({
         });
       }
     }
-
-        $('[name="facName"]').val('');
-
     Projects.update(
       proID,
       {$set: 
@@ -186,14 +206,14 @@ Template.adding.events({
   }
 });
 
-//Template.projectlist.events({
-//   'click .delete-project': function(event) {
-//
-//    event.preventDefault();
-//    var documentID = this._id;
-//    Projects.remove({_id: documentID});
-//    }
-//  });
+Template.projectList.events({
+  'click .delete-project': function(event) {
+
+   event.preventDefault();
+   var documentID = this._id;
+   Projects.remove({_id: documentID});
+   }
+ });
 
 Template.projectList.helpers({
     'project': function(){
@@ -216,7 +236,8 @@ Template.addProject.events({
             users:[{userId:currentUser,username:names}],
             createdAt:new Date()
         }, function(error, result){
-            Router.go('project', {_id: result })
+          initialProject(result);
+          Router.go('project', {_id: result})
         });
 
         $('[name=projectName]').val('');

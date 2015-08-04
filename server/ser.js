@@ -1,3 +1,12 @@
+Meteor.publish("cells",function(){
+  return Cells.find();
+})
+Meteor.publish("projects",function(){
+  return Projects.find();
+})
+Meteor.publish("chatroom",function(){
+  return Chatrooms.find();
+})
 var cellFindOne = function(rowNo, columnNo){
       return Cells.findOne({ row: rowNo, column:columnNo});
 }
@@ -36,29 +45,29 @@ var updateTotal = function(){
      });
 }
 
-//var destroy = function() {
-//	Cells.remove({});
-//	Projects.remove({});
-//	Meteor.users.remove({});
-//	Projects.insert({_id:"p4tETnfgHArySKLGJ",rows:2,columns:2,createdAt: new Date(),name:"P1",users:[]});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:3,data:0,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:4,data:0,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:0,column:3,data:'New York',createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:0,column:4,data:'Hawaii',createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:0,data:'Cost',createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:0,data:'Safety',createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:1,data:3,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:2,data:1,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:3,data:2,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:4,data:3,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:1,data:1,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:2,data:2,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:3,data:3,createdAt: new Date()});
-//	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:4,data:1,createdAt: new Date()});
-//	updateWeight();
-//	updateTotal();
-//	Meteor.setTimeout(function() {
-//	  destroy();
-//    },2* 60 * 1000);
+// var destroy = function() {
+// 	Cells.remove({});
+// 	Projects.remove({});
+// 	Meteor.users.remove({});
+// 	Projects.insert({_id:"p4tETnfgHArySKLGJ",rows:2,columns:2,createdAt: new Date(),name:"P1",users:[]});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:3,data:0,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:-1,column:4,data:0,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:0,column:3,data:'New York',createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:0,column:4,data:'Hawaii',createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:0,data:'Cost',createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:0,data:'Safety',createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:1,data:3,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:2,data:1,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:3,data:2,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:1,column:4,data:3,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:1,data:1,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:2,data:2,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:3,data:3,createdAt: new Date()});
+// 	Cells.insert({projectID:"p4tETnfgHArySKLGJ",row:2,column:4,data:1,createdAt: new Date()});
+// 	updateWeight();
+// 	updateTotal();
+// 	Meteor.setTimeout(function() {
+// 	  destroy();
+//    },5* 60 * 1000);
 //  }
 //  destroy();
