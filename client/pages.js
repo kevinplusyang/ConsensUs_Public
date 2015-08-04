@@ -209,9 +209,9 @@ Template.addProject.events({
             users:[{userId:currentUser,username:names}],
             createdAt:new Date()
         }, function(error, result){
-            Router.go('projectPage', {_id: results })
+            Router.go('project', {_id: result })
         });
 
-        $('[name=projectName]').val();
+        $('[name=projectName]').val('');
     }
 });

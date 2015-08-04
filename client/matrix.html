@@ -21,13 +21,11 @@
       </tr>
 
       </thead>
-
-
-         <tbody>
+      <tbody>
             {{#each rowNum}}
                 {{> matBody}}
             {{/each}}
-         </tbody>
+      </tbody>
      </table>
 
   {{> addCandidate}}
@@ -63,7 +61,7 @@
     <li>row: {{> editableText collection="cells" field="row" saveOnFocusout=true}}
     column: {{> editableText collection="cells" field="column" saveOnFocusout=true}}
     data: {{> editableText collection="cells" field="data" saveOnFocusout=true}}
-    <!-- project: {{> editableText collection="cells" field="projectID" saveOnFocusout=true}} -->
+    project: {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}
     <!-- <a href="#" class="delete-cell">Delete</a> -->
     </li>
 </template>
