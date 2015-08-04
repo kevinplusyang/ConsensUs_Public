@@ -217,7 +217,8 @@ Template.projectList.events({
 
 Template.projectList.helpers({
     'project': function(){
-        return Projects.find({}, {sort:{createdAt:1}});
+        var currentUser = Meteor.userId();
+        return Projects.find({createdby: currentUser}, {sort:{createdAt:1}});
     }
 });
 
@@ -243,3 +244,5 @@ Template.addProject.events({
         $('[name=projectName]').val('');
     }
 });
+
+

@@ -52,3 +52,6 @@ Template.login.events({
         Router.go('user');
     }
 });
+
+
+
