@@ -19,7 +19,7 @@ Template.register.events({
         		console.log(err);
         	else
         	{
-        	var proID = "p4tETnfgHArySKLGJ";
+        	var proID = "rSHZHEsh6Zs6eDgT9";
         	var currentUserID = Meteor.userId();
         //console.log(Meteor.userId());
         	console.log(currentUserID);
