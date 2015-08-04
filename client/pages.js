@@ -111,6 +111,10 @@ Template.addCandidate.events({
         });
       }
     }
+
+        $('[name="canName"]').val('');
+
+
     Projects.update(
       proID,
       {$set: 
@@ -148,6 +152,9 @@ Template.addFactor.events({
         });
       }
     }
+
+        $('[name="facName"]').val('');
+
     Projects.update(
       proID,
       {$set: 
