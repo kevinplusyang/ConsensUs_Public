@@ -166,8 +166,7 @@ Template.addFactor.events({
         }
       }
       );
-    
-    //console.log(candidateCo);
+
   }
 });
 
