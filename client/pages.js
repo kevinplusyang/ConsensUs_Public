@@ -189,6 +189,7 @@ Template.adding.events({
   }
 });
 
+
 Template.projectList.events({
   'click .delete-project': function(event) {
 
@@ -198,10 +199,11 @@ Template.projectList.events({
    }
  });
 
+
 Template.projectList.helpers({
     'project': function(){
         var currentUser = Meteor.userId();
-        return Projects.find({createdby: currentUser}, {sort:{createdAt:1}});
+        return Projects.find({"users.userId" : currentUser}, {sort:{createdAt:1}});
     }
 });
 
