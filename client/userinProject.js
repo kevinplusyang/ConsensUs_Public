@@ -7,7 +7,7 @@ Template.userInProject.helpers({
    		one[item].pj=this._id;
    		console.log(one[item])
    	}
-   	// one['pj'] = this._id;
+
    	console.log(this._id);
     return one;
    }
