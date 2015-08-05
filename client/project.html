@@ -1,20 +1,22 @@
 <template name="project">
-
+  <!--{{> navigation}}-->
   <h2>Project </h2>
   {{name}}
   {{_id}}
 
-  <br />
+	<br />
 
-  {{> userInProject}}
+  	{{> userInProject}}
   
-
-	{{> matrix}}
-
-    {{> chatrooms}}
+ 	{{#if isReportPage}}
+	{{> reportMatrix}}
+	{{/if}}
+	 <!-- {{> matrix}} -->
+	{{> chatrooms}}
 
 	<!-- {{> test}} -->
 </template>
+
 
 
 
