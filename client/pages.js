@@ -207,26 +207,4 @@ Template.projectList.helpers({
 });
 
 
-Template.addProject.events({
-    'submit form': function(event){
-        event.preventDefault();
-        var projectName = $('[name=projectName]').val();
-        var currentUser = Meteor.userId();
-        var names = Meteor.user().username;
-        Projects.insert({
-            name : projectName,
-            createdby: currentUser,
-            columns:2,
-            rows:2,
-            users:[{userId:currentUser,username:names}],
-            createdAt:new Date()
-        }, function(error, result){
-          initialProject(result,currentUser);
-          Router.go('project', {_id: result})
-        });
-
-        $('[name=projectName]').val('');
-    }
-});
-
 
