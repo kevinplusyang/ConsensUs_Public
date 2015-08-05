@@ -6,7 +6,6 @@ var projAddUser=function(cuserID,userName,proID){
 	return Projects.update(proID,{$push: {users: {userID:cuserID,username:userName}}});
 };
 
-
 Template.register.events({
     'submit form': function(){
         event.preventDefault();
@@ -33,7 +32,6 @@ Template.register.events({
     }
 });
 
-
 Template.navigation.events({
     'click .logout': function(event){
         event.preventDefault();
@@ -41,8 +39,6 @@ Template.navigation.events({
         Router.go('/');
     }
 });
-
-
 Template.login.events({
     'submit form': function(event){
         event.preventDefault();
