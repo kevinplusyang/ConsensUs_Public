@@ -7,12 +7,16 @@
 	<br />
 
   	{{> userInProject}}
+
   
  	{{#if isReportPage}}
+ 	<p>We are seeing report</p>
 	{{> reportMatrix}}
 	{{else}}
-	<!-- <p>personal</p> -->
-	<!-- {{> matrix}} -->
+	<p>We are now seeing {{userToSee.username}}'s page</p>
+	
+
+	{{> matrix}}
 	{{/if}}
 	{{> chatrooms}}
 

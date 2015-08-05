@@ -1,5 +1,5 @@
 <template name = 'matrix'>
-{{_id}}
+{{_id}} {{userToSee.userId}}
      <table class="table table-bordered">
       <thead>
 
@@ -7,7 +7,7 @@
         <td></td>
         <td></td>
         <td>Total Score</td>
-        {{#each cellFindRow -1}}
+        {{#each cellFindRow -1 userToSee.userId}}
         {{> cellshow}}
         {{/each}}
       </tr>
@@ -16,36 +16,36 @@
           <th></th>
           <th>Weight</th>
           <th>Normalized Weight</th>
-          {{#each cellFindRow 0}}
+          {{#each cellFindRow 0 userToSee.userId}}
             {{> cellshow}}
           {{/each}}
       </tr>
 
       </thead>
       <tbody>
-       {{#each rowNum}}
+       {{#each rowNum userToSee.userId}}
          {{> matBody}}
        {{/each}}
       </tbody>
      </table>
 
-  {{> addCandidate}}
+<!--   {{> addCandidate}}
 
-  {{> addFactor}}
+  {{> addFactor}} -->
 
  <h3>New test</h3>
   
-  <ul>{{#each cellthis}}
+  <ul>{{#each cellthis 1 userToSee.userId}}
   {{> celllist}}
   {{/each}} 
   </ul>
 
-  <h3>test</h3>
+<!--   <h3>test</h3>
   
   <ul>{{#each cell}}
   {{> celllist}}
   {{/each}} 
-  </ul>
+  </ul> -->
   <!-- {{> adding}} -->
 
 
@@ -54,7 +54,7 @@
 <template name = "matBody">
       <tr>      
 <!--         {{row}}{{_id}} -->
-        {{#each cellFindRow row projectID}}
+        {{#each cellFindRow row projectID userToSee.userId}}
         
         {{> cellshow}}
         {{/each}}
@@ -64,7 +64,8 @@
 <template name = "cellshow">
   <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="projectID" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="userID" saveOnFocusout=true}};
 
   </td>
 </template>
@@ -74,6 +75,9 @@
     column: {{> editableText collection="cells" field="column" saveOnFocusout=true}}
     data: {{> editableText collection="cells" field="data" saveOnFocusout=true}}
     project: {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}
+    userID: {{> editableText collection="cells" field="userID" saveOnFocusout=true}}
+    isReport: {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}
+
     <!-- <a href="#" class="delete-cell">Delete</a> -->
     </li>
 </template>

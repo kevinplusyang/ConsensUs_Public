@@ -3,30 +3,30 @@ Meteor.subscribe("projects");
 Meteor.subscribe("chatroom");
 
 
-var cellFindOne = function(rowNo, columnNo,proID){
-      return Cells.findOne({row: rowNo, column:columnNo, projectID:proID});
+var cellFindOne = function(rowNo, columnNo,proID,userID){
+      return Cells.findOne({isReport:false,userID: userID, row: rowNo, column:columnNo, projectID:proID});
 }
-var cellFindCol= function(colNo,proID){
-      return Cells.find({ column: colNo, projectID:proID},{ sort:{row: 1 }});
+var cellFindCol= function(colNo,proID,userID){
+      return Cells.find({isReport:false,userID: userID,column: colNo, projectID:proID},{ sort:{row: 1 }});
 }
-var cellFindRow= function(rowNo,proID){
-      return Cells.find({ row: rowNo, projectID:proID},{ sort:{column: 1 }});
+var cellFindRow= function(rowNo,proID,userID){
+      return Cells.find({isReport:false,userID: userID,row: rowNo, projectID:proID},{ sort:{column: 1 }});
 }
-var updateWeight = function(proID){
-      var weightArray = cellFindCol(1,proID);
+var updateWeight = function(proID,userID){
+      var weightArray = cellFindCol(1,proID,userID);
       var sum = 0;
       weightArray.forEach(function(cell){
         sum =sum + Number(cell.data);
       });
       cellFindCol(2,proID).forEach(function(cell){
-        Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID).data/sum}});
+        Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID,userID).data/sum}});
       });
       // norWeightArray.forEach(function(cell){
       //   cell.data=Number(cell.data)/sum;
       // });
 }
-var updateTotal = function(proID){
-      var totalArray = cellFindRow(-1,proID);
+var updateTotal = function(proID,userID){
+      var totalArray = cellFindRow(-1,proID,userID);
 
       totalArray.forEach(function(cell){
         var sum = 0;
@@ -34,7 +34,7 @@ var updateTotal = function(proID){
         var scoreCol = cellFindCol(Col,proID);
         scoreCol.forEach(function(cellInside){
           if (Number(cellInside.row)>= 1) {
-            sum =sum + Number(cellFindOne(cellInside.row,2,proID).data ) * Number(cellInside.data) ;
+            sum =sum + Number(cellFindOne(cellInside.row,2,proID,userID).data ) * Number(cellInside.data) ;
           };
         });
         Cells.update(cell._id,{$set: {data: sum}});
@@ -50,24 +50,28 @@ var updateTotal = function(proID){
 var proID='p4tETnfgHArySKLGJ';
 
 Template.matrix.helpers({
-    cell: function () {
-      updateWeight(this._id);
-      updateTotal(this._id);
-      return Cells.find();
+    // cell: function () {
+    //   updateWeight(this._id,userID);
+    //   updateTotal(this._id,userID);
+    //   return Cells.find();
+    // },
+    // cellthis:function(userID){
+    //   return Cells.find({isReport:false,userId:userID,projectID: this._id});
+    // },
+    cellthis:function(rowNo,userID){
+      return cellFindRow(rowNo,this._id,userID);
     },
-    cellthis:function(){
-      return Cells.find({projectID: this._id});
-    },
-    cellFindRow: function(rowNo){
+
+    cellFindRow: function(rowNo,userID){
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
-      return cellFindRow(rowNo,this._id);
+      return cellFindRow(rowNo,this._id,userID);
     },
     // cellFindCol: function(colNo){
     //   //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
     //   return cellFindCol(colNo,this._id);
     // },
-    rowNum: function(){
-      var col0 = cellFindCol(0,this._id);
+    rowNum: function(userID){
+      var col0 = cellFindCol(0,this._id,userID);
       return col0;
     }
     //factorCo: 2,
@@ -75,8 +79,8 @@ Template.matrix.helpers({
   });
 
 Template.matBody.helpers({
-    cellFindRow: function(rowNo, projectID){
-      return cellFindRow(rowNo,projectID);
+    cellFindRow: function(rowNo, projectID,userID){
+      return cellFindRow(rowNo,projectID,userID);
     }
 });
 
