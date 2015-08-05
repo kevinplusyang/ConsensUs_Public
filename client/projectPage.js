@@ -1,6 +1,6 @@
 Template.project.helpers({
     isReportPage: function () {
 
-      return true;
+      return false;
     }
   });
