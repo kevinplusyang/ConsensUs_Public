@@ -203,7 +203,14 @@ Template.projectList.helpers({
     'project': function(){
         var currentUser = Meteor.userId();
         return Projects.find({"users.userId" : currentUser}, {sort:{createdAt:1}});
+    },
+
+    'currentUser': function(){
+        var currentUser = Meteor.userId();
+        return currentUser
     }
+
+
 });
 
 
