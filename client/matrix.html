@@ -65,14 +65,18 @@
 
 <template name = "cellshow">
   <td>
-        {{#if oi userID}}
+        {{#if oi userID row column}}
             {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+            <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+            <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true}};-->
          {{else}}
             {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}};
+            <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true userCanEdit=false}};-->
+            <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true userCanEdit=false}};-->
         {{/if}}
 
-    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="userID" saveOnFocusout=true}};
+    <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+    <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true}};-->
 
   </td>
 </template>
