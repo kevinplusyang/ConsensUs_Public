@@ -1,9 +1,10 @@
 Template.userInProject.helpers({
    'userInProject': function(currentProjectt){
-
+      console.log("cr:",currentProjectt);
       var nowProject = Projects.findOne({_id: currentProjectt});
-      console.log(nowProject);
+      console.log("find:", nowProject);
    	var one = nowProject.users;
+      console.log(one);
    	for (var item in one)
    	{
    		one[item].pj=currentProjectt;

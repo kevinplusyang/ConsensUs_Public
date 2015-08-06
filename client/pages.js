@@ -47,44 +47,43 @@ var updateTotal = function(proID,userID){
 //var factorCo=2;
 //var candidateCo=2;
 
-var proID='p4tETnfgHArySKLGJ';
+// var proID='p4tETnfgHArySKLGJ';
 
 Template.matrix.helpers({
-    cell: function () {
+    cell: function (currentProjectt) {
       // updateWeight(this._id,userID);
       // updateTotal(this._id,userID);
-      return Cells.find({projectID: this._id});
+      return Cells.find({projectID: currentProjectt});
     },
     // cellthis:function(userID){
     //   return Cells.find({isReport:false,userId:userID,projectID: this._id});
     // },
-    cellthis:function(userID){
-      console.log("here");
-      // console.log(rowNo);
-      console.log(this._id);
-      console.log(userID);
+    cellthis:function(userID,currentProjectt){
+
       // updateWeight(this._id,userID);
       // updateTotal(this._id,userID);
-      return Cells.find({isReport:false,userID:userID,projectID: this._id});
+      return Cells.find({isReport:false,userID:userID,projectID: currentProjectt});
     },
 
-    cellFindRow: function(rowNo,userID){
-      updateWeight(this._id,userID);
-      updateTotal(this._id,userID);
+    cellFindRow: function(rowNo,userID,currentProjectt){
+      updateWeight(currentProjectt,userID);
+      updateTotal(currentProjectt,userID);
+      console.log("now see this:",currentProjectt);
 
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
-      return cellFindRow(rowNo,this._id,userID);
+      return cellFindRow(rowNo,currentProjectt,userID);
     },
     // cellFindCol: function(colNo){
     //   //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
     //   return cellFindCol(colNo,this._id);
     // },
-    rowNum: function(userID){
-      var col0 = cellFindCol(0,this._id,userID);
+    rowNum: function(userID,currentProjectt){
+      var col0 = cellFindCol(0,currentProjectt,userID);
+      
       return col0;
     },
-    userToSee: function(){
-      return Meteor.user();
+    userToSee: function(userID){
+      return Meteor.users.findOne({_id:userID}).username;
     }
     //factorCo: 2,
     //candidateCo:2
@@ -94,11 +93,15 @@ Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
       // updateWeight(projectID,userID);
       // updateTotal(projectID,userID);
+      console.log("here!!");
+      console.log(projectID);
+      console.log(userID);
+      console.log(cellFindRow(rowNo,projectID,userID));
       return cellFindRow(rowNo,projectID,userID);
-    },
-    userToSee: function(){
-      return Meteor.user();
-    }
+     }
+    // userToSee: function(){
+    //   return Meteor.user();
+    // }
 });
 
 
@@ -113,7 +116,7 @@ Template.celllist.events({
    'click .delete-cell': function(event) {
  
     event.preventDefault();
-    var documentID = this._id;
+    var documentID = currentProjectt;
     Cells.remove({_id: documentID});
     }
   });
