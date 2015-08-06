@@ -299,18 +299,23 @@ Template.addProject.events({
 });
 
 Template.cellshow.helpers({
-    'oi': function(UID){
+    'oi': function(UID, row, column){
 
         var currentUser = Meteor.userId();
 
 
         console.log("=====================");
-        console.log(currentUser);
-        console.log(UID);
+        console.log(row);
+        console.log(column);
         console.log("=====================");
 
 
         if(currentUser==UID){
+
+            if(row==-1||column==0||row==0||column==2){
+                return false
+            }
+
             return true;
         }else{
             return false;
