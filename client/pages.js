@@ -297,3 +297,28 @@ Template.addProject.events({
         $('[name=projectName]').val('');
     }
 });
+
+Template.cellshow.helpers({
+    'oi': function(UID){
+
+        var currentUser = Meteor.userId();
+
+
+        console.log("=====================");
+        console.log(currentUser);
+        console.log(UID);
+        console.log("=====================");
+
+
+        if(currentUser==UID){
+            return true;
+        }else{
+            return false;
+        }
+
+
+
+        return false
+    }
+});
+

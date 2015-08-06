@@ -65,7 +65,12 @@
 
 <template name = "cellshow">
   <td>
-    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+        {{#if oi userID}}
+            {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+         {{else}}
+            {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}};
+        {{/if}}
+
     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
     {{> editableText collection="cells" field="userID" saveOnFocusout=true}};
 
