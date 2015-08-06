@@ -1,5 +1,8 @@
 <template name = 'reportMatrix'>
 <h3>report page</h3>
+
+    {{> setTH}}
+
 {{_id}}
      <table class="table table-bordered">
       <thead>
@@ -66,6 +69,16 @@
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
   </li>
+</template>
+
+
+
+
+
+<template name="setTH">
+    <form>Input STH
+        <input type="text" placeholder="SET STH" name="sth">
+    </form>
 </template>
 
 

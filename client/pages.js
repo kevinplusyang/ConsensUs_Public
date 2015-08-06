@@ -286,7 +286,8 @@ Template.addProject.events({
             columns:2,
             rows:2,
             users:[{userId:currentUser,username:names}],
-            createdAt:new Date()
+            createdAt:new Date(),
+            sTH:0.5
         }, function(error, result){
           console.log(result);
           initialProject(result,currentUser);
