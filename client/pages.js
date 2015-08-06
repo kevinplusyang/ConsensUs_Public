@@ -49,6 +49,17 @@ var updateCandidate = function(proID){
         var candiReport = Cells.findOne({isReport:true,row:0,column:colNo,projectID:proID});
         Cells.update(candiUser._id,{$set: {data: candiReport.data}});       
       }
+    })
+}
+var updateFactor = function(proID){
+    var facUserCursor=Cells.find({isReport:false,column:0,projectID:proID});
+
+    facUserCursor.forEach(function(facUser){
+      rowNo = facUser.row;
+      if(rowNo>0){
+        var facReport = Cells.findOne({isReport:true,row:rowNo,column:0,projectID:proID});
+        Cells.update(facUser._id,{$set: {data: facReport.data}});       
+      }
 
     })
 
@@ -82,6 +93,7 @@ Template.matrix.helpers({
       updateWeight(currentProjectt,userID);
       updateTotal(currentProjectt,userID);
       updateCandidate(currentProjectt);
+      updateFactor(currentProjectt);
       // console.log("now see this:",currentProjectt);
 
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
