@@ -41,33 +41,6 @@ var updateRow = function(proID,rowNo){
       }
     })
 }
-      // var weightArray = cellFindCol(1,proID);
-      // var sum = 0;
-      // weightArray.forEach(function(cell){
-      //   sum =sum + Number(cell.data);
-      // });
-      // cellFindCol(2,proID).forEach(function(cell){
-      //   Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID).data/sum}});
-      // });
-      // norWeightArray.forEach(function(cell){
-      //   cell.data=Number(cell.data)/sum;
-      // });
-
-// var updateTotal = function(proID){
-//       var totalArray = cellFindRow(-1,proID);
-
-//       totalArray.forEach(function(cell){
-//         var sum = 0;
-//         Col=cell.column;
-//         var scoreCol = cellFindCol(Col,proID);
-//         scoreCol.forEach(function(cellInside){
-//           if (Number(cellInside.row)>= 1) {
-//             sum =sum + Number(cellFindOne(cellInside.row,2,proID).data ) * Number(cellInside.data) ;
-//           };
-//         });
-//         Cells.update(cell._id,{$set: {data: sum}});
-//      });
-// }
 
 
 

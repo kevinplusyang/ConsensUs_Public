@@ -40,6 +40,19 @@ var updateTotal = function(proID,userID){
         Cells.update(cell._id,{$set: {data: sum}});
      });
 }
+var updateCandidate = function(proID){
+    var candiUserCursor=Cells.find({isReport:false,row:0,projectID:proID});
+
+    candiUserCursor.forEach(function(candiUser){
+      colNo = candiUser.column;
+      if(colNo>2){
+        var candiReport = Cells.findOne({isReport:true,row:0,column:colNo,projectID:proID});
+        Cells.update(candiUser._id,{$set: {data: candiReport.data}});       
+      }
+
+    })
+
+}
 
 
 
@@ -68,7 +81,8 @@ Template.matrix.helpers({
     cellFindRow: function(rowNo,userID,currentProjectt){
       updateWeight(currentProjectt,userID);
       updateTotal(currentProjectt,userID);
-      console.log("now see this:",currentProjectt);
+      updateCandidate(currentProjectt);
+      // console.log("now see this:",currentProjectt);
 
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
       return cellFindRow(rowNo,currentProjectt,userID);
