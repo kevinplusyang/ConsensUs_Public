@@ -29,6 +29,15 @@
        {{/each}}
       </tbody>
      </table>
+
+
+
+     <h3>test</h3>
+     <ul>
+      {{#each celllist 2 1 _id}}
+       {{> reportcelllist}}
+      {{/each}}
+     </ul>
 </template> 
 
 <template name = "reportMatBody">
@@ -45,7 +54,19 @@
   <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}};
     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+<!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
   </td>
 </template>
+
+<template name = "reportcelllist">
+  <li>
+    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+<!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
+
+  </li>
+</template>
+
+
 
