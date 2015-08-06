@@ -288,7 +288,7 @@ Template.addProject.events({
           console.log(result);
           initialProject(result,currentUser);
           console.log(result);
-          Router.go('project', {_id: result})
+          Router.go('project', {_id: result,_uid: currentUser})
         });
 
         $('[name=projectName]').val('');

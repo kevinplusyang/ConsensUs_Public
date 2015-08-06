@@ -1,13 +1,13 @@
 <template name="userInProject">
 <h3>Users in this project:</h3>
  <ul>
- {{_id}}
+ {{currentProjectt}}
 
 
-     <li><a href="/project/{{getID}}/flag/report">REPOOOORT</a></li>
+     <li><a href="/project/{{currentProjectt}}/flag/report">REPOOOORT</a></li>
 
 
-        {{#each userInProject}}
+        {{#each userInProject currentProjectt}}
             <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
             <!--<li>{{username}} {{pj}} </li>-->
 
