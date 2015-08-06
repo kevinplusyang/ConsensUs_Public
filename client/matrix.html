@@ -1,5 +1,5 @@
 <template name = 'matrix'>
-{{_id}} {{userToSee.userId}}
+{{_id}}<p>seethis {{userToSee._id}}</p>
      <table class="table table-bordered">
       <thead>
 
@@ -7,7 +7,7 @@
         <td></td>
         <td></td>
         <td>Total Score</td>
-        {{#each cellFindRow -1 userToSee.userId}}
+        {{#each cellFindRow -1 userToSee._id}}
         {{> cellshow}}
         {{/each}}
       </tr>
@@ -16,14 +16,14 @@
           <th></th>
           <th>Weight</th>
           <th>Normalized Weight</th>
-          {{#each cellFindRow 0 userToSee.userId}}
+          {{#each cellFindRow 0 userToSee._id}}
             {{> cellshow}}
           {{/each}}
       </tr>
 
       </thead>
       <tbody>
-       {{#each rowNum userToSee.userId}}
+       {{#each rowNum userToSee._id}}
          {{> matBody}}
        {{/each}}
       </tbody>
@@ -35,7 +35,7 @@
 
  <h3>New test</h3>
   
-  <ul>{{#each cellthis 1 userToSee.userId}}
+  <ul>{{#each cellthis userToSee._id}}
   {{> celllist}}
   {{/each}} 
   </ul>
@@ -54,7 +54,7 @@
 <template name = "matBody">
       <tr>      
 <!--         {{row}}{{_id}} -->
-        {{#each cellFindRow row projectID userToSee.userId}}
+        {{#each cellFindRow row projectID userToSee._id}}
         
         {{> cellshow}}
         {{/each}}
@@ -64,8 +64,8 @@
 <template name = "cellshow">
   <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="userID" saveOnFocusout=true}};
+   <!--  {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="userID" saveOnFocusout=true}}; -->
 
   </td>
 </template>

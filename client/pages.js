@@ -18,7 +18,7 @@ var updateWeight = function(proID,userID){
       weightArray.forEach(function(cell){
         sum =sum + Number(cell.data);
       });
-      cellFindCol(2,proID).forEach(function(cell){
+      cellFindCol(2,proID,userID).forEach(function(cell){
         Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID,userID).data/sum}});
       });
       // norWeightArray.forEach(function(cell){
@@ -31,7 +31,7 @@ var updateTotal = function(proID,userID){
       totalArray.forEach(function(cell){
         var sum = 0;
         Col=cell.column;
-        var scoreCol = cellFindCol(Col,proID);
+        var scoreCol = cellFindCol(Col,proID,userID);
         scoreCol.forEach(function(cellInside){
           if (Number(cellInside.row)>= 1) {
             sum =sum + Number(cellFindOne(cellInside.row,2,proID,userID).data ) * Number(cellInside.data) ;
@@ -58,11 +58,20 @@ Template.matrix.helpers({
     // cellthis:function(userID){
     //   return Cells.find({isReport:false,userId:userID,projectID: this._id});
     // },
-    cellthis:function(rowNo,userID){
-      return cellFindRow(rowNo,this._id,userID);
+    cellthis:function(userID){
+      console.log("here");
+      // console.log(rowNo);
+      console.log(this._id);
+      console.log(userID);
+      // updateWeight(this._id,userID);
+      // updateTotal(this._id,userID);
+      return Cells.find({isReport:false,userID:userID,projectID: this._id});
     },
 
     cellFindRow: function(rowNo,userID){
+      updateWeight(this._id,userID);
+      updateTotal(this._id,userID);
+
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
       return cellFindRow(rowNo,this._id,userID);
     },
@@ -73,6 +82,9 @@ Template.matrix.helpers({
     rowNum: function(userID){
       var col0 = cellFindCol(0,this._id,userID);
       return col0;
+    },
+    userToSee: function(){
+      return Meteor.user();
     }
     //factorCo: 2,
     //candidateCo:2
@@ -80,7 +92,12 @@ Template.matrix.helpers({
 
 Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
+      // updateWeight(projectID,userID);
+      // updateTotal(projectID,userID);
       return cellFindRow(rowNo,projectID,userID);
+    },
+    userToSee: function(){
+      return Meteor.user();
     }
 });
 
@@ -207,13 +224,7 @@ Template.projectList.helpers({
     'project': function(){
         var currentUser = Meteor.userId();
         return Projects.find({"users.userId" : currentUser}, {sort:{createdAt:1}});
-    },
-
-    'currentUser': function () {
-        var currentUser = Meteor.userId();
-        return currentUser
     }
-
 });
 
 

@@ -8,8 +8,8 @@
     <ul>
         {{#each project}}
             <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
-
-            <li><a href="/project/{{_id}}/{{currentUser}}">{{name}}</a></li>
+            
+            <li><a href="{{pathFor route='project'}}">{{name}}</a></li>
             <a href="#" class="delete-project">Delete</a>
         {{/each}}
     </ul>
