@@ -68,3 +68,18 @@ Template.reportMatBody.helpers({
       return cellFindRow(rowNo,projectID);
     }
 });
+
+Template.setTH.events({
+    'submit form': function (event) {
+        event.preventDefault();
+        var sth = $('[name=sth]').val();
+
+        var currentProject = this._id;
+
+
+        Projects.update({_id:currentProject},{$set:{sTH:sth}});
+
+        $('[name=sth]').val('');
+
+    }
+});
