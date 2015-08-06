@@ -50,11 +50,11 @@ var updateTotal = function(proID,userID){
 var proID='p4tETnfgHArySKLGJ';
 
 Template.matrix.helpers({
-    // cell: function () {
-    //   updateWeight(this._id,userID);
-    //   updateTotal(this._id,userID);
-    //   return Cells.find();
-    // },
+    cell: function () {
+      // updateWeight(this._id,userID);
+      // updateTotal(this._id,userID);
+      return Cells.find({projectID: this._id});
+    },
     // cellthis:function(userID){
     //   return Cells.find({isReport:false,userId:userID,projectID: this._id});
     // },

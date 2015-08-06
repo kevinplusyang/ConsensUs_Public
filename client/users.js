@@ -1,10 +1,10 @@
 // Accounts.ui.config({
 //     passwordSignupFields: "USERNAME_ONLY"
 //   });
-var projAddUser=function(cuserID,userName,proID){
+// var projAddUser=function(cuserID,userName,proID){
 
-	return Projects.update(proID,{$push: {users: {userID:cuserID,username:userName}}});
-};
+// 	return Projects.update(proID,{$push: {users: {userID:cuserID,username:userName}}});
+// };
 
 Template.register.events({
     'submit form': function(){
@@ -23,7 +23,7 @@ Template.register.events({
         	var currentUserID = Meteor.userId();
         //console.log(Meteor.userId());
         	console.log(currentUserID);
- 			projAddUser(currentUserID,username,proID);
+ 			// projAddUser(currentUserID,username,proID);
         	}
     	});
         
