@@ -10,5 +10,15 @@ Template.userInProject.helpers({
    	// one['pj'] = this._id;
    	console.log(this._id);
     return one;
-   }
+   },
+
+
+	'getID': function(){
+		var ID=this._id;
+		return ID;
+	}
+
+
+
+
 });
