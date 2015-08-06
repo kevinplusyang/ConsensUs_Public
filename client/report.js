@@ -28,14 +28,18 @@ var updateRow = function(proID,rowNo){
 
     rowCursor.forEach(function(cell){
       // console.log(cell.column);
-      if(cell.column>0){
-    var aver = calculateOne(rowNo,cell.column,proID);
-    Cells.update(cell._id,{$set: {data: aver}});
-  }
+      if(rowNo>0){
+          if(cell.column>0){
+          var aver = calculateOne(rowNo,cell.column,proID);
+          Cells.update(cell._id,{$set: {data: aver}});
+        }
+      }else if(rowNo===-1){
+          if(cell.column>1){
+          var aver = calculateOne(rowNo,cell.column,proID);
+          Cells.update(cell._id,{$set: {data: aver}});
+        }
+      }
     })
-    
-
-
 }
       // var weightArray = cellFindCol(1,proID);
       // var sum = 0;
@@ -70,7 +74,7 @@ var updateRow = function(proID,rowNo){
 Template.reportMatrix.helpers({
     cellFindRow: function(rowNo){
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
-
+      updateRow(this._id,rowNo);
       return cellFindRow(rowNo,this._id);
     },
     rowNum: function(){
