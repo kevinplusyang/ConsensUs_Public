@@ -1,64 +1,109 @@
 <template name = 'matrix'>
-<!--      <table class="table table-bordered">
-       <tr>
-        <td>Total Score</td>
-        {{#each cellFindRow 0}}
-        {{> cellshow}}
-        {{/each}}
-      </tr>
-      </table> -->
+{{_id}}<p>seethis {{userToSee._id}}</p>
      <table class="table table-bordered">
       <thead>
+
       <tr>
         <td></td>
         <td></td>
         <td>Total Score</td>
-        {{#each cellFindRow 0}}
+        {{#each cellFindRow -1 userToSee._id}}
         {{> cellshow}}
         {{/each}}
       </tr>
-     	
-     		<tr>
-     		<th></th>
-     		<th>Weight</th>
-     		<th>Normalized Weight</th>
-     		<th>Hawaii</th>
-     		<th>New York</th>
-     		</tr>
-     	</thead>
-     	<tbody>
-     	<tr>
-     		<td>Cost</td>
-     		{{#each cellFindRow 1}}
-   			{{> cellshow}}
-   			{{/each}}
-     	</tr>
-     	<tr>
-     		<td>Safety</td>
-     		{{#each cellFindRow 2}}
-   			{{> cellshow}}
-   			{{/each}}
-     	</tr>
-   		
-   		</tbody>
-   	</table>
+
+      <tr>
+          <th></th>
+          <th>Weight</th>
+          <th>Normalized Weight</th>
+          {{#each cellFindRow 0 userToSee._id}}
+            {{> cellshow}}
+          {{/each}}
+      </tr>
+
+      </thead>
+      <tbody>
+       {{#each rowNum userToSee._id}}
+         {{> matBody}}
+       {{/each}}
+      </tbody>
+     </table>
+
+<!--   {{> addCandidate}}
+
+  {{> addFactor}} -->
+
+ <h3>New test</h3>
+  
+  <ul>{{#each cellthis userToSee._id}}
+  {{> celllist}}
+  {{/each}} 
+  </ul>
+
+<!--   <h3>test</h3>
   
   <ul>{{#each cell}}
   {{> celllist}}
   {{/each}} 
-  </ul>		
-  </template>
+  </ul> -->
+  <!-- {{> adding}} -->
+
+
+</template>
+
+<template name = "matBody">
+      <tr>      
+<!--         {{row}}{{_id}} -->
+        {{#each cellFindRow row projectID userToSee._id}}
+        
+        {{> cellshow}}
+        {{/each}}
+      </tr>
+</template>
 
 <template name = "cellshow">
-  	<td>
-    {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+  <td>
+    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+   <!--  {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="userID" saveOnFocusout=true}}; -->
+
   </td>
-  <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>
 
 <template name = "celllist">
-    <li>{{row}},{{column}},{{data}}
+    <li>row: {{> editableText collection="cells" field="row" saveOnFocusout=true}}
+    column: {{> editableText collection="cells" field="column" saveOnFocusout=true}}
+    data: {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+    project: {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}
+    userID: {{> editableText collection="cells" field="userID" saveOnFocusout=true}}
+    isReport: {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}
+
     <!-- <a href="#" class="delete-cell">Delete</a> -->
     </li>
-  <!-- <li>"position: " {{row}} "X" {{column}} ", value:" {{data}}</li> -->
 </template>
+
+<template name="addCandidate">
+    <form>
+        Add a candidate:
+        <input type="text" placeholder="Type a candidate here..." name="canName">
+    </form>
+</template>
+
+<template name="addFactor">
+    <form>
+        Add a factor:
+        <input type="text" placeholder="Type a factor here..." name="facName">
+    </form>
+</template>
+
+<template name="adding">
+    <form>
+        Add a cell in project "p4tETnfgHArySKLGJ":
+        <input type="text" placeholder="row" name="rowNo" />
+        <br/>
+        <input type="text" placeholder="col" name="colNo" />
+        <br/>
+        <input type="submit" value="Submit" />
+    </form>
+</template> 
+

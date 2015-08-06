@@ -1,0 +1,16 @@
+<template name = 'test'>
+  <p>test</p>
+  <ul>{{#each project}}
+  {{> projectlist}}
+  {{/each}} 
+  </ul>
+</template>
+
+<template name = "projectlist">
+    <li>rows: {{> editableText collection="projects" field="rows" saveOnFocusout=true}}
+    columns: {{> editableText collection="projects" field="columns" saveOnFocusout=true}}
+    name: {{> editableText collection="projects" field="name" saveOnFocusout=true}}
+    id: {{> editableText collection="projects" field="_id" saveOnFocusout=true}}
+    <a href="#" class="delete-project">Delete</a>
+    </li>
+</template>

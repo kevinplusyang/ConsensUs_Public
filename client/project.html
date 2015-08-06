@@ -1,15 +1,28 @@
 <template name="project">
-  <nav class="navbar  navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-    <a class="navbar-brand" href="#">ConsensUS</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-    </ul>
-  </div><!-- /.container-fluid -->
- </nav>
-   <h2>Project </h2>
-	{{> matrix}}
+  <!--{{> navigation}}-->
+  <h2>Project </h2>
+  {{name}}
+  {{_id}}
 
+	<br />
+
+  	{{> userInProject}}
+
+  
+ 	{{#if isReportPage}}
+ 	<p>We are seeing report</p>
+	{{> reportMatrix}}
+	{{else}}
+	<p>We are now seeing {{userToSee.username}}'s page</p>
+	
+
+	{{> matrix}}
+	{{/if}}
+	{{> chatrooms}}
+
+	<!-- {{> test}} -->
 </template>
+
+
+
+

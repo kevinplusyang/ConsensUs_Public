@@ -1,0 +1,51 @@
+<template name = 'reportMatrix'>
+<h3>report page</h3>
+{{_id}}
+     <table class="table table-bordered">
+      <thead>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total Score</td>
+        {{#each cellFindRow -1}}
+        {{> reportcellshow}}
+        {{/each}}
+      </tr>
+
+      <tr>
+          <th></th>
+          <th>Weight</th>
+          <th>Normalized Weight</th>
+          {{#each cellFindRow 0}}
+            {{> reportcellshow}}
+          {{/each}}
+      </tr>
+
+      </thead>
+      <tbody>
+       {{#each rowNum}}
+         {{> reportMatBody}}
+       {{/each}}
+      </tbody>
+     </table>
+</template> 
+
+<template name = "reportMatBody">
+      <tr>      
+<!--         {{row}}{{_id}} -->
+        {{#each cellFindRow row projectID}}
+        
+        {{> reportcellshow}}
+        {{/each}}
+      </tr>
+</template>
+
+<template name = "reportcellshow">
+  <td>
+    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+
+  </td>
+</template>
+

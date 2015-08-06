@@ -1,0 +1,13 @@
+<template name="userInProject">
+<h3>Users in this project:</h3>
+ <ul>
+ {{_id}}
+ <li>report</li>
+        {{#each userInProject}}
+            <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
+            <li>{{username}} {{pj}} </li>
+            <!-- <li><a href="{{pathFor route='project'}}">{{name}}</a></li> -->
+            <!-- <a href="#" class="delete-project">Delete</a> -->
+        {{/each}}
+    </ul>
+</template>

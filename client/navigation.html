@@ -1,0 +1,20 @@
+<template name="navigation">
+    <nav class="navbar  navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ConsensUS</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Home</a></li>-->
+                {{#if currentUser}}
+                    <li><a href="/">Project List</a></li>
+                    <li><a href="#" class="logout">Logout</a></li>
+                    {{else}}
+                    <li><a href="/">Home</a></li>
+                    <li class="active"><a href="/">About</a></li>
+                {{/if}}
+            </ul>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+</template>

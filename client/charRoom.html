@@ -1,0 +1,31 @@
+<template name="chatrooms">
+    <p>{{name}} Chat Room</p>
+    <ul>
+        {{#each chatroom}}
+            {{> chatItem}}
+        {{/each}}
+    </ul>
+
+    {{> newChatItem}}
+
+</template>
+
+<template name="chatItem">
+
+    {{user}}:{{content}}
+    <br>
+    Time: {{createdAt}}
+    [<a href="#" class="delete-chatItem">Del</a>]
+    <br>
+    ----------------------------------------------------------------------------
+    <br>
+
+
+</template>
+
+<template name="newChatItem">
+    <form>
+        Input:
+        <input type="text" placeholder="{{user}}Input Here" name="newItem">
+    </form>
+</template>

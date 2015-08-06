@@ -1,0 +1,19 @@
+<template name="user">
+
+{{#if currentUser}}
+    {{> projectList}}
+    {{> joinProject}}
+{{else}}
+<p>please login</p>
+{{/if}}
+</template>
+
+
+<template name="joinProject">
+    <form>Input Invite Code
+        <input type="text" placeholder="Input Invite Code" name="joinproject">
+    </form>
+
+</template>
+
+
