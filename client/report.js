@@ -69,6 +69,21 @@ Template.reportMatBody.helpers({
     }
 });
 
+Template.setTH.events({
+    'submit form': function (event) {
+        event.preventDefault();
+        var sth = $('[name=sth]').val();
+
+        var currentProject = this._id;
+
+
+        Projects.update({_id:currentProject},{$set:{sTH:sth}});
+
+        $('[name=sth]').val('');
+
+    }
+});
+
 
 Template.addCandidate.events({
     'submit form': function(event){
@@ -80,7 +95,9 @@ Template.addCandidate.events({
   
     for (var i=-1;i<=Number(this.rows);i++){
       if(i===0){     
-        Cells.insert({userID: null,isReport: true,data: canName,row: 0,createdAt: new Date(),column: Number(this.columns)+3,projectID:this._id});
+        Cells.insert({userID: null,isReport: true,data: canName,row: 0,createdAt: new Date(),column: Number
+
+(this.columns)+3,projectID:this._id});
       }else{
         Cells.insert({
         userID: null,isReport: true,
@@ -97,7 +114,9 @@ Template.addCandidate.events({
         var nowUserId=this.users[item].userId;
         for (i=-1;i<=Number(this.rows);i++){
         if(i===0){     
-        Cells.insert({userID: nowUserId,isReport: false,data: canName,row: 0,createdAt: new Date(),column: Number(this.columns)+3,projectID:this._id});
+        Cells.insert({userID: nowUserId,isReport: false,data: canName,row: 0,createdAt: new Date(),column: 
+
+Number(this.columns)+3,projectID:this._id});
       }else{
         Cells.insert({
         userID: nowUserId,isReport: false,
@@ -146,7 +165,9 @@ Template.addFactor.events({
         var nowUserId=this.users[item].userId;
         for (var i=0;i<=Number(this.columns)+2;i++){
         if(i===0){     
-        Cells.insert({userID: nowUserId,isReport: false,data: facName,row:this.rows+1,createdAt: new Date(),column: 0,projectID:this._id});
+        Cells.insert({userID: nowUserId,isReport: false,data: facName,row:this.rows+1,createdAt: new Date
+
+(),column: 0,projectID:this._id});
       }else{
         Cells.insert({
         userID: nowUserId,isReport: false,
@@ -170,3 +191,4 @@ Template.addFactor.events({
     $('[name="facName"]').val('');
   }
 });
+
