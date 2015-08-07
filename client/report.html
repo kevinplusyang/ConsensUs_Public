@@ -89,7 +89,15 @@
   </li>
 </template>  -->
 
+<template name = "reportcelllist">
+    <li>
+        {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+        <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+        {{> editableText collection="cells" field="projectID" saveOnFocusout=true}};
+        {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
 
+    </li>
+</template>
 
 
 
