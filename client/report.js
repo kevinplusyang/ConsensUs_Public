@@ -147,6 +147,10 @@ Template.reportcellshow.helpers({
     isFactor: function(){
       var flag = (this.column === 0);
       return flag;
+    },
+    showNotes: function(row){
+      // var rowNo=this.row;
+      return Session.get('showNotes')[row];
     }
 });
 
@@ -302,5 +306,12 @@ Template.reportcellshow.events({
     Projects.update(this.projectID,  {$set: {rows: Number(thisProject.rows)-1}});  
 
     },
+    "change .show-notes input": function (event) {
+      var rowNo=this.row;
+      // Session.set({showNotes.rowNo: event.target.checked});
+      // console.log("@@@@@@@@@");
+      // console.log(rowNo);
+      // console.log("@@@@@@@@@");
+    }
 
   });

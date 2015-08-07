@@ -63,10 +63,17 @@
     {{> editableText collection="cells" field="data" saveOnFocusout=true}};
     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
     {{#if isCandidate }}
-    <a href="#" class="delete-candi">DeleteCandidate</a>
+    <a href="#" class="delete-candi"> Delete </a>
     {{/if}}
     {{#if isFactor}}
-    <a href="#" class="delete-fac">DeleteFactor</a>
+    <a href="#" class="delete-fac"> Delete </a>
+    <label class="show-notes">
+        <input type="checkbox" checked="{{showNotes row}}" />
+        Show Notes
+    </label>
+      {{#if showNotes row}}
+      {{> notes}}
+      {{/if}}
     {{/if}}
 
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
