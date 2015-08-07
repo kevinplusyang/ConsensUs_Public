@@ -1,11 +1,10 @@
 /**
- * Created by MingYang on 8/4/15.
+ * Created by kevinyang on 8/7/15.
  */
 
-
-Template.chatrooms.helpers({
-    'chatroom': function(PID){
-        var currentProject = PID;
+Template.reportchatrooms.helpers({
+    'reportchatroom': function(){
+        var currentProject = this._id;
 
         return Chatrooms.find({projectId: currentProject},{sort:{createdAt:1}});
     }
@@ -13,7 +12,7 @@ Template.chatrooms.helpers({
 
 
 
-    Template.chatItem.events({
+    Template.reportchatItem.events({
         'click .delete-chatItem': function(event){
             event.preventDefault();
             var documentID = this._id;
@@ -22,23 +21,24 @@ Template.chatrooms.helpers({
 
     }),
 
-    Template.newChatItem.helpers({
+    Template.reportnewChatItem.helpers({
         'chatroom': function(){
             return Chatrooms.find({projectId: currentProject},{sort:{createdAt:1}});
         }
     }),
 
 
-    Template.newChatItem.events({
+    Template.reportnewChatItem.events({
         'submit form': function(event){
             event.preventDefault();
 
             var chatContent = event.target.newItem.value;
             //console.log(chatContent);
-            var currentProject = this.currentProjectt;
+            var currentProject = this._id;
             var currentUser = Meteor.userId();
             //var alias = Meteor.users.find({_id: currentUser});
             var names = Meteor.user().username;
+
 
 
 

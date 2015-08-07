@@ -1,0 +1,33 @@
+<template name="reportchatrooms">
+    <p>{{name}} Chat Room</p>
+    <ul>
+        {{#each reportchatroom}}
+            {{> reportchatItem}}
+        {{/each}}
+    </ul>
+
+
+    {{> reportnewChatItem}}
+
+</template>
+
+<template name="reportchatItem">
+
+    {{user}}:{{content}}
+    <br>
+    Time: {{createdAt}}
+    [<a href="#" class="delete-chatItem">Del</a>]
+    <br>
+    ----------------------------------------------------------------------------
+    <br>
+
+
+</template>
+
+<template name="reportnewChatItem">
+    {{currentProjectt}}
+    <form>
+        Input:
+        <input type="text" placeholder="{{user}}Input Here" name="newItem">
+    </form>
+</template>
