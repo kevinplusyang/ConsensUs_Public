@@ -290,5 +290,17 @@ Template.reportcellshow.events({
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {columns: Number(thisProject.columns)-1}});  
 
-    }
+    },
+    'click .delete-fac': function(event) {
+    event.preventDefault();   
+    var facCursor = Cells.find({projectID: this.projectID,row:this.row});
+    facCursor.forEach(function(cell){
+      Cells.remove({_id:cell._id});
+    })
+    
+    var thisProject=Projects.findOne({_id:this.projectID });
+    Projects.update(this.projectID,  {$set: {rows: Number(thisProject.rows)-1}});  
+
+    },
+
   });
