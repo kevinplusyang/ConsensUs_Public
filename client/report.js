@@ -44,6 +44,60 @@ var updateRow = function(proID,rowNo){
 
 
 
+
+var calculateSD = function(rowNo, columnNo,proID){
+    var cellUserCursor=Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID});
+    var tempSum = 0;
+    var sum = 0;
+    var count = cellUserCursor.count();
+
+    cellUserCursor.forEach(function(cellUser){
+        tempSum = tempSum + Number(cellUser.data);
+    });
+
+    var avg = tempSum/count;
+
+
+    cellUserCursor.forEach(function(cellUser){
+        console.log("celldata");
+        console.log(Number(cellUser.data));
+        console.log(Number(cellUser.data)-avg);
+        console.log("celldata");
+        //var e = (Number(cellUser.data)-avg);
+
+        sum = sum + (Number(cellUser.data)-avg)*(Number(cellUser.data)-avg);
+    });
+
+    var variance = sum/count;
+
+    return variance;
+}
+
+
+
+
+var updateRowForVariance = function(proID,rowNo){
+
+    var rowCursor = cellFindRow(rowNo,proID);
+
+    rowCursor.forEach(function(cell){
+        console.log("cellcol");
+        console.log(cell.column);
+
+
+        if(rowNo>0){
+            if(cell.column>0){
+                var variance = calculateSD(rowNo,cell.column,proID);
+                Cells.update(cell._id,{$set: {SDdata : variance}});
+            }
+        }
+    })
+}
+
+
+
+
+
 Template.reportMatrix.helpers({
     cellFindRow: function(rowNo){
       //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
@@ -65,6 +119,7 @@ Template.reportMatrix.helpers({
 Template.reportMatBody.helpers({
     cellFindRow: function(rowNo, projectID){
       updateRow(projectID,rowNo);
+        updateRowForVariance(projectID,rowNo);
       return cellFindRow(rowNo,projectID);
     }
 });
