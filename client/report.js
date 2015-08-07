@@ -71,7 +71,7 @@ var calculateSD = function(rowNo, columnNo,proID){
     var variance = sum/count;
 
     return variance;
-}
+};
 
 
 
@@ -92,7 +92,7 @@ var updateRowForVariance = function(proID,rowNo){
             }
         }
     })
-}
+};
 
 
 

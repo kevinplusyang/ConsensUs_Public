@@ -1,7 +1,6 @@
 /**
- * Created by MingYang on 8/4/15.
+ * Created by kevinyang on 8/7/15.
  */
-
 
 Template.chatrooms.helpers({
     'chatroom': function(PID){
