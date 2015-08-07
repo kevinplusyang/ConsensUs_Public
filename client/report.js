@@ -279,3 +279,16 @@ Template.addFactor.events({
   }
 });
 
+Template.reportcellshow.events({
+   'click .delete-candi': function(event) {
+    event.preventDefault();   
+    var candidateCursor = Cells.find({projectID: this.projectID,column:this.column});
+    candidateCursor.forEach(function(cell){
+      Cells.remove({_id:cell._id});
+    })
+    
+    var thisProject=Projects.findOne({_id:this.projectID });
+    Projects.update(this.projectID,  {$set: {columns: Number(thisProject.columns)-1}});  
+
+    }
+  });
