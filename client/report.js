@@ -161,9 +161,15 @@ Template.addCandidate.events({
   
     for (var i=-1;i<=Number(this.rows);i++){
       if(i===0){     
-        Cells.insert({userID: null,isReport: true,data: canName,row: 0,createdAt: new Date(),column: Number
+        Cells.insert({userID: null,
+            isReport: true,
+            data: canName,
+            row: 0,
+            createdAt: new Date(),
+            column: Number(this.columns)+3,
+            projectID:this._id,
+            SDdata:0});
 
-(this.columns)+3,projectID:this._id});
       }else{
         Cells.insert({
         userID: null,isReport: true,
@@ -171,7 +177,8 @@ Template.addCandidate.events({
         row: i,
         createdAt: new Date(),
         column: Number(this.columns)+3,
-        projectID:this._id
+        projectID:this._id,
+            SDdata:0
         });
       }
     }
@@ -180,17 +187,24 @@ Template.addCandidate.events({
         var nowUserId=this.users[item].userId;
         for (i=-1;i<=Number(this.rows);i++){
         if(i===0){     
-        Cells.insert({userID: nowUserId,isReport: false,data: canName,row: 0,createdAt: new Date(),column: 
-
-Number(this.columns)+3,projectID:this._id});
+        Cells.insert({userID: nowUserId,
+            isReport: false,
+            data: canName,
+            row: 0,
+            createdAt: new Date(),
+            column: Number(this.columns)+3,
+            projectID:this._id,
+            SDdata:0});
       }else{
+
         Cells.insert({
         userID: nowUserId,isReport: false,
         data: 0,
         row: i,
         createdAt: new Date(),
         column: Number(this.columns)+3,
-        projectID:this._id
+        projectID:this._id,
+            SDdata:0
         });
       }
       }    
@@ -209,12 +223,10 @@ Template.addFactor.events({
     // report
     for (var i=0;i<=Number(this.columns)+2;i++){
       if(i===0){
-        Cells.insert({userID: null,isReport: true,
-        data: facName,
-        row: this.rows+1,
-        createdAt: new Date(),
+        Cells.insert({userID: null,isReport: true, data: facName, row: this.rows+1, createdAt: new Date(),
         column: 0,
-        projectID:this._id
+        projectID:this._id,
+            SDdata:0
         });
       }else{
         Cells.insert({userID: null,isReport: true,
@@ -222,7 +234,8 @@ Template.addFactor.events({
         row: this.rows+1,
         createdAt: new Date(),
         column: i,
-        projectID:this._id
+        projectID:this._id,
+            SDdata:0
         });
       }
     }
@@ -231,17 +244,25 @@ Template.addFactor.events({
         var nowUserId=this.users[item].userId;
         for (var i=0;i<=Number(this.columns)+2;i++){
         if(i===0){     
-        Cells.insert({userID: nowUserId,isReport: false,data: facName,row:this.rows+1,createdAt: new Date
-
-(),column: 0,projectID:this._id});
+        Cells.insert({userID: nowUserId,
+            isReport: false,
+            data: facName,
+            row:this.rows+1,
+            createdAt: new Date(),
+            column: 0,
+            projectID:this._id,
+            SDdata:0});
       }else{
         Cells.insert({
         userID: nowUserId,isReport: false,
+
         data: 0,
         row: this.rows+1,
         createdAt: new Date(),
         column: i,
-        projectID:this._id
+
+        projectID:this._id,
+            SDdata:0
         });
       }
       }    
