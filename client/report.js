@@ -139,6 +139,17 @@ Template.setTH.events({
     }
 });
 
+Template.reportcellshow.helpers({
+    isCandidate: function(){
+      var flag = (this.row === 0);
+      return flag;
+    },
+    isFactor: function(){
+      var flag = (this.column === 0);
+      return flag;
+    }
+});
+
 
 Template.addCandidate.events({
     'submit form': function(event){

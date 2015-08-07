@@ -62,6 +62,13 @@
   <td>
     {{> editableText collection="cells" field="data" saveOnFocusout=true}};
     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+    {{#if isCandidate }}
+    <a href="#" class="delete-candi">DeleteCandidate</a>
+    {{/if}}
+    {{#if isFactor}}
+    <a href="#" class="delete-fac">DeleteFactor</a>
+    {{/if}}
+
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
   </td>
