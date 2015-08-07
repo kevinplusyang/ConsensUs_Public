@@ -57,6 +57,10 @@
         {{> reportcellshow}}
         {{/each}}
       </tr>
+      {{#if showNotes row}}
+      {{> notes}}
+      {{/if}}
+
 </template>
 
 <template name = "reportcellshow">
@@ -72,9 +76,9 @@
         <input type="checkbox" checked="{{showNotes row}}" />
         Show Notes
     </label>
-      {{#if showNotes row}}
+<!--       {{#if showNotes row}}
       {{> notes}}
-      {{/if}}
+      {{/if}} -->
     {{/if}}
 
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->

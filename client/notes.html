@@ -1,3 +1,16 @@
 <template name="notes">
-    <p>Notes here</p>
+    
+    <tr>
+    	<td>Notes for {{data}}</td>
+    	<td colspan="2">Notes for weight of {{data}} :</td>
+    	{{#each colhere row projectID}}
+    	{{> noteArea}}
+    	{{/each}}
+    </tr>
+</template>
+
+<template name="noteArea">
+    
+    <td>Notes for {{row}}{{column}}</td>
+    	
 </template>

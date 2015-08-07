@@ -225,7 +225,8 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
-
+    //
+    
 
  var showCheckBox=[false,false];
  Session.set({showNotes: showCheckBox});

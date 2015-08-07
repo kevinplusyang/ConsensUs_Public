@@ -116,11 +116,25 @@ Template.reportMatrix.helpers({
     //candidateCo:2
   });
 
+/*
+to be modified later: setDefault
+Qc,150807
+*/
+var showCheckBox=[false,false];
+Session.setDefault({showNotes: showCheckBox});
+
 Template.reportMatBody.helpers({
     cellFindRow: function(rowNo, projectID){
       updateRow(projectID,rowNo);
         updateRowForVariance(projectID,rowNo);
       return cellFindRow(rowNo,projectID);
+    },
+    showNotes: function(row){
+      // var rowNo=this.row;
+      console.log("@@@@@@@");
+    console.log(Session.get('showNotes')[row-1]);
+    return Session.get('showNotes')[row-1];
+      // return true;
     }
 });
 
@@ -138,12 +152,6 @@ Template.setTH.events({
 
     }
 });
-/*
-to be modified later: setDefault
-Qc,150807
-*/
-var showCheckBox=[false,false];
-Session.setDefault({showNotes: showCheckBox});
 
 Template.reportcellshow.helpers({
     isCandidate: function(){
