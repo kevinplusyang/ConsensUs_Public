@@ -36,6 +36,9 @@
        {{> reportcelllist}}
       {{/each}}
      </ul> -->
+      {{> addCandidate}}
+
+      {{> addFactor}}
 
 
      {{> chatrooms}}
@@ -59,6 +62,19 @@
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
   </td>
+</template>
+<template name="addCandidate">
+    <form>
+        Add a candidate:
+        <input type="text" placeholder="Type a candidate here..." name="canName">
+    </form>
+</template>
+
+<template name="addFactor">
+    <form>
+        Add a factor:
+        <input type="text" placeholder="Type a factor here..." name="facName">
+    </form>
 </template>
 
 <!-- <template name = "reportcelllist">

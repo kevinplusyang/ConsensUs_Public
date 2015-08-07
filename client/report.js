@@ -68,3 +68,105 @@ Template.reportMatBody.helpers({
       return cellFindRow(rowNo,projectID);
     }
 });
+
+
+Template.addCandidate.events({
+    'submit form': function(event){
+    event.preventDefault();
+    // var thisProject = Projects.findOne({_id: proID});
+    var canName = $('[name="canName"]').val();
+    
+    /////////////add new columns in Report page
+  
+    for (var i=-1;i<=Number(this.rows);i++){
+      if(i===0){     
+        Cells.insert({userID: null,isReport: true,data: canName,row: 0,createdAt: new Date(),column: Number(this.columns)+3,projectID:this._id});
+      }else{
+        Cells.insert({
+        userID: null,isReport: true,
+        data: 0,
+        row: i,
+        createdAt: new Date(),
+        column: Number(this.columns)+3,
+        projectID:this._id
+        });
+      }
+    }
+    //add new columns in related user's page
+      for(var item in this.users){
+        var nowUserId=this.users[item].userId;
+        for (i=-1;i<=Number(this.rows);i++){
+        if(i===0){     
+        Cells.insert({userID: nowUserId,isReport: false,data: canName,row: 0,createdAt: new Date(),column: Number(this.columns)+3,projectID:this._id});
+      }else{
+        Cells.insert({
+        userID: nowUserId,isReport: false,
+        data: 0,
+        row: i,
+        createdAt: new Date(),
+        column: Number(this.columns)+3,
+        projectID:this._id
+        });
+      }
+      }    
+    }
+
+    Projects.update(this._id,  {$set: {columns: Number(this.columns)+1}});  
+    $('[name="canName"]').val('');
+  }
+});
+
+Template.addFactor.events({
+    'submit form': function(event){
+    event.preventDefault();
+    var facName = $('[name="facName"]').val();
+
+    // report
+    for (var i=0;i<=Number(this.columns)+2;i++){
+      if(i===0){
+        Cells.insert({userID: null,isReport: true,
+        data: facName,
+        row: this.rows+1,
+        createdAt: new Date(),
+        column: 0,
+        projectID:this._id
+        });
+      }else{
+        Cells.insert({userID: null,isReport: true,
+        data: 0,
+        row: this.rows+1,
+        createdAt: new Date(),
+        column: i,
+        projectID:this._id
+        });
+      }
+    }
+    //personal
+     for(var item in this.users){
+        var nowUserId=this.users[item].userId;
+        for (var i=0;i<=Number(this.columns)+2;i++){
+        if(i===0){     
+        Cells.insert({userID: nowUserId,isReport: false,data: facName,row:this.rows+1,createdAt: new Date(),column: 0,projectID:this._id});
+      }else{
+        Cells.insert({
+        userID: nowUserId,isReport: false,
+        data: 0,
+        row: this.rows+1,
+        createdAt: new Date(),
+        column: i,
+        projectID:this._id
+        });
+      }
+      }    
+    }
+    Projects.update(
+      this._id,
+      {$set: 
+        {rows: 
+          Number(this.rows)+1
+        }
+      }
+      );
+    $('[name="facName"]').val('');
+  }
+});
