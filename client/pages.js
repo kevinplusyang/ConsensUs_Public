@@ -1,6 +1,7 @@
 Meteor.subscribe("cells");
 Meteor.subscribe("projects");
 Meteor.subscribe("chatroom");
+Meteor.subscribe("notes");
 
 
 var cellFindOne = function(rowNo, columnNo,proID,userID){
@@ -193,7 +194,7 @@ Template.projectList.helpers({
 
 
 var initialProject = function(proID,userID){
-  console.log("here");
+  // console.log("here");
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:-1,column:3,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:-1,column:4,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:0,column:3,data:'New York',createdAt: new Date(),SDdata:0});
@@ -226,6 +227,8 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
 
 
+ var showCheckBox=[false,false];
+ Session.set({showNotes: showCheckBox});
  updateWeight(proID);
  updateTotal(proID);
 }

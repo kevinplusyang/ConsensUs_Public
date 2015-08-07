@@ -138,6 +138,12 @@ Template.setTH.events({
 
     }
 });
+/*
+to be modified later: setDefault
+Qc,150807
+*/
+var showCheckBox=[false,false];
+Session.setDefault({showNotes: showCheckBox});
 
 Template.reportcellshow.helpers({
     isCandidate: function(){
@@ -150,7 +156,9 @@ Template.reportcellshow.helpers({
     },
     showNotes: function(row){
       // var rowNo=this.row;
-      return Session.get('showNotes')[row];
+    console.log(Session.get('showNotes'));
+    return Session.get('showNotes')[row-1];
+      // return true;
     }
 });
 
@@ -283,6 +291,11 @@ Template.addFactor.events({
   }
 });
 
+
+
+
+
+
 Template.reportcellshow.events({
    'click .delete-candi': function(event) {
     event.preventDefault();   
@@ -307,11 +320,15 @@ Template.reportcellshow.events({
 
     },
     "change .show-notes input": function (event) {
-      var rowNo=this.row;
-      // Session.set({showNotes.rowNo: event.target.checked});
-      // console.log("@@@@@@@@@");
-      // console.log(rowNo);
-      // console.log("@@@@@@@@@");
+      var rowNo=Number(this.row);
+
+      // console.log(Session.get('showNotes'))
+      var getShowNotes = Session.get('showNotes');
+      var newSN = getShowNotes;
+      newSN[rowNo-1] = event.target.checked;
+      // console.log(newSN);
+      Session.set({showNotes: newSN});
+
     }
 
   });
