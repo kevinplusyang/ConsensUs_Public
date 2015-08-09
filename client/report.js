@@ -200,6 +200,18 @@ Template.addCandidate.events({
         projectID:this._id,
             SDdata:0
         });
+        // insert 'placeholder' of notes
+        if(i>0){
+          Notes.insert({isAdd:true,
+            row:i,
+            column:Number(this.columns)+3,
+            projectID:this._id,
+            createdAt: new Date(),
+            content:'click to add',
+            createdBy: Meteor.userId(),
+            name:Meteor.user().username,
+            url:''});
+        }
       }
     }
     //add new columns in related user's page
@@ -229,9 +241,13 @@ Template.addCandidate.events({
       }
       }    
     }
+    
+
 
     Projects.update(this._id,  {$set: {columns: Number(this.columns)+1}});  
     $('[name="canName"]').val('');
+
+
   }
 });
 
@@ -257,6 +273,17 @@ Template.addFactor.events({
         projectID:this._id,
             SDdata:0
         });
+        if(i>1){
+          Notes.insert({isAdd:true,
+            row:this.rows+1,
+            column:i,
+            projectID:this._id,
+            createdAt: new Date(),
+            content:'click to add',
+            createdBy: Meteor.userId(),
+            name:Meteor.user().username,
+            url:''});
+        }
       }
     }
     //personal
