@@ -10,17 +10,16 @@ Template.addNote.events({
     'submit form': function(event){
     event.preventDefault();
     // var thisProject = Projects.findOne({_id: proID});
-    var content = $('[name="Note"]').val();
+    var text = $('[name="Note"]').val();
+     // console.log(text);
     Notes.insert({
       row:this.row,
       column:this.column,
       createdAt: new Date(),
-      content:content,
+      content:text,
       createdBy: Meteor.userId(),
       name:Meteor.user().username,
       url:''
-
-
     });  
     $('[name="Note"]').val('');
   }
