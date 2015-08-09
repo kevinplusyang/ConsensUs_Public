@@ -59,10 +59,10 @@ var calculateSD = function(rowNo, columnNo,proID){
 
 
     cellUserCursor.forEach(function(cellUser){
-        console.log("celldata");
-        console.log(Number(cellUser.data));
-        console.log(Number(cellUser.data)-avg);
-        console.log("celldata");
+        // console.log("celldata");
+        // console.log(Number(cellUser.data));
+        // console.log(Number(cellUser.data)-avg);
+        // console.log("celldata");
         //var e = (Number(cellUser.data)-avg);
 
         sum = sum + (Number(cellUser.data)-avg)*(Number(cellUser.data)-avg);
@@ -81,8 +81,8 @@ var updateRowForVariance = function(proID,rowNo){
     var rowCursor = cellFindRow(rowNo,proID);
 
     rowCursor.forEach(function(cell){
-        console.log("cellcol");
-        console.log(cell.column);
+        // console.log("cellcol");
+        // console.log(cell.column);
 
 
         if(rowNo>0){
@@ -131,8 +131,8 @@ Template.reportMatBody.helpers({
     },
     showNotes: function(row){
       // var rowNo=this.row;
-      console.log("@@@@@@@");
-    console.log(Session.get('showNotes')[row-1]);
+    //   console.log("@@@@@@@");
+    // console.log(Session.get('showNotes')[row-1]);
     return Session.get('showNotes')[row-1];
       // return true;
     }
@@ -164,7 +164,7 @@ Template.reportcellshow.helpers({
     },
     showNotes: function(row){
       // var rowNo=this.row;
-    console.log(Session.get('showNotes'));
+    // console.log(Session.get('showNotes'));
     return Session.get('showNotes')[row-1];
       // return true;
     }
@@ -299,11 +299,6 @@ Template.addFactor.events({
   }
 });
 
-
-
-
-
-
 Template.reportcellshow.events({
    'click .delete-candi': function(event) {
     event.preventDefault();   
@@ -314,6 +309,17 @@ Template.reportcellshow.events({
     
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {columns: Number(thisProject.columns)-1}});  
+    
+    // column-1 for those followings.
+
+    var candiFollowingCursor = Cells.find({projectID: this.projectID,column:{$gt:this.column}});
+    candiFollowingCursor.forEach(function(cell){
+      var col = Number(cell.column)-1;
+      Cells.update(cell._id,{$set: {column: col}});
+    });
+
+
+
 
     },
     'click .delete-fac': function(event) {
@@ -321,10 +327,23 @@ Template.reportcellshow.events({
     var facCursor = Cells.find({projectID: this.projectID,row:this.row});
     facCursor.forEach(function(cell){
       Cells.remove({_id:cell._id});
-    })
+    });
     
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {rows: Number(thisProject.rows)-1}});  
+
+    // row-1 for those followings.
+
+    var facFollowingCursor = Cells.find({projectID: this.projectID,row:{$gt:this.row}});
+    facFollowingCursor.forEach(function(cell){
+      var ro = Number(cell.row)-1;
+      Cells.update(cell._id,{$set: {row: ro}});
+    });
+
+    // session delete this item
+    var newSN = Session.get('showNotes');
+    newSN.splice(this.row-1, 1);
+    Session.set({showNotes: newSN});
 
     },
     "change .show-notes input": function (event) {

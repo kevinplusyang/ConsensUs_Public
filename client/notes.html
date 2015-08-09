@@ -1,8 +1,8 @@
 <template name="notes">
     
     <tr>
-    	<td>Notes for {{data}}</td>
-    	<td colspan="2">Notes for weight of {{data}} :</td>
+    	<td></td>
+    	<td colspan="2">Notes for {{data}} :</td>
     	{{#each colhere row projectID}}
     	{{> noteArea}}
     	{{/each}}
@@ -11,6 +11,16 @@
 
 <template name="noteArea">
     
-    <td>Notes for {{row}}{{column}}</td>
+    <td>Notes for {{row}}{{column}}
+<!-- 	{{#each}}
+    {{> noteList}} -->
+    <!-- {{> addNote}} -->
+    </td>
     	
+</template>
+
+<template name="addNote">
+    <form>
+        <input type="text" placeholder="Take notes here..." name="Note">
+    </form>
 </template>
