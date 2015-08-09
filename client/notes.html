@@ -2,26 +2,48 @@
     
     <tr>
     	<td></td>
-    	<td colspan="2">Notes for {{data}} :</td>
+    	<td></td>
     	{{#each colhere row projectID}}
+    	<!-- <td colspan="2">Notes for {{data}} : {{>noteArea}}</td> -->      	
+    	
     	{{> noteArea}}
+    	
+    	
     	{{/each}}
     </tr>
 </template>
 
 <template name="noteArea">
+    <!-- colspan="{{columnWeight}}" -->
+    <td>
+    <ul>
     
-    <td>Notes for {{row}}{{column}}
-<!-- 	{{#each notelist}}
+	{{#each notelist}}
     	{{> noteList}}
-    {{/each}} -->
+    {{/each}}
+    </ul>
+    {{#with addNoteDefault}}
     {{> addNote}}
-    </td>
-    	
+    {{/with}}
+<!--     {{#with row=row column=column projectID=projectID}}
+    {{> addNote}}
+    {{/with}} -->
+    </td>   
+   	
 </template>
 
 <template name="addNote">
-    <form>
-        <input type="text" placeholder="Take notes here..." name="Note">
-    </form>
+<!--     <form>
+        <input type="text" placeholder="Take notes here..." name="Note{{column}}">
+    </form> -->
+    {{console}}
+    <span class="editable-text-trigger">
+here:{{> editableText collection="notes" field="content" saveOnFocusout=true beforeUpdate="setIsAddBefore" afterUpdate="addInsertHolder"}}
+</span>
+</template>
+
+<template name="noteList">
+<li>{{name}}:{{content}},{{isAdd}}
+</li>
+
 </template>
