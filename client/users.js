@@ -83,20 +83,69 @@ var updateTotal = function(proID,userID){
 }
 var initialPageforInv = function(proID,userID){
 
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:3,data:0,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:4,data:0,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:3,data:'New York',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:4,data:'Hawaii',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:0,data:'Cost',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:0,data:'Safety',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:1,data:3,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:2,data:1,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:3,data:2,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:4,data:3,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:1,data:1,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:3,data:0,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:4,data:0,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:3,data:'New York',createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:4,data:'Hawaii',createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:0,data:'Cost',createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:0,data:'Safety',createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:1,data:3,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:2,data:1,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:3,data:2,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:4,data:3,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:1,data:1,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
+    //Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
+
+    var row = Projects.findOne({_id: proID}).rows;
+    var column = Projects.findOne({_id: proID}).columns;
+
+    console.log("rows");
+    console.log(row);
+    console.log("column");
+    console.log(column);
+    console.log("=============");
+
+    //for(var m=1 ; m<=row ; m++){
+    //    for(var n=1 ; n<=column+2 ; n++){
+    //        console.log("rows");
+    //        console.log(m);
+    //        console.log("column");
+    //        console.log(n);
+    //        console.log("=============");
+    //    }
+    //}
+
+    for(var k=3 ; k<=column+2 ; k++){
+        var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:-1, column:k}).data;
+        Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:k,data:dataTemp,createdAt: new Date(),SDdata:0});
+    }
+
+    for(k=3 ; k<=column+2 ; k++){
+        var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:0, column:k}).data;
+        Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:k,data:dataTemp,createdAt: new Date(),SDdata:0});
+    }
+    for(k=1 ; k<=row ; k++){
+        var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:k, column:0}).data;
+        Cells.insert({userID: userID, isReport : false ,projectID:proID,row:k,column:0,data:dataTemp,createdAt: new Date(),SDdata:0});
+    }
+    for(k=1 ; k<=row ; k++){
+        var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:k, column:1}).data;
+        Cells.insert({userID: userID, isReport : false ,projectID:proID,row:k,column:1,data:dataTemp,createdAt: new Date(),SDdata:0});
+    }
+    for(k=1 ; k<=row ; k++){
+        var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:k, column:2}).data;
+        Cells.insert({userID: userID, isReport : false ,projectID:proID,row:k,column:2,data:dataTemp,createdAt: new Date(),SDdata:0});
+    }
+
+    for(var m=1; m<=row ; m++)
+        for(var n =3 ; n<=column+2; n++){
+            var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:m, column:n}).data;
+            Cells.insert({userID: userID, isReport : false ,projectID:proID,row:m,column:n,data:dataTemp,createdAt: new Date(),SDdata:0});
+        }
+
+
 
 
  updateWeight(proID,userID);
