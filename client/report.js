@@ -329,15 +329,21 @@ Template.addFactor.events({
 Template.reportcellshow.events({
    'click .delete-candi': function(event) {
     event.preventDefault();   
+    //remove cells
     var candidateCursor = Cells.find({projectID: this.projectID,column:this.column});
     candidateCursor.forEach(function(cell){
       Cells.remove({_id:cell._id});
     })
-    
+    //remove notes
+    var notesCursor = Notes.find({projectID: this.projectID,column:this.column});
+    notesCursor.forEach(function(note){
+      Notes.remove({_id:note._id});
+    })
+    // project.columns--
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {columns: Number(thisProject.columns)-1}});  
     
-    // column-1 for those followings.
+    // column-1 for those followings cells
 
     var candiFollowingCursor = Cells.find({projectID: this.projectID,column:{$gt:this.column}});
     candiFollowingCursor.forEach(function(cell){
@@ -345,26 +351,45 @@ Template.reportcellshow.events({
       Cells.update(cell._id,{$set: {column: col}});
     });
 
+    // column-1 for those followings notes
 
-
+    var noteFollowingCursor = Notes.find({projectID: this.projectID,column:{$gt:this.column}});
+    noteFollowingCursor.forEach(function(note){
+      var col = Number(note.column)-1;
+      Notes.update(note._id,{$set: {column: col}});
+    });
 
     },
     'click .delete-fac': function(event) {
-    event.preventDefault();   
+    event.preventDefault();  
+    //remove cells 
     var facCursor = Cells.find({projectID: this.projectID,row:this.row});
     facCursor.forEach(function(cell){
       Cells.remove({_id:cell._id});
     });
-    
+    //remove notes
+    var notesCursor = Notes.find({projectID: this.projectID,row:this.row});
+    notesCursor.forEach(function(note){
+      Notes.remove({_id:note._id});
+    })
+    // project.rows--
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {rows: Number(thisProject.rows)-1}});  
 
-    // row-1 for those followings.
+    // row-1 for those following cells
 
     var facFollowingCursor = Cells.find({projectID: this.projectID,row:{$gt:this.row}});
     facFollowingCursor.forEach(function(cell){
       var ro = Number(cell.row)-1;
       Cells.update(cell._id,{$set: {row: ro}});
+    });
+
+    // row-1 for those followings notes
+
+    var noteFollowingCursor = Notes.find({projectID: this.projectID,row:{$gt:this.row}});
+    noteFollowingCursor.forEach(function(note){
+      var ro = Number(note.row)-1;
+      Notes.update(note._id,{$set: {row: ro}});
     });
 
     // session delete this item
