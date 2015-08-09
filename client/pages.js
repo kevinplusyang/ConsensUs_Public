@@ -115,7 +115,8 @@ Template.matrix.helpers({
     //factorCo: 2,
     //candidateCo:2
   });
-
+var showCheckBox=[false,false];
+Session.setDefault({showNotes: showCheckBox});
 Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
       // updateWeight(projectID,userID);
@@ -125,10 +126,14 @@ Template.matBody.helpers({
       console.log(userID);
       console.log(cellFindRow(rowNo,projectID,userID));
       return cellFindRow(rowNo,projectID,userID);
-     }
-    // userToSee: function(){
-    //   return Meteor.user();
-    // }
+     },
+     showNotes: function(row){
+      // var rowNo=this.row;
+    //   console.log("@@@@@@@");
+    // console.log(Session.get('showNotes')[row-1]);
+    return Session.get('showNotes')[row-1];
+      // return true;
+    }
 });
 
 
@@ -287,6 +292,29 @@ Template.cellshow.helpers({
 
 
         return false
+    },
+    isFactor: function(){
+      var flag = (this.column === 0);
+      return flag;
+    },
+    showNotes: function(row){
+      // var rowNo=this.row;
+    // console.log(Session.get('showNotes'));
+    return Session.get('showNotes')[row-1];
+      // return true;
     }
 });
+Template.cellshow.events({
+  "change .show-notes input": function (event) {
+      var rowNo=Number(this.row);
 
+      // console.log(Session.get('showNotes'))
+      var getShowNotes = Session.get('showNotes');
+      var newSN = getShowNotes;
+      newSN[rowNo-1] = event.target.checked;
+      // console.log(newSN);
+      Session.set({showNotes: newSN});
+
+    }
+
+  });

@@ -61,19 +61,31 @@
         {{> cellshow}}
         {{/each}}
       </tr>
+      {{#if showNotes row}}
+      {{> notes}}
+      {{/if}}
 </template>
 
 <template name = "cellshow">
   <td>
         {{#if oi userID row column}}
             {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-            <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-            <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true}};-->
+            {{#if isFactor}}
+              <label class="show-notes">
+                <input type="checkbox" checked="{{showNotes row}}" />
+                  Show Notes
+                </label>
+            {{/if}}
          {{else}}
             {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}};
-            <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true userCanEdit=false}};-->
-            <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true userCanEdit=false}};-->
+            {{#if isFactor}}
+              <label class="show-notes">
+                <input type="checkbox" checked="{{showNotes row}}" />
+                  Show Notes
+                </label>
+            {{/if}}
         {{/if}}
+
 
     <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
     <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true}};-->
