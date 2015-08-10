@@ -1,13 +1,20 @@
 <template name="home">
-
-  <h2>Create your own group-decision-matrix</h2>
-
-    {{#if currentUser}}
-        {{> user}}
-    {{else}}
-        {{> register}}
-        {{> login}}
-    {{/if}}
+<div class="container">
+{{#if currentUser}}
+    {{> user}}
+{{else}}
+    <div class="row">
+        <h2>Create your own group-decision-matrix</h2>
+        <div class="col-sm-6">
+            {{> register}}
+            {{> login}}
+        </div>
+        <div class="col-sm-6">
+            
+        </div>
+    </div>
+ {{/if}}    
+</div>
 
  </template>
 
