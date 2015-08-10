@@ -10,3 +10,4 @@ iron:router
 babrahams:editable-text
 accounts-password
 accounts-ui
+twbs:bootstrap
