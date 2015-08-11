@@ -27,7 +27,10 @@ a {
 #addProject form{
 	margin-top: 30px;
 	margin-bottom: 30px;
-
+}
+.right-container{
+	margin-top: 20px;
+	margin-right: 10px;
 }
 .panel-heading h3{
 	color: #fff;
@@ -55,5 +58,20 @@ a {
 	color: #fff;
 	text-decoration: none;
 }
+.project-nav{
+	background-color:#f1f3f4;
+	width: 100%;
+	height: 149px;
+	padding-left: 100px;
+	padding-top: 54px;
+}
+.project-nav h2{
+	margin-top: 0;
+	color: #269fb2;
+}
+.project-nav .profile{
+	color: #269fb2;
+	font-size: 14px;
 
+}
 
