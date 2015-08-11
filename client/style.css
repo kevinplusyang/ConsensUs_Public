@@ -72,6 +72,8 @@ a {
 .project-nav .profile{
 	color: #269fb2;
 	font-size: 14px;
-
+}
+.project-nav .profile img{
+	margin-right:20px;
 }
 
