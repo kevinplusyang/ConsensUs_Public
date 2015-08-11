@@ -1,16 +1,38 @@
 <template name="user">
-
 {{#if currentUser}}
-    {{> projectList}}
-    {{> joinProject}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 left-con">
+            {{> addProject}}
+            {{> joinProject}}
+        </div>
+        <div class="col-md-9">
+            <!--Show the project list in control panel-->
+            {{> projectList}}
+        </div>        
+    </div>
+</div>
+    
 {{else}}
 <p>please login</p>
+
 {{/if}}
 </template>
 
-
+<template name="addProject">
+    <!--Input container for adding user template-->
+    <div>
+        <div id='addProject'>
+            <img src="/ImgNewMatrix.png">
+            <form>Add New Project<br />
+            <input type="text" placeholder="New Project Name" name="projectName">
+            </form>
+        </div>
+    </div>
+    
+</template>
 <template name="joinProject">
-    <form>Input Invite Code
+    <form>Input Invite Code<br />
         <input type="text" placeholder="Input Invite Code" name="joinproject">
     </form>
 

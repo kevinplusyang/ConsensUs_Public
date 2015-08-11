@@ -1,33 +1,29 @@
 <template name="projectList">
-    <!--Show the project list in control panel-->
 
-    {{> addProject}}
     <!--Show addProject template-->
 
+    <div class='panel panel-default'>
+        <div class="panel-heading">
+        <h3>My Matrix</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{#each project}}
+                    <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
+                    <li class="list-group-item"><a href="/project/{{_id}}/{{currentUserrr}}">{{name}}</a></li>
 
-    <ul>
-        {{#each project}}
-            <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
-
-
-            <li><a href="/project/{{_id}}/{{currentUserrr}}">{{name}}</a></li>
-
-            <!--<li><a href="{{pathFor route='project'}}">{{name}}</a></li>-->
-            <a href="#" class="delete-project">Delete</a>
-        {{/each}}
-    </ul>
+                    <!--<li><a href="{{pathFor route='project'}}">{{name}}</a></li>-->
+                    <!-- <a href="#" class="delete-project">Delete</a> -->
+                {{/each}}
+            </ul>
+        </div>
+    </div>
     <!--Show the existing project list-->
 
 
-    <a href="/project">Project</a>
+    <!-- <a href="/project">Project</a> -->
     <!--Only for test use-->
 
 </template>
 
 
-<template name="addProject">
-    <!--Input container for adding user template-->
-    <form>New Project Name:
-        <input type="text" placeholder="Enter a Project Name Here" name="projectName">
-    </form>
-</template>

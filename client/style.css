@@ -8,11 +8,52 @@ a {
 }
 
 .footer{
-    clear: both;
-	background: #f6f6f6;
+    clear: both;	
 	margin-top: 20px;
 	padding: 20px 0;
 	color: #999;
 	text-align: center;
 }
+.left-con{	
+	height: 540px;
+	text-align: center;
+}
+#addProject{
+	
+	margin: auto;
+	margin-top: 90%;
+	width: 70%;
+}
+#addProject form{
+	margin-top: 30px;
+	margin-bottom: 30px;
+
+}
+.panel-heading h3{
+	color: #fff;
+	font-size: 24px;
+	margin-top:0;
+	margin-bottom: 0;
+}
+.panel-body{
+	padding-right: 36px;
+}
+.panel-body .list-group-item{
+	height: 51px;
+	font-size: 20px;
+	padding: 0;
+}
+.panel-body .list-group-item a{
+	display: block;
+	height: 100%;
+	padding-top: 10px;
+	padding-left: 16px;
+	color: #269fb2;
+}
+.list-group-item a:hover{
+	background-color: #269fb2;
+	color: #fff;
+	text-decoration: none;
+}
+
 
