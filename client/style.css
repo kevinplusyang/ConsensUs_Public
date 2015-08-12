@@ -142,4 +142,13 @@ a {
 	float: right;
 	padding-right: 10px;
 }
+.notebook{
+	background-color: #fff0da;
+}
+.note-group{
+	background: red;
+}
+.note-item{
+	background: green;
+}
 

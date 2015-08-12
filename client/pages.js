@@ -237,10 +237,10 @@ var initialProject = function(proID,userID){
  Session.set({showNotes: showCheckBox});
 
     //
-    Notes.insert({isAdd:true,row:1,column:2,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:1,column:1,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
     Notes.insert({isAdd:true,row:1,column:3,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
     Notes.insert({isAdd:true,row:1,column:4,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:2,column:2,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:2,column:1,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
     Notes.insert({isAdd:true,row:2,column:3,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
     Notes.insert({isAdd:true,row:2,column:4,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
 

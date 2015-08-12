@@ -1,6 +1,6 @@
 Template.notes.helpers({
     colhere: function(rowNo,proID){
-      return Cells.find({isReport: true,row: rowNo,column:{$gt:1}, projectID:proID},{ sort:{column: 1 }});
+      return Cells.find({isReport: true,row: rowNo,column:{$gt:0}, projectID:proID},{ sort:{column: 1 }});
       
       // return cellFindRow(rowNo,this._id);
     }

@@ -1,11 +1,8 @@
-<template name="notes">
-    
+<template name="notes">    
     <tr>
-    	<td></td>
-    	<td></td>
+    	<td></td>   	
+    	     	
     	{{#each colhere row projectID}}
-    	<!-- <td colspan="2">Notes for {{data}} : {{>noteArea}}</td> -->      	
-    	
     	{{> noteArea}}
     	
     	
@@ -15,8 +12,8 @@
 
 <template name="noteArea">
     <!-- colspan="{{columnWeight}}" -->
-    <td>
-    <ul>
+    <td class='notebook'>
+    <ul class='notes-group'>
     
 	{{#each notelist}}
     	{{> noteList}}
@@ -43,7 +40,8 @@ here:{{> editableText collection="notes" field="content" saveOnFocusout=true bef
 </template>
 
 <template name="noteList">
-<li>{{name}}:{{content}},{{row}},{{column}}
+<li class="note-item">
+    {{name}}:{{content}}<!-- ,{{row}},{{column}} -->
 </li>
 
 </template>
