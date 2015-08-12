@@ -69,6 +69,9 @@ var calculateSD = function(rowNo, columnNo,proID){
     });
 
     var variance = sum/count;
+    variance = Math.sqrt(variance);
+
+
 
     return variance;
 };
@@ -84,14 +87,52 @@ var updateRowForVariance = function(proID,rowNo){
         // console.log("cellcol");
         // console.log(cell.column);
 
+        //
+        //if(rowNo>0){
+        //    if(cell.column>0){
+        //        var variance = calculateSD(rowNo,cell.column,proID);
+        //        Cells.update(cell._id,{$set: {SDdata : variance}});
+        //    }
+        //}
+
+
+        //var variance = calculateSD( -1 ,3 ,proID);
+        //Cells.update(cell._id,{$set: {SDdata : variance}});
+
+
 
         if(rowNo>0){
             if(cell.column>0){
                 var variance = calculateSD(rowNo,cell.column,proID);
+
                 Cells.update(cell._id,{$set: {SDdata : variance}});
             }
+        }else if(rowNo===-1){
+            if(cell.column>1){
+                var variance = calculateSD(rowNo,cell.column,proID);
+                Cells.update(cell._id,{$set: {SDdata : variance}});
+
+                //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
+
+
+                console.log("====================");
+                console.log(rowNo);
+                console.log(cell.column);
+                console.log(variance);
+                console.log("====================");
+            }
         }
+
+
+
     })
+
+
+
+
+
+
+
 };
 
 
@@ -127,6 +168,12 @@ Template.reportMatBody.helpers({
     cellFindRow: function(rowNo, projectID){
       updateRow(projectID,rowNo);
         updateRowForVariance(projectID,rowNo);
+
+        updateRowForVariance(projectID,-1);
+
+
+
+
       return cellFindRow(rowNo,projectID);
     },
     showNotes: function(row){
