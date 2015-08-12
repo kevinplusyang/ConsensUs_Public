@@ -1,6 +1,7 @@
 <template name = 'matrix'>
 <!-- {{currentProjectt}}
 <p>seethis {{userToSee currentUserr}},{{currentUserr}}</p> -->
+
 <div class="table-container">
      <table>
       <tr>
@@ -63,12 +64,20 @@
 <template name = "cellshow">
   <td class="table-{{type}}">
         {{#if oi userID row column}}
-            {{> editableText collection="cells" field="data" saveOnFocusout=true}}
-            {{#if isFactor}}
-              <label class="show-notes">
-                <input type="checkbox" checked="{{showNotes row}}" />
-                  Show Notes
-                </label>
+            {{#if notWeight}}
+              
+              {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+              {{#if isFactor}}
+                <label class="show-notes">
+                  <input type="checkbox" checked="{{showNotes row}}" />
+                    Show Notes
+                  </label>
+              {{/if}}
+
+            {{else}}
+
+              <div class="sliderrr"></div>
+
             {{/if}}
          {{else}}
             {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}

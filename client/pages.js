@@ -3,7 +3,6 @@ Meteor.subscribe("projects");
 Meteor.subscribe("chatroom");
 Meteor.subscribe("notes");
 
-
 var cellFindOne = function(rowNo, columnNo,proID,userID){
       return Cells.findOne({isReport:false,userID: userID, row: rowNo, column:columnNo, projectID:proID});
 }
@@ -20,7 +19,8 @@ var updateWeight = function(proID,userID){
         sum =sum + Number(cell.data);
       });
       cellFindCol(2,proID,userID).forEach(function(cell){
-        Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID,userID).data/sum}});
+        var val=cellFindOne(cell.row, 1,proID,userID).data/sum;
+        Cells.update(cell._id,{$set: {data: val.toFixed(3) }});
       });
       // norWeightArray.forEach(function(cell){
       //   cell.data=Number(cell.data)/sum;
@@ -38,7 +38,7 @@ var updateTotal = function(proID,userID){
             sum =sum + Number(cellFindOne(cellInside.row,2,proID,userID).data ) * Number(cellInside.data) ;
           };
         });
-        Cells.update(cell._id,{$set: {data: sum}});
+        Cells.update(cell._id,{$set: {data: sum.toFixed(3)}});
      });
 }
 var updateCandidate = function(proID){
@@ -273,6 +273,26 @@ Template.addProject.events({
     }
 });
 
+Template.cellshow.rendered = function () {
+  // ...
+  // console.log("fsfsf:",this.$(".slider"));
+  var id=this.data._id;
+
+  this.$(".sliderrr").noUiSlider({
+    start: this.data.data,
+    connect:'lower',
+    range:{
+      'min':0,
+      'max':5
+    }
+  }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+  Cells.update({_id:id}, {$set:{data:val}});
+  }).on('change',function(ev,val){
+    Cells.update({_id:id}, {$set: {data: val}});
+  })
+};
+
 Template.cellshow.helpers({
     'oi': function(UID, row, column){
 
@@ -320,8 +340,20 @@ Template.cellshow.helpers({
       {
         return 'show';
       }
+    },
+    notWeight:function(){
+      if(this.column===1){
+        return false;
+      }else{
+        return true;
+      }
+
     }
 });
+
+
+
+
 Template.cellshow.events({
   "change .show-notes input": function (event) {
       var rowNo=Number(this.row);
