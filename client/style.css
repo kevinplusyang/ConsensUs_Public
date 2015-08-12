@@ -76,4 +76,70 @@ a {
 .project-nav .profile img{
 	margin-right:20px;
 }
+.table-container{
+	margin-top: 87px;
+	margin-left: 113px;
+}
+.table-container table{
+	table-layout:fixed;
+}
+.table-null{
+	width: 220px;
+}
+.table-head{
+	text-align: center;
+	border: 0 !important;
+	width: 296px !important;
+	height: 55px;
+	/* Rectangle 28 Copy 11: */
+	background-image: -webkit-linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+	background-image: -o-linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+	background-image: linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+	/* Total Score: */
+	font-family: STHeitiSC-Medium;
+	font-size: 19.54px;
+	color: #1C8090;
+	line-height: 21px;
+}
+.table-rowScore{
+	text-align: center;
+	/* Rectangle 28 Copy 9: */
+	width: 221px !important;
+	height: 55px;
+	background: #F1F3F4;
+	border: 1px solid #FFFFFF;
+	color: #1C8090;
+	}
+.table-row0{
+	text-align: center;
+	/* Candidate 3: */
+	font-family: STHeitiSC-Medium;
+	font-size: 24px;
+	color: #1C8090;
+	line-height: 25px;
+	/* Rectangle 28 Copy 33: */
+	height: 55px;
+	background-image: -webkit-linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+	background-image: -o-linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+	background-image: linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
+
+	}
+.table-show{
+	text-align: center;
+	height: 55px;
+	background: #F1F3F4;
+	border: 1px solid #FFFFFF;
+	color: #1C8090;
+}
+.col0{
+	text-align: left !important;	
+	padding-left: 40px;
+}
+.col1{
+	width: 250px;
+}
+.show-notes{
+	float: right;
+	padding-right: 10px;
+}
 

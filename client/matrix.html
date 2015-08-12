@@ -1,40 +1,34 @@
 <template name = 'matrix'>
-{{currentProjectt}}
-<p>seethis {{userToSee currentUserr}},{{currentUserr}}</p>
-     <table class="table table-bordered">
-      <thead>
-
+<!-- {{currentProjectt}}
+<p>seethis {{userToSee currentUserr}},{{currentUserr}}</p> -->
+<div class="table-container">
+     <table>
       <tr>
-        <td></td>
-        <td></td>
-        <td>Total Score</td>
+        <td class="table-null"></td>
+        <td colspan="2" class="table-head">Total Score</td>
         {{#each cellFindRow -1 currentUserr currentProjectt}}
         {{> cellshow}}
         {{/each}}
       </tr>
 
       <tr>
-          <th></th>
-          <th>Weight</th>
-          <th>Normalized Weight</th>
+          <td></td>
+          <td colspan="2" class="table-row0">Weight</td>
           {{#each cellFindRow 0 currentUserr currentProjectt}}
             {{> cellshow}}
           {{/each}}
       </tr>
-
-      </thead>
-      <tbody>
        {{#each rowNum currentUserr currentProjectt}}
          {{> matBody}}
        {{/each}}
-      </tbody>
-     </table>
 
+     </table>
+</div>
 <!--   {{> addCandidate}}
 
   {{> addFactor}} -->
 
- <h3>New test</h3>
+<!--  <h3>New test</h3>
   
   <ul>{{#each cellthis currentUserr currentProjectt}}
   {{> celllist}}
@@ -46,7 +40,7 @@
   <ul>{{#each cell currentProjectt}}
   {{> celllist}}
   {{/each}} 
-  </ul>
+  </ul> -->
   <!-- {{> adding}} -->
 
 
@@ -67,9 +61,9 @@
 </template>
 
 <template name = "cellshow">
-  <td>
+  <td class="table-{{type}}">
         {{#if oi userID row column}}
-            {{> editableText collection="cells" field="data" saveOnFocusout=true}};
+            {{> editableText collection="cells" field="data" saveOnFocusout=true}}
             {{#if isFactor}}
               <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
@@ -77,7 +71,7 @@
                 </label>
             {{/if}}
          {{else}}
-            {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}};
+            {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
             {{#if isFactor}}
               <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />

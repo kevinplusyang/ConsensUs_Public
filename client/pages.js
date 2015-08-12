@@ -302,6 +302,24 @@ Template.cellshow.helpers({
     // console.log(Session.get('showNotes'));
     return Session.get('showNotes')[row-1];
       // return true;
+    },
+    type:function(){
+      if(this.row ===0){
+        return 'row0';
+      // }else if(this.row===-1)
+      // {
+      //   return 'head';
+      }else if(this.row===-1)
+      {
+        return 'rowScore';
+      }else if(this.column===0){
+        return 'show col0'
+      }else if(this.column===1){
+        return 'show col1'
+      }else
+      {
+        return 'show';
+      }
     }
 });
 Template.cellshow.events({
