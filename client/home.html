@@ -1,32 +1,90 @@
 <template name="home">
 
-    
 
-    {{#if currentUser}}
-        {{> user}}
+{{#if currentUser}}
+    {{> user}}
+{{else}}
 
-    {{else}}
-    <h2>Create your own group-decision-matrix</h2>
+    <div id="home-left" class="col-md-6">
         {{> register}}
+    </div>
+    <div id="home-right" class="col-md-6 right-con">
         {{> login}}
-    {{/if}}
+    </div>
+
+{{/if}}
+
+
+    <!--{{#if currentUser}}-->
+        <!--{{> user}}-->
+
+    <!--{{else}}-->
+    <!--<h2>Create your own group-decision-matrix</h2>-->
+        <!--{{> register}}-->
+        <!--{{> login}}-->
+    <!--{{/if}}-->
 
 </template>
 
 <template name="register">
-    <h3>Register</h3>
-    <form class="register">
-        <p>Username: <input type="text" name="username"></p>
-        <p>Password: <input type="password" name="password"></p>
-        <p><input type="submit" value="Register"></p>
-    </form>
+
+    <div class="col-md-8 col-md-offset-1">
+
+    <div id="r1">
+        <p id="create">Create</p>
+    </div>
+
+    <div id="r3">
+        <p id="yourown">Your Own</p>
+    </div>
+
+    <div id="r4">
+        <p id="gdm">Group Decision Matrix</p>
+
+    </div>
+
+    <div>
+        <form class="register">
+            <p class="register-1"> <input class="home-input" style="border-radius: 5px"  type="text" name="username" placeholder="Username"></p>
+            <p class="register-1"> <input class="home-input" style="border-radius: 5px" type="password" name="password" placeholder="Password"></p>
+
+           <div class="col-md-offset-3">
+               <p><input type="submit" value="Register" id="registerbtm" style="border-radius: 5px"></p>
+           </div>
+
+        </form>
+    </div>
+
+    </div>
+
 </template>
 
 <template name="login">
-    <h2>Login</h2>
-    <form class="login">
-        <p>Username: <input type="text" id="username"></p>
-        <p>Password: <input type="password" id="password"></p>
-        <p><input type="submit" value="Login"></p>
-    </form>
+
+    <div id="l1" class="col-md-offset-1">
+        <div>
+            <p id="login">
+            Login
+            </p>
+        </div>
+
+        <div id="l2">
+            <form class="login">
+                <p class="register-1"> <input type="text" class="home-input" style="border-radius: 5px" id="username" placeholder="Username"></p>
+                <p class="register-1"> <input type="password" class="home-input" style="border-radius: 5px" id="password" placeholder="Password"></p>
+
+                <div class="col-sm-offset-2">
+                    <p><input type="submit" value="Login" id="loginbtm" style="border-radius: 5px"></p>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+
 </template>
