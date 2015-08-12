@@ -8,6 +8,18 @@ id:{{_id}}
       <thead>
 
       <tr>
+          <td></td>
+          <td></td>
+          <td>Standard D</td>
+          {{#each cellFindRow -1}}
+              {{> reportSDcellshow}}
+          {{/each}}
+      </tr>
+
+
+
+
+      <tr>
         <td></td>
         <td></td>
         <td>Total Score</td>
@@ -33,12 +45,12 @@ id:{{_id}}
       </tbody>
      </table>
 
-<!--      <h3>test</h3>
+     <h3>test</h3>
      <ul>
       {{#each celllist 2 1 _id}}
        {{> reportcelllist}}
       {{/each}}
-     </ul> -->
+     </ul>
       {{> addCandidate}}
 
       {{> addFactor}}
@@ -85,6 +97,33 @@ id:{{_id}}
 
   </td>
 </template>
+
+
+<template name = "reportSDcellshow">
+    <td>
+        {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
+        <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+        {{#if isCandidate }}
+            <a href="#" class="delete-candi"> Delete </a>
+        {{/if}}
+        {{#if isFactor}}
+            <a href="#" class="delete-fac"> Delete </a>
+            <label class="show-notes">
+                <input type="checkbox" checked="{{showNotes row}}" />
+                Show Notes
+            </label>
+            <!--       {{#if showNotes row}}
+                {{> notes}}
+            {{/if}} -->
+        {{/if}}
+
+        <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
+
+    </td>
+</template>
+
+
+
 <template name="addCandidate">
     <form>
         Add a candidate:
@@ -99,14 +138,14 @@ id:{{_id}}
     </form>
 </template>
 
-<!-- <template name = "reportcelllist">
-  <li>
-    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="projectID" saveOnFocusout=true}};
+ <!--<template name = "reportcelllist">-->
+  <!--<li>-->
+    <!--{{> editableText collection="cells" field="data" saveOnFocusout=true}};-->
+    <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+    <!--{{> editableText collection="cells" field="projectID" saveOnFocusout=true}};-->
 
-  </li>
-</template>  -->
+  <!--</li>-->
+<!--</template>  -->
 
 <template name = "reportcelllist">
     <li>
