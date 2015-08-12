@@ -147,13 +147,36 @@ a {
 }
 .notebook{
 	background-color: #fff0da;
+	padding:0;
+	vertical-align: top;
 }
-.note-group{
-	background: red;
+.notebook .list-group{
+	padding:0;
+	margin: 0;
 }
-.note-item{
-	background: green;
+.notebook .list-group-item{
+	background-color: #fff0da;
+	border-color: #fff;
+	padding:5px;
+	height: 40px;
 }
+.note-head{
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	background-color: #fff;
+	float: left;
+	padding: 2px 0;
+	text-align: center;
+	overflow: hidden;
+
+}
+.note-content{
+	padding-left: 50px;
+	padding-top: 5px;
+}
+
+
 
 #home-left{
 	background-color: #FFFFFF;
