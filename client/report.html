@@ -1,9 +1,38 @@
+<!-- Somewhere else .. -->
+
+<template name="sdboxTrigger">
+  <a href="#"><img src="/Img-ruler.png" class="imgRuler">SD Setting</a>
+</template>
+
+<template name="sdbox">
+  <div class="SD-div">       
+        {{> SDshow}}
+        <p></p>
+        {{> setTH}}
+  </div>
+</template>
+
 <template name = 'reportMatrix'>
 <div class="container-fluid">
   <div class="project-nav">
       <h2>Report {{name}}</h2>
-      {{> setTH}}
-      {{> SDbox}}
+      
+      <div class="project-tool" >
+      {{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}
+
+      {{ > dropdown name="sdbox" }}
+      </div>
+
+
+
+
+      <!-- <button href="#" class="ruler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="/Img-ruler.png" class="imgRuler">SD setting</button>
+      </div>
+
+      <div class="SD-div dropdown-menu  dropdown-menu-right">
+        {{> setTH}}
+        {{> SDbox}}
+      </div> -->
   </div>
 </div>
 
@@ -170,7 +199,7 @@
 
 
 <template name="setTH">
-    <form>Input STH
+    <form>Setting SD threshold
         <input type="text" placeholder="SET STH" name="sth">
     </form>
 </template>

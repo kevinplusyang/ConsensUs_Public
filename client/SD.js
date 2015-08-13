@@ -1,6 +1,6 @@
 
 Session.setDefault({showSD: false});
-Template.SDbox.helpers({
+Template.SDshow.helpers({
     showSD: function(){
       // var rowNo=this.row;
     // console.log(Session.get('showNotes'));
@@ -8,7 +8,7 @@ Template.SDbox.helpers({
       // return true;
     }
 });
-Template.SDbox.events({
+Template.SDshow.events({
 	"change .show-SD input": function (event) {
 
       // console.log(Session.get('showNotes'))
