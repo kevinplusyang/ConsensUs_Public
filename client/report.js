@@ -31,12 +31,12 @@ var updateRow = function(proID,rowNo){
       if(rowNo>0){
           if(cell.column>0){
           var aver = calculateOne(rowNo,cell.column,proID);
-          Cells.update(cell._id,{$set: {data: aver}});
+          Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
         }
       }else if(rowNo===-1){
           if(cell.column>1){
           var aver = calculateOne(rowNo,cell.column,proID);
-          Cells.update(cell._id,{$set: {data: aver}});
+          Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
         }
       }
     })
@@ -105,12 +105,12 @@ var updateRowForVariance = function(proID,rowNo){
             if(cell.column>0){
                 var variance = calculateSD(rowNo,cell.column,proID);
 
-                Cells.update(cell._id,{$set: {SDdata : variance}});
+                Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
             }
         }else if(rowNo===-1){
             if(cell.column>1){
                 var variance = calculateSD(rowNo,cell.column,proID);
-                Cells.update(cell._id,{$set: {SDdata : variance}});
+                Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
 
                 //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
 
