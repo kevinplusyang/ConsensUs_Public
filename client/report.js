@@ -115,11 +115,11 @@ var updateRowForVariance = function(proID,rowNo){
                 //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
 
 
-                console.log("====================");
-                console.log(rowNo);
-                console.log(cell.column);
-                console.log(variance);
-                console.log("====================");
+                // console.log("====================");
+                // console.log(rowNo);
+                // console.log(cell.column);
+                // console.log(variance);
+                // console.log("====================");
             }
         }
 
@@ -200,7 +200,21 @@ Template.setTH.events({
 
     }
 });
+var findMaxSD = function(proID){
+    var cellCursor = Cells.find({projectID:proID,isReport:true}, 
+    {fields: {SDdata: 1}});
+    var max=0;
+    cellCursor.forEach(function (cell) {
+      if(cell.SDdata>max){
+        max=cell.SDdata;
+      }
+    });
+    console.log("afsdfs:",max);
+    return max;
 
+
+
+}
 Template.reportcellshow.helpers({
     isCandidate: function(){
       var flag = (this.row === 0);
@@ -217,22 +231,35 @@ Template.reportcellshow.helpers({
       // return true;
     },
     type:function(){
+      var temp='';
       if(this.row ===0){
-        return 'row0';
+        temp = 'row0';
       // }else if(this.row===-1)
       // {
       //   return 'head';
       }else if(this.row<0)
       {
-        return 'rowScore';
+        temp = 'rowScore';
       }else if(this.column===0){
-        return 'show col0'
+        temp = 'show col0';
       }else if(this.column===1){
-        return 'show col1'
+        temp = 'show col1';
       }else
       {
-        return 'show';
+        temp = 'show';
+        var thisProject = Projects.findOne({_id: this.projectID});
+        var maxSD=findMaxSD(this.projectID);
+        var SDth = Number(thisProject.sTH)*maxSD;
+        if(this.SDdata <= SDth){
+          var changeColor = true;
+        }else{
+          changeColor=false;
+        }
+        if(changeColor){
+          temp= 'show colorCell';
+        }
       }
+    return temp;
     }
 });
 
