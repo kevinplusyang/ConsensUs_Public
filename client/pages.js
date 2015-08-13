@@ -206,11 +206,11 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:0,column:4,data:'Hawaii',createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:0,data:'Cost',createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:0,data:'Safety',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:1,data:3,createdAt: new Date(),SDdata:0});
+    Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:1,data:0.75,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:2,data:1,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:3,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:1,column:4,data:3,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:1,data:1,createdAt: new Date(),SDdata:0});
+    Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:1,data:0.25,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
@@ -222,11 +222,11 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:4,data:'Hawaii',createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:0,data:'Cost',createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:0,data:'Safety',createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:1,data:3,createdAt: new Date(),SDdata:0});
+    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:1,data:0.75,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:2,data:1,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:3,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:1,column:4,data:3,createdAt: new Date(),SDdata:0});
-    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:1,data:1,createdAt: new Date(),SDdata:0});
+    Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:1,data:0.25,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
@@ -277,19 +277,22 @@ Template.cellshow.rendered = function () {
   // ...
   // console.log("fsfsf:",this.$(".slider"));
   var id=this.data._id;
+  var slider=this.$(".sliderrr");
 
-  this.$(".sliderrr").noUiSlider({
+  slider.noUiSlider({
     start: this.data.data,
     connect:'lower',
     range:{
       'min':0,
-      'max':5
+      'max':1
     }
   }).on('slide', function (ev, val) {
     //   // set real values on 'slide' event
   Cells.update({_id:id}, {$set:{data:val}});
   }).on('change',function(ev,val){
     Cells.update({_id:id}, {$set: {data: val}});
+    slider.noUiSlider.val(2);
+
   })
 };
 
