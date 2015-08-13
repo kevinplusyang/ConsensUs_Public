@@ -134,6 +134,13 @@ a {
 	border: 1px solid #FFFFFF;
 	color: #1C8090;
 }
+.table-SD{
+	text-align: center;
+	height: 55px;
+	background: #F1F3F4;
+	border: 1px solid #FFFFFF;
+	color: #1C8090;
+}
 .col0{
 	text-align: left !important;	
 	padding-left: 40px;

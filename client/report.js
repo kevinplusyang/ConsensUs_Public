@@ -152,9 +152,10 @@ Template.reportMatrix.helpers({
     celllist: function(rowNo,columnNo,proID){
       // updateOne(rowNo,columnNo,proID);
       return Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID}); 
+    },
+    showSD: function(){
+    return Session.get('showSD');
     }
-    //factorCo: 2,
-    //candidateCo:2
   });
 
 /*

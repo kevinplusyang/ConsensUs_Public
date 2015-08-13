@@ -3,12 +3,14 @@
   <div class="project-nav">
       <h2>Report {{name}}</h2>
       {{> setTH}}
+      {{> SDbox}}
   </div>
 </div>
 
 <!-- id:{{_id}} -->
 <div class="table-container">
   <table>
+      {{#if showSD}}
       <tr>
           <td class="table-null"></td>        
           <td colspan="2" class="table-head">Standard D</td>
@@ -16,6 +18,7 @@
               {{> reportSDcellshow}}
           {{/each}}
       </tr>
+      {{/if}}
       <tr>
         <td></td>
         <!-- <td></td> -->
@@ -100,10 +103,10 @@
 
 
 <template name = "reportSDcellshow">
-    <td>
+    <td class="table-SD">
         {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
         <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-        {{#if isCandidate }}
+<!--         {{#if isCandidate }}
             <a href="#" class="delete-candi"> Delete </a>
         {{/if}}
         {{#if isFactor}}
@@ -111,11 +114,11 @@
             <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
                 Show Notes
-            </label>
+            </label> -->
             <!--       {{#if showNotes row}}
                 {{> notes}}
             {{/if}} -->
-        {{/if}}
+<!--         {{/if}} -->
 
         <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
@@ -171,6 +174,8 @@
         <input type="text" placeholder="SET STH" name="sth">
     </form>
 </template>
+
+
 
 
 
