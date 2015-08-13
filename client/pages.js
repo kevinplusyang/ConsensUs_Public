@@ -289,9 +289,10 @@ Template.cellshow.rendered = function () {
   }).on('slide', function (ev, val) {
     //   // set real values on 'slide' event
   Cells.update({_id:id}, {$set:{data:val}});
+  
   }).on('change',function(ev,val){
     Cells.update({_id:id}, {$set: {data: val}});
-    slider.noUiSlider.val(2);
+    
 
   })
 };

@@ -278,3 +278,19 @@ a {
 .triphome {
 	display: none;
 }
+.delete-candi,.delete-fac{
+	font-size: 10px;
+	float: right;
+}
+.addButton{
+	/*background-image: url('/Btn-Add.png');*/
+	width: 38px;
+	height: 38px;
+}
+#addCandi{
+	padding-left: 30px;
+}
+#addFac{
+	text-align: center;
+	padding-top: 10px;
+}

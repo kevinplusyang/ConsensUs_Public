@@ -214,15 +214,34 @@ Template.reportcellshow.helpers({
     // console.log(Session.get('showNotes'));
     return Session.get('showNotes')[row-1];
       // return true;
+    },
+    type:function(){
+      if(this.row ===0){
+        return 'row0';
+      // }else if(this.row===-1)
+      // {
+      //   return 'head';
+      }else if(this.row<0)
+      {
+        return 'rowScore';
+      }else if(this.column===0){
+        return 'show col0'
+      }else if(this.column===1){
+        return 'show col1'
+      }else
+      {
+        return 'show';
+      }
     }
 });
 
 
 Template.addCandidate.events({
-    'submit form': function(event){
+    'click .add': function(event){
     event.preventDefault();
     // var thisProject = Projects.findOne({_id: proID});
-    var canName = $('[name="canName"]').val();
+    // var canName = $('[name="canName"]').val();
+    var canName='Rename';
     
     /////////////add new columns in Report page
   
@@ -292,17 +311,17 @@ Template.addCandidate.events({
 
 
     Projects.update(this._id,  {$set: {columns: Number(this.columns)+1}});  
-    $('[name="canName"]').val('');
+    // $('[name="canName"]').val('');
 
 
   }
 });
 
 Template.addFactor.events({
-    'submit form': function(event){
+    'click .add': function(event){
     event.preventDefault();
-    var facName = $('[name="facName"]').val();
-
+    // var facName = $('[name="facName"]').val();
+    var facName="Rename";
     // report
     for (var i=0;i<=Number(this.columns)+2;i++){
       if(i===0){
@@ -369,7 +388,7 @@ Template.addFactor.events({
         }
       }
       );
-    $('[name="facName"]').val('');
+    // $('[name="facName"]').val('');
   }
 });
 

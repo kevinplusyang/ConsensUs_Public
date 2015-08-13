@@ -1,49 +1,49 @@
 <template name = 'reportMatrix'>
-<h3>report page</h3>
+<div class="container-fluid">
+  <div class="project-nav">
+      <h2>Report {{name}}</h2>
+      {{> setTH}}
+  </div>
+</div>
 
-    {{> setTH}}
-
-id:{{_id}}
-     <table class="table table-bordered">
-      <thead>
-
+<!-- id:{{_id}} -->
+<div class="table-container">
+  <table>
       <tr>
-          <td></td>
-          <td></td>
-          <td>Standard D</td>
+          <td class="table-null"></td>        
+          <td colspan="2" class="table-head">Standard D</td>
           {{#each cellFindRow -1}}
               {{> reportSDcellshow}}
           {{/each}}
       </tr>
-
-
-
-
       <tr>
         <td></td>
-        <td></td>
-        <td>Total Score</td>
+        <!-- <td></td> -->
+        <td colspan="2" class="table-head">Total Score</td>
         {{#each cellFindRow -1}}
         {{> reportcellshow}}
         {{/each}}
       </tr>
 
       <tr>
-          <th></th>
-          <th>Weight</th>
-          <th>Normalized Weight</th>
+          <td></td>
+          <td colspan="2" class="table-row0">Weight</td>
+          <!-- <td>Normalized Weight</td> -->
           {{#each cellFindRow 0}}
             {{> reportcellshow}}
           {{/each}}
+          <td id='addCandi'>{{> addCandidate}}</td>
       </tr>
 
-      </thead>
-      <tbody>
        {{#each rowNum}}
          {{> reportMatBody}}
        {{/each}}
-      </tbody>
-     </table>
+       <tr>
+         <td id='addFac'>{{> addFactor}}</td>
+       </tr>
+
+  </table>
+</div>
 
      <h3>test</h3>
      <ul>
@@ -51,9 +51,9 @@ id:{{_id}}
        {{> reportcelllist}}
       {{/each}}
      </ul>
-      {{> addCandidate}}
+      <!-- {{> addCandidate}} -->
 
-      {{> addFactor}}
+      <!-- {{> addFactor}} -->
 
 
     {{> reportchatrooms}}
@@ -76,9 +76,9 @@ id:{{_id}}
 </template>
 
 <template name = "reportcellshow">
-  <td>
-    {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-    {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
+  <td class="table-{{type}}">
+    {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+<!--     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}; -->
     {{#if isCandidate }}
     <a href="#" class="delete-candi"> Delete </a>
     {{/if}}
@@ -125,17 +125,23 @@ id:{{_id}}
 
 
 <template name="addCandidate">
-    <form>
-        Add a candidate:
-        <input type="text" placeholder="Type a candidate here..." name="canName">
-    </form>
+  
+    <!-- Add a candidate: -->
+        <!--  <form>
+         <input type="text" placeholder="Type a candidate here..." name="canName">
+        </form> -->
+    <!-- <input type="button" value="" name="canName" class="addButton"> -->
+    <a href="#" class="add"> <img src="/Btn-Add.png" class="addButton"> </a>
+
 </template>
 
 <template name="addFactor">
-    <form>
+<!--     <form>
         Add a factor:
         <input type="text" placeholder="Type a factor here..." name="facName">
-    </form>
+    </form> -->
+    <a href="#" class="add"> <img src="/Btn-Add.png" class="addButton"> </a>
+
 </template>
 
  <!--<template name = "reportcelllist">-->
