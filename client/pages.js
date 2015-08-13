@@ -274,7 +274,7 @@ Template.addProject.events({
     }
 });
 
-Template.cellshow.rendered = function () {
+Template.cellshow.onRendered (function () {
   // ...
   // console.log("fsfsf:",this.$(".slider"));
   var id=this.data._id;
@@ -296,7 +296,7 @@ Template.cellshow.rendered = function () {
     
 
   })
-};
+});
 
 Template.cellshow.helpers({
     'oi': function(UID, row, column){

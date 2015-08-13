@@ -186,20 +186,55 @@ Template.reportMatBody.helpers({
     }
 });
 
-Template.setTH.events({
-    'submit form': function (event) {
-        event.preventDefault();
-        var sth = $('[name=sth]').val();
+Template.setTH.onRendered (function () {
+  // ...
+   //console.log("fsfsf:",this);
+   var thisProject=this.data;
+  var slider=this.$("#SDSlider");
 
-        var currentProject = this._id;
+  slider.noUiSlider({
+    start: this.data.sTH,
+    connect:'lower',
+    range:{
+      'min':0,
+      'max':1
+    }
+  }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
+    //Cells.update({_id:id}, {$set:{data:val}});
+  
+  }).on('change',function(ev,val){
+    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
+    
+
+  })
+});
 
 
-        Projects.update({_id:currentProject},{$set:{sTH:sth}});
-
-        $('[name=sth]').val('');
-
+Template.setTH.helpers({
+    sTHpct: function(){
+    return this.sTH*100;
+      // return true;
     }
 });
+
+
+
+// Template.setTH.events({
+//     'submit form': function (event) {
+//         event.preventDefault();
+//         var sth = $('[name=sth]').val();
+
+//         var currentProject = this._id;
+
+
+//         Projects.update({_id:currentProject},{$set:{sTH:sth}});
+
+//         $('[name=sth]').val('');
+
+//     }
+// });
 var findMaxSD = function(proID){
     var cellCursor = Cells.find({projectID:proID,isReport:true}, 
     {fields: {SDdata: 1}});
@@ -209,7 +244,7 @@ var findMaxSD = function(proID){
         max=cell.SDdata;
       }
     });
-    console.log("afsdfs:",max);
+    //console.log("afsdfs:",max);
     return max;
 
 

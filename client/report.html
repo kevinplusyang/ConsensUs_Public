@@ -199,9 +199,13 @@
 
 
 <template name="setTH">
-    <form>Setting SD threshold
+<!--     <form>Setting SD threshold
         <input type="text" placeholder="SET STH" name="sth">
-    </form>
+    </form> -->
+    <span>Setting SD threshold: {{sTHpct}}%</span>
+    <div class="slider-container">
+      <div id="SDSlider"></div>
+    </div>
 </template>
 
 

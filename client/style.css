@@ -332,3 +332,12 @@ a {
 	background-color: #61bfce;
 	color: #fff;
 }
+#SDSlider,.sliderrr{
+	background: #61bfce;
+
+}
+.slider-container{
+	width:90%;
+	margin-left: 5%;
+	margin-top: 10px;
+}
