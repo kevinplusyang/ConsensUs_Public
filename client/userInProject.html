@@ -1,20 +1,43 @@
 <template name="userInProject">
-<h3>Users in this project:</h3>
- <ul>
- {{currentProjectt}}
+
+ <!--<ul>-->
+ <!--{{currentProjectt}}-->
 
 
-     <li><a href="/project/{{currentProjectt}}/flag/report">REPOOOORT</a></li>
 
 
+
+
+    <ul style="margin: 0px ; padding-left: 0px">
+        <li class="projectListCell" style="list-style-type: none ;  height: 70px ;text-align: center">
+
+
+            <div style="margin-top: 27px">
+
+                <a href="/project/{{currentProjectt}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Report</a>
+            </div>
+
+
+        </li>
         {{#each userInProject currentProjectt}}
             <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
             <!--<li>{{username}} {{pj}} </li>-->
 
+            <li class="projectListCell">
 
-            <li><a href="/project/{{pj}}/{{userId}}">{{username}},id:{{userId}}</a></li>
-            <!-- <li><a href="{{pathFor route='project'}}">{{name}}</a></li> -->
+                <div style="margin-top: 27px">
+                    <a href="/project/{{pj}}/{{userId}}" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">{{username}}</a>
+                </div>
+
+
+            </li>
+
+
+
             <!-- <a href="#" class="delete-project">Delete</a> -->
         {{/each}}
     </ul>
+
+
+    <!--</ul>-->
 </template>
