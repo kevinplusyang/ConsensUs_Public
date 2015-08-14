@@ -1,33 +1,46 @@
 <template name="chatrooms">
-    <p>{{name}} Chat Room</p>
-    <ul>
+    <!--<p>{{name}} Chat Room</p>-->
+    <ul style="margin: 0px; padding: 0px">
         {{#each chatroom currentProjectt}}
             {{> chatItem}}
         {{/each}}
     </ul>
 
+    <!--<div id="chatroomFooter">-->
+    <!--{{> newChatItem}}-->
+    <!--</div>-->
 
-    {{> newChatItem}}
 
 </template>
 
 <template name="chatItem">
 
-    {{user}}:{{content}}
-    <br>
-    Time: {{createdAt}}
-    [<a href="#" class="delete-chatItem">Del</a>]
-    <br>
-    ----------------------------------------------------------------------------
-    <br>
+
+
+
+
+    <div class="col-md-12" style="padding-left: 3px; padding-right: 0px; display: inline; margin-top: 13px; margin-left: 0px">
+        <div class="col-md-4" style="padding: 0px; display: inline">
+            {{user}}
+        </div>
+
+        <div class="col-md-8 col-md-offset-4" style="margin: 0px;border: 2px solid #359eb4; border-radius: 5px; background-color: #ffffff; padding: 5px; display: inline">
+            <p style=" word-wrap: break-word;">
+                {{content}}
+            </p>
+
+        </div>
+
+
+    </div>
+
 
 
 </template>
 
 <template name="newChatItem">
-    {{currentProjectt}}
+    <!--{{currentProjectt}}-->
     <form>
-        Input:
-        <input type="text" placeholder="{{user}}Input Here" name="newItem">
+        <input type="text" placeholder="{{user}}Input Here" name="newItem" style="height: 40px; width: 100%;">
     </form>
 </template>

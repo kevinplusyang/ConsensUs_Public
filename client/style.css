@@ -341,3 +341,13 @@ a {
 	margin-left: 5%;
 	margin-top: 10px;
 }
+
+
+.projectListCell{
+	list-style-type: none ;
+	border: 1px solid #359eb4;
+	height: 70px ;
+	text-align: center;
+	background-color: #359eb4;
+
+}
