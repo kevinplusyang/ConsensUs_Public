@@ -235,7 +235,6 @@ var initialProject = function(proID,userID){
 
  var showCheckBox=[false,false];
  Session.set({showNotes: showCheckBox});
- Session.set({showSD: false});
 
     //
     Notes.insert({isAdd:true,row:1,column:1,projectID:proID,createdAt: new Date(),content:'click to add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
@@ -274,7 +273,7 @@ Template.addProject.events({
     }
 });
 
-Template.cellshow.onRendered (function () {
+Template.cellshow.rendered = function () {
   // ...
   // console.log("fsfsf:",this.$(".slider"));
   var id=this.data._id;
@@ -296,7 +295,7 @@ Template.cellshow.onRendered (function () {
     
 
   })
-});
+};
 
 Template.cellshow.helpers({
     'oi': function(UID, row, column){

@@ -31,12 +31,12 @@ var updateRow = function(proID,rowNo){
       if(rowNo>0){
           if(cell.column>0){
           var aver = calculateOne(rowNo,cell.column,proID);
-          Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
+          Cells.update(cell._id,{$set: {data: aver}});
         }
       }else if(rowNo===-1){
           if(cell.column>1){
           var aver = calculateOne(rowNo,cell.column,proID);
-          Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
+          Cells.update(cell._id,{$set: {data: aver}});
         }
       }
     })
@@ -105,21 +105,15 @@ var updateRowForVariance = function(proID,rowNo){
             if(cell.column>0){
                 var variance = calculateSD(rowNo,cell.column,proID);
 
-                Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
+                Cells.update(cell._id,{$set: {SDdata : variance}});
             }
         }else if(rowNo===-1){
             if(cell.column>1){
                 var variance = calculateSD(rowNo,cell.column,proID);
-                Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
+                Cells.update(cell._id,{$set: {SDdata : variance}});
 
                 //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
 
-
-                // console.log("====================");
-                // console.log(rowNo);
-                // console.log(cell.column);
-                // console.log(variance);
-                // console.log("====================");
             }
         }
 
@@ -152,10 +146,9 @@ Template.reportMatrix.helpers({
     celllist: function(rowNo,columnNo,proID){
       // updateOne(rowNo,columnNo,proID);
       return Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID}); 
-    },
-    showSD: function(){
-    return Session.get('showSD');
     }
+    //factorCo: 2,
+    //candidateCo:2
   });
 
 /*
@@ -186,70 +179,22 @@ Template.reportMatBody.helpers({
     }
 });
 
-Template.setTH.onRendered (function () {
-  // ...
-   //console.log("fsfsf:",this);
-   var thisProject=this.data;
-  var slider=this.$("#SDSlider");
+Template.setTH.events({
+    'submit form': function (event) {
+        event.preventDefault();
 
-  slider.noUiSlider({
-    start: this.data.sTH,
-    connect:'lower',
-    range:{
-      'min':0,
-      'max':1
-    }
-  }).on('slide', function (ev, val) {
-    //   // set real values on 'slide' event
-    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
-    //Cells.update({_id:id}, {$set:{data:val}});
-  
-  }).on('change',function(ev,val){
-    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
-    
+        var sth = $('[name=sth]').val();
 
-  })
-});
+        var currentProject = this._id;
 
 
-Template.setTH.helpers({
-    sTHpct: function(){
-    return this.sTH*100;
-      // return true;
+        Projects.update({_id:currentProject},{$set:{sTH:sth}});
+
+        $('[name=sth]').val('');
+
     }
 });
 
-
-
-// Template.setTH.events({
-//     'submit form': function (event) {
-//         event.preventDefault();
-//         var sth = $('[name=sth]').val();
-
-//         var currentProject = this._id;
-
-
-//         Projects.update({_id:currentProject},{$set:{sTH:sth}});
-
-//         $('[name=sth]').val('');
-
-//     }
-// });
-var findMaxSD = function(proID){
-    var cellCursor = Cells.find({projectID:proID,isReport:true}, 
-    {fields: {SDdata: 1}});
-    var max=0;
-    cellCursor.forEach(function (cell) {
-      if(cell.SDdata>max){
-        max=cell.SDdata;
-      }
-    });
-    //console.log("afsdfs:",max);
-    return max;
-
-
-
-}
 Template.reportcellshow.helpers({
     isCandidate: function(){
       var flag = (this.row === 0);
@@ -266,35 +211,22 @@ Template.reportcellshow.helpers({
       // return true;
     },
     type:function(){
-      var temp='';
       if(this.row ===0){
-        temp = 'row0';
+        return 'row0';
       // }else if(this.row===-1)
       // {
       //   return 'head';
       }else if(this.row<0)
       {
-        temp = 'rowScore';
+        return 'rowScore';
       }else if(this.column===0){
-        temp = 'show col0';
+        return 'show col0'
       }else if(this.column===1){
-        temp = 'show col1';
+        return 'show col1'
       }else
       {
-        temp = 'show';
-        var thisProject = Projects.findOne({_id: this.projectID});
-        var maxSD=findMaxSD(this.projectID);
-        var SDth = Number(thisProject.sTH)*maxSD;
-        if(this.SDdata <= SDth){
-          var changeColor = true;
-        }else{
-          changeColor=false;
-        }
-        if(changeColor){
-          temp= 'show colorCell';
-        }
+        return 'show';
       }
-    return temp;
     }
 });
 
