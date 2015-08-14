@@ -65,7 +65,7 @@ a {
 	background-color:#f1f3f4;
 	width: 100%;
 	height: 149px;
-	padding-left: 100px;
+	padding-left: 150px;
 	padding-top: 54px;
 }
 .project-nav h2{
@@ -78,13 +78,15 @@ a {
 .project-nav .profile{
 	color: #269fb2;
 	font-size: 14px;
+	clear: both;
+	padding-top: 10px;
 }
 .project-nav .profile img{
 	margin-right:20px;
 }
 .table-container{
 	margin-top: 87px;
-	margin-left: 113px;
+	margin-left: 150px;
 }
 .table-container table{
 	table-layout:fixed;

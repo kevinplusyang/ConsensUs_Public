@@ -6,9 +6,9 @@ Template.reportuserInProject.helpers({
     'reportuserInProject': function(){
         //console.log("cr:",currentProjectt);
         var currentProjectt = this._id;
-        console.log("===============");
-        console.log(currentProjectt);
-        console.log("===============");
+        // console.log("===============");
+        // console.log(currentProjectt);
+        // console.log("===============");
 
 
         var nowProject = Projects.findOne({_id: currentProjectt});
