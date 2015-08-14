@@ -1,39 +1,25 @@
 <template name="reportchatrooms">
-
-    <ul style="margin: 0px; padding: 0px">
+    <p>{{name}} Chat Room</p>
+    <ul>
         {{#each reportchatroom}}
             {{> reportchatItem}}
         {{/each}}
     </ul>
 
 
-    <!--{{> reportnewChatItem}}-->
+    {{> reportnewChatItem}}
 
 </template>
 
 <template name="reportchatItem">
 
-
-
-
-
-    <div class="col-md-12" style="padding-left: 3px; padding-right: 0px; display: inline; margin-top: 13px; margin-left: 0px">
-        <div class="col-md-4" style="padding: 0px; display: inline">
-            {{user}}
-        </div>
-
-        <div class="col-md-8 col-md-offset-4" style="margin: 0px;border: 2px solid #359eb4; border-radius: 5px; background-color: #ffffff; padding: 5px; display: inline">
-            <p style=" word-wrap: break-word;">
-                {{content}}
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-
+    {{user}}:{{content}}
+    <br>
+    Time: {{createdAt}}
+    [<a href="#" class="delete-chatItem">Del</a>]
+    <br>
+    ----------------------------------------------------------------------------
+    <br>
 
 
 </template>
@@ -41,7 +27,7 @@
 <template name="reportnewChatItem">
     {{currentProjectt}}
     <form>
-
-        <input type="text" placeholder="{{user}}Input Here" name="newItem" style="height: 40px; width: 100%;">
+        Input:
+        <input type="text" placeholder="{{user}}Input Here" name="newItem">
     </form>
 </template>

@@ -1,14 +1,45 @@
+<!-- Somewhere else .. -->
+
+<template name="sdboxTrigger">
+  <a href="#"><img src="/Img-ruler.png" class="imgRuler">SD Setting</a>
+</template>
+
+<template name="sdbox">
+  <div class="SD-div">       
+        {{> SDshow}}
+        <p></p>
+        {{> setTH}}
+  </div>
+</template>
+
 <template name = 'reportMatrix'>
 <div class="container-fluid">
   <div class="project-nav">
       <h2>Report {{name}}</h2>
-      {{> setTH}}
+      
+      <div class="project-tool" >
+      {{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}
+
+      {{ > dropdown name="sdbox" }}
+      </div>
+
+
+
+
+      <!-- <button href="#" class="ruler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="/Img-ruler.png" class="imgRuler">SD setting</button>
+      </div>
+
+      <div class="SD-div dropdown-menu  dropdown-menu-right">
+        {{> setTH}}
+        {{> SDbox}}
+      </div> -->
   </div>
 </div>
 
 <!-- id:{{_id}} -->
 <div class="table-container">
   <table>
+      {{#if showSD}}
       <tr>
           <td class="table-null"></td>        
           <td colspan="2" class="table-head">Standard D</td>
@@ -16,6 +47,7 @@
               {{> reportSDcellshow}}
           {{/each}}
       </tr>
+      {{/if}}
       <tr>
         <td></td>
         <!-- <td></td> -->
@@ -82,6 +114,8 @@
 
 
 
+    {{> reportchatrooms}}
+
 
 
 </template> 
@@ -125,10 +159,10 @@
 
 
 <template name = "reportSDcellshow">
-    <td>
+    <td class="table-SD">
         {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
         <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-        {{#if isCandidate }}
+<!--         {{#if isCandidate }}
             <a href="#" class="delete-candi"> Delete </a>
         {{/if}}
         {{#if isFactor}}
@@ -136,11 +170,11 @@
             <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
                 Show Notes
-            </label>
+            </label> -->
             <!--       {{#if showNotes row}}
                 {{> notes}}
             {{/if}} -->
-        {{/if}}
+<!--         {{/if}} -->
 
         <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
@@ -192,10 +226,16 @@
 
 
 <template name="setTH">
-    <form>Input STH
+<!--     <form>Setting SD threshold
         <input type="text" placeholder="SET STH" name="sth">
-    </form>
+    </form> -->
+    <span>Setting SD threshold: {{sTHpct}}%</span>
+    <div class="slider-container">
+      <div id="SDSlider"></div>
+    </div>
 </template>
+
+
 
 
 

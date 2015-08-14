@@ -71,6 +71,9 @@ a {
 .project-nav h2{
 	margin-top: 0;
 	color: #269fb2;
+	width: 30%;
+	margin: 0;
+	float: left;
 }
 .project-nav .profile{
 	color: #269fb2;
@@ -128,6 +131,13 @@ a {
 
 	}
 .table-show{
+	text-align: center;
+	height: 55px;
+	background: #F1F3F4;
+	border: 1px solid #FFFFFF;
+	color: #1C8090;
+}
+.table-SD{
 	text-align: center;
 	height: 55px;
 	background: #F1F3F4;
@@ -294,20 +304,40 @@ a {
 	text-align: center;
 	padding-top: 10px;
 }
-
-#sidebar{
-	/*position: fixed;*/
-
+.project-tool{
+	float: right;
+	padding-right: 30%;
+}
+.project-tool a{
+	font-size: 12.3px;
+	color: #6f747d;
+	display: block;
+/*	padding-top: 20px;*/
+}
+.SD-div{
+	/* Rectangle 316: */
+	background: rgba(240,243,244,0.36);
+	/* Show Standard Deviat: */
+	font-family: STHeitiSC-Medium;
+	font-size: 12px;
+	color: #1C8090;
+	line-height: 12px;
+	padding-top:27px;
+	padding-left:10px;
+	width: 185px;
+	height: 118px;
 
 }
-
-.projectListCell{
-	list-style-type: none ;
-	border: 1px solid #359eb4;
-	height: 70px ;
-	text-align: center;
-	background-color: #359eb4;
+.colorCell{
+	background-color: #61bfce;
+	color: #fff;
+}
+#SDSlider,.sliderrr{
+	background: #61bfce;
 
 }
-
-
+.slider-container{
+	width:90%;
+	margin-left: 5%;
+	margin-top: 10px;
+}
