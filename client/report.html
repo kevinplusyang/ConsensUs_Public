@@ -1,45 +1,14 @@
-<!-- Somewhere else .. -->
-
-<template name="sdboxTrigger">
-  <a href="#"><img src="/Img-ruler.png" class="imgRuler">SD Setting</a>
-</template>
-
-<template name="sdbox">
-  <div class="SD-div">       
-        {{> SDshow}}
-        <p></p>
-        {{> setTH}}
-  </div>
-</template>
-
 <template name = 'reportMatrix'>
 <div class="container-fluid">
   <div class="project-nav">
       <h2>Report {{name}}</h2>
-      
-      <div class="project-tool" >
-      {{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}
-
-      {{ > dropdown name="sdbox" }}
-      </div>
-
-
-
-
-      <!-- <button href="#" class="ruler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="/Img-ruler.png" class="imgRuler">SD setting</button>
-      </div>
-
-      <div class="SD-div dropdown-menu  dropdown-menu-right">
-        {{> setTH}}
-        {{> SDbox}}
-      </div> -->
+      {{> setTH}}
   </div>
 </div>
 
 <!-- id:{{_id}} -->
 <div class="table-container">
   <table>
-      {{#if showSD}}
       <tr>
           <td class="table-null"></td>        
           <td colspan="2" class="table-head">Standard D</td>
@@ -47,7 +16,6 @@
               {{> reportSDcellshow}}
           {{/each}}
       </tr>
-      {{/if}}
       <tr>
         <td></td>
         <!-- <td></td> -->
@@ -88,7 +56,32 @@
       <!-- {{> addFactor}} -->
 
 
-    {{> reportchatrooms}}
+
+
+    <div id="sidebar" style="padding: 0px; height: 500px;width: 300px;">
+
+        <div style="padding: 0px;height: 500px; width:100px;overflow: scroll; float: left; background-color: #3f9db6">
+            {{> reportuserInProject}}
+        </div>
+
+        <div style="background-color: #F1F3F4; border: 0px; margin: 0px ; padding-left: 4px; padding-top: 20px; padding: 4px; height: 460px;width: 200px; overflow: scroll; float: right">
+            {{> reportchatrooms}}
+
+        </div>
+
+        <div style="padding: 0px; float: right; height: 40px; width: 200px;position: relative; left:0px; top: 0px;">
+            {{> reportnewChatItem}}
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
 
 
 </template> 
@@ -132,10 +125,10 @@
 
 
 <template name = "reportSDcellshow">
-    <td class="table-SD">
+    <td>
         {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
         <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-<!--         {{#if isCandidate }}
+        {{#if isCandidate }}
             <a href="#" class="delete-candi"> Delete </a>
         {{/if}}
         {{#if isFactor}}
@@ -143,11 +136,11 @@
             <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
                 Show Notes
-            </label> -->
+            </label>
             <!--       {{#if showNotes row}}
                 {{> notes}}
             {{/if}} -->
-<!--         {{/if}} -->
+        {{/if}}
 
         <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
@@ -199,16 +192,10 @@
 
 
 <template name="setTH">
-<!--     <form>Setting SD threshold
+    <form>Input STH
         <input type="text" placeholder="SET STH" name="sth">
-    </form> -->
-    <span>Setting SD threshold: {{sTHpct}}%</span>
-    <div class="slider-container">
-      <div id="SDSlider"></div>
-    </div>
+    </form>
 </template>
-
-
 
 
 
