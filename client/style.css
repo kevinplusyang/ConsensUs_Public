@@ -130,18 +130,16 @@ a {
 .table-show{
 	text-align: center;
 	height: 55px;
-	background: #fff;
+	background: #F1F3F4;
 	border: 1px solid #FFFFFF;
 	color: #1C8090;
 }
 .col0{
 	text-align: left !important;	
 	padding-left: 40px;
-	background: #F1F3F4;
 }
 .col1{
 	width: 250px;
-	background: #F1F3F4;
 }
 .show-notes{
 	float: right;
