@@ -114,12 +114,6 @@ var updateRowForVariance = function(proID,rowNo){
 
                 //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
 
-
-                console.log("====================");
-                console.log(rowNo);
-                console.log(cell.column);
-                console.log(variance);
-                console.log("====================");
             }
         }
 

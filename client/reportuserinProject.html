@@ -1,4 +1,4 @@
-<template name="userInProject">
+<template name="reportuserInProject">
 
 
 
@@ -8,14 +8,13 @@
 
             <div style="margin-top: 27px">
 
-                <a href="/project/{{currentProjectt}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Report</a>
+                <a href="/project/{{this._id}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Report</a>
             </div>
 
 
         </li>
-        {{#each userInProject currentProjectt}}
-            <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
-            <!--<li>{{username}} {{pj}} </li>-->
+        {{#each reportuserInProject}}
+
 
             <li class="projectListCell">
 
