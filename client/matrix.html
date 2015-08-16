@@ -75,19 +75,25 @@
               {{/if}}
 
             {{else}}
-            <div class="slider-container">
-              <div class="sliderrr"></div>
-            </div>
+                {{> sliderCell}}
+      <!--       <div class="slider-container"> -->
+              <!-- <div class="sliderrr"></div> -->
+           <!--  </div> -->
 
             {{/if}}
          {{else}}
-            {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
-            {{#if isFactor}}
+            {{#if notWeight}}
+              {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
+                {{#if isFactor}}
               <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
                   Show Notes
                 </label>
+                {{/if}}
+            {{else}}
+                {{> sliderCell}}
             {{/if}}
+
         {{/if}}
 
 
@@ -123,3 +129,9 @@
     </form>
 </template> 
 
+<template name="sliderCell">
+    <div class="slider-container"> 
+              <div class="sliderrr"></div>
+    </div>
+    {{data}}
+</template>

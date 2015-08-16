@@ -121,10 +121,10 @@ Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
       // updateWeight(projectID,userID);
       // updateTotal(projectID,userID);
-      console.log("here!!");
-      console.log(projectID);
-      console.log(userID);
-      console.log(cellFindRow(rowNo,projectID,userID));
+      // console.log("here!!");
+      // console.log(projectID);
+      // console.log(userID);
+      // console.log(cellFindRow(rowNo,projectID,userID));
       return cellFindRow(rowNo,projectID,userID);
      },
      showNotes: function(row){
@@ -274,29 +274,29 @@ Template.addProject.events({
     }
 });
 
-Template.cellshow.onRendered (function () {
-  // ...
-  // console.log("fsfsf:",this.$(".slider"));
-  var id=this.data._id;
-  var slider=this.$(".sliderrr");
+// Template.cellshow.onRendered (function () {
+//   // ...
+//   // console.log("fsfsf:",this.$(".slider"));
+//   var id=this.data._id;
+//   var slider=this.$(".sliderrr");
 
-  slider.noUiSlider({
-    start: this.data.data,
-    connect:'lower',
-    range:{
-      'min':0,
-      'max':1
-    }
-  }).on('slide', function (ev, val) {
-    //   // set real values on 'slide' event
-  Cells.update({_id:id}, {$set:{data:val}});
+//   slider.noUiSlider({
+//     start: this.data.data,
+//     connect:'lower',
+//     range:{
+//       'min':0,
+//       'max':1
+//     }
+//   }).on('slide', function (ev, val) {
+//     //   // set real values on 'slide' event
+//   Cells.update({_id:id}, {$set:{data:val}});
   
-  }).on('change',function(ev,val){
-    Cells.update({_id:id}, {$set: {data: val}});
+//   }).on('change',function(ev,val){
+//     Cells.update({_id:id}, {$set: {data: val}});
     
 
-  })
-});
+//   })
+// });
 
 Template.cellshow.helpers({
     'oi': function(UID, row, column){
@@ -347,7 +347,7 @@ Template.cellshow.helpers({
       }
     },
     notWeight:function(){
-      if(this.column===1){
+      if(this.column===2){
         return false;
       }else{
         return true;
@@ -373,3 +373,67 @@ Template.cellshow.events({
     }
 
   });
+
+var updateSliders=function(id){
+  //SSconsole.log('@@@@,');
+  var thiscell = Cells.findOne({_id:id});
+  var slider=$( ".noUi-origin" );//$(".sliderrr");
+       //console.log(slider);
+       //console.log(slider.val());
+        //console.log(slider[0].val());
+       // console.log(slider.val());
+      //  console.log(slider[0].vGet());
+      slider.each(function(index){
+          var cell=Cells.findOne({
+            projectID:thiscell.projectID,
+            row:index+1,
+            column:2,
+            isReport:false,
+            userID:thiscell.userID
+          });
+          var value=cell.data*100;
+
+          $(this).css("left",value.toString()+"%");
+      
+       //console.log("fsf:",$(this).val());
+       //console.log("fsfdddd:",this);
+        //console.log('dfdsds:',$(this)[0]);
+
+      })
+};
+Template.sliderCell.onRendered (function () {
+  // ...
+  // console.log("fsfsf:",this.$(".slider"));
+  var id=this._id;
+  var thiscell=this.data;
+  //console.log(thiscell);
+  //console.log(thiscell.data);
+
+  var WCell=Cells.findOne({//normalized weight cell
+    projectID:thiscell.projectID,
+    row:thiscell.row,
+    column:1,
+    isReport:false,
+    userID:thiscell.userID
+  });
+   var slider=this.$(".sliderrr");
+
+
+  slider.noUiSlider({
+    start: thiscell.data,//nWCell.data,
+    connect:'lower',
+    range:{
+      'min':0,
+      'max':1
+    }
+  }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+    Cells.update({_id:WCell._id}, {$set:{data:val}});
+    updateSliders(WCell._id);
+  
+  }).on('change',function(ev,val){
+    Cells.update({_id:WCell._id}, {$set: {data: val}});
+
+  })
+
+});
