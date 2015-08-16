@@ -14,8 +14,7 @@
 
       <tr>
           <td></td>
-          <td colspan="2" class="table-row0">Weight 
-          <a href="#" class="scale"> Scale </a></td>
+          <td colspan="2" class="table-row0">Weight</td>
           {{#each cellFindRow 0 currentUserr currentProjectt}}
             {{> cellshow}}
           {{/each}}
@@ -30,20 +29,20 @@
 
   {{> addFactor}} -->
 
- <h3>New test</h3>
-  
-  <ul>{{#each cellthis currentUserr currentProjectt}}
-  {{> celllist}}
-  {{/each}} 
-  </ul>
+ <!--<h3>New test</h3>-->
+  <!---->
+  <!--<ul>{{#each cellthis currentUserr currentProjectt}}-->
+  <!--{{> celllist}}-->
+  <!--{{/each}} -->
+  <!--</ul>-->
 
-  <h3>test</h3>
-  
-  <ul>{{#each cell currentProjectt}}
-  {{> celllist}}
-  {{/each}} 
-  </ul>
-  <!-- {{> adding}} -->
+  <!--<h3>test</h3>-->
+  <!---->
+  <!--<ul>{{#each cell currentProjectt}}-->
+  <!--{{> celllist}}-->
+  <!--{{/each}} -->
+  <!--</ul>-->
+  <!--&lt;!&ndash; {{> adding}} &ndash;&gt;-->
 
 
 </template>
@@ -76,25 +75,19 @@
               {{/if}}
 
             {{else}}
-                {{> sliderCell}}
-      <!--       <div class="slider-container"> -->
-              <!-- <div class="sliderrr"></div> -->
-           <!--  </div> -->
+            <div class="slider-container">
+              <div class="sliderrr"></div>
+            </div>
 
             {{/if}}
          {{else}}
-            {{#if notWeight}}
-              {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
-                {{#if isFactor}}
+            {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
+            {{#if isFactor}}
               <label class="show-notes">
                 <input type="checkbox" checked="{{showNotes row}}" />
                   Show Notes
                 </label>
-                {{/if}}
-            {{else}}
-                {{> sliderCell}}
             {{/if}}
-
         {{/if}}
 
 
@@ -130,9 +123,3 @@
     </form>
 </template> 
 
-<template name="sliderCell">
-    <div class="slider-container"> 
-              <div class="sliderrr"></div>
-    </div>
-    {{data}}
-</template>

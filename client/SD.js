@@ -21,36 +21,5 @@ Template.SDshow.events({
     }
 
   });
-Template.setTH.onRendered (function () {
-  // ...
-   //console.log("fsfsf:",this);
-   var thisProject=this.data;
-  var slider=this.$("#SDSlider");
 
-  slider.noUiSlider({
-    start: this.data.sTH,
-    connect:'lower',
-    range:{
-      'min':0,
-      'max':1
-    }
-  }).on('slide', function (ev, val) {
-    //   // set real values on 'slide' event
-    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
-    //Cells.update({_id:id}, {$set:{data:val}});
-  
-  }).on('change',function(ev,val){
-    Projects.update({_id:thisProject._id},{$set:{sTH:val}});
-    
-
-  })
-});
-
-
-Template.setTH.helpers({
-    sTHpct: function(){
-    return Math.round(this.sTH*100);
-      // return true;
-    }
-});
 

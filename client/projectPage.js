@@ -9,3 +9,12 @@ Template.project.helpers({
     return Projects.findOne({_id: this.currentProjectt}).name;
   }
   });
+
+
+
+Template.project.events({
+    'click #menu-toggle': function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    }
+})

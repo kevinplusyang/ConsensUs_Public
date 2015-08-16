@@ -90,7 +90,7 @@ Template.navigation.events({
     'click .logout': function(event){
         event.preventDefault();
         Meteor.logout();
-        Router.go('/logout');
+        Router.go('/');
     }
 });
 Template.login.events({
