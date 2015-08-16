@@ -9,43 +9,83 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <img alt="Brand" src="/CONSENSUS.png" style="margin-left: 20px; margin-top: 2px">
-
+                    <img alt="Brand" src="/CONSENSUS.png" style="margin-left: 53px; margin-top: 2px">
                 </a>
             </div>
 
 
-            <div class="btn-group pull-right center-block" >
-                <button type="button" class="btn btn-lg  dropdown-toggle" style="background-color: #6b6f78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="/menu%20logo.png">
-                </button>
-                <ul class="dropdown-menu  dropdown-menu-right" style="background-color: #6b6f78">
-                    <!--<li style="user-focus: #123456"><a href="#" style="color: #ffffff">About</a></li>-->
+            <!--<div class="btn-group pull-right center-block" >-->
+                <!--<button type="button" class="btn btn-lg  dropdown-toggle" style="background-color: #6b6f78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--<img src="/menu%20logo.png">-->
+                <!--</button>-->
+                <!--<ul class="dropdown-menu  dropdown-menu-right" style="background-color: #6b6f78">-->
+                    <!--&lt;!&ndash;<li style="user-focus: #123456"><a href="#" style="color: #ffffff">About</a></li>&ndash;&gt;-->
 
 
 
-                    {{#if currentUser}}
-                        <li><a href="/" style="color: #ffffff">Project List</a></li>
+                    <!--{{#if currentUser}}-->
+                        <!--<li><a href="/" style="color: #ffffff">Project List</a></li>-->
 
-                        <li><a href="/profile" class="profile" style="color: #ffffff">Profile</a></li>
+                        <!--<li><a href="/profile" class="profile" style="color: #ffffff">Profile</a></li>-->
 
-                        <li><a href="#" class="logout" style="color: #ffffff">Logout</a></li>
+                        <!--<li><a href="#" class="logout" style="color: #ffffff">Logout</a></li>-->
 
-                    {{else}}
-                        <li><a href="/" style="color: #ffffff">Home</a></li>
-                        <li><a href="/" style="color: #ffffff">About</a></li>
-                    {{/if}}
+                    <!--{{else}}-->
+                        <!--<li><a href="/" style="color: #ffffff">Home</a></li>-->
+                        <!--<li><a href="/" style="color: #ffffff">About</a></li>-->
+                    <!--{{/if}}-->
 
-                </ul>
+                <!--</ul>-->
+            <!--</div>-->
+
+
+
+            <div style="margin-left: 300px; position: absolute ;right: 17px;">
+                {{#dropdownTrigger name="dropdownTest" }}
+                    <button type="button" class="btn btn-lg  dropdown-toggle" style="height: 45px; width: 45px;background-color: #6b6f78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="/menu%20logo.png">
+                    </button>
+                {{/dropdownTrigger}}
+
+                {{#dropdown name="dropdownTest"}}
+                    <ul style="background-color: #6b6f78; list-style-type: none; margin-left: 0px;margin-right: 24px; padding-left: 5px; padding-right: 5px; border-radius: 5px; width: 300px">
+                        <!--<li style="user-focus: #123456"><a href="#" style="color: #ffffff">About</a></li>-->
+
+
+
+                        {{#if currentUser}}
+                            <div style="padding: 5px">
+                                <li><a href="/" style="color: #ffffff; margin: 10px; font-size: 17px; font-family: STHeitiSC-Medium">Project List</a></li>
+                            </div>
+
+                              <div style="padding: 5px">
+                                 <li><a href="/profile" class="profile" style="color: #ffffff; margin: 10px; font-size: 17px; font-family: STHeitiSC-Medium">Profile</a></li>
+                              </div>
+
+                           <div style="padding: 5px">
+                            <li><a href="#" class="logout" style="color: #ffffff; margin: 10px; font-size: 17px; font-family: STHeitiSC-Medium">Logout</a></li>
+                            </div>
+
+
+                        {{else}}
+                        <div style="padding: 5px">
+                            <li><a href="/" style="color: #ffffff; margin: 10px; font-size: 17px; font-family: STHeitiSC-Medium">Home</a></li>
+                        </div>
+                        <div style="padding: 5px">
+                            <li><a href="/" style="color: #ffffff; margin: 10px; font-size: 17px; font-family: STHeitiSC-Medium">About</a></li>
+                        </div>
+                        {{/if}}
+
+                    </ul>
+                {{/dropdown}}
             </div>
 
         </div>
 
+
+
+
     </nav>
-
-
-
-
 
 
     <script src="jquery-2.1.4.min.js"></script>

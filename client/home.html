@@ -1,9 +1,14 @@
 <template name="home">
 
 
+
 {{#if currentUser}}
+
     {{> user}}
 {{else}}
+    <div style="position: relative; z-index: 999999">
+        {{> navigation}}
+    </div>
 
     <div id="home-left" class="col-md-6">
         {{> register}}
@@ -57,18 +62,19 @@
 
 
         <div id="r1">
-            <div id="main">
+            <!--<div id="main">-->
 
-                <div id="1" class="triphome" style="color: #269fb2; font-size: 50px">Create</div>
-                <div id="2" class="triphome" style="color: #c7254e; font-size: 50px">Design</div>
-                <div id="3" class="triphome" style="color: gold; font-size: 50px">Evaluate</div>
+                <!--<div id="1" class="triphome" style="color: #269fb2; font-size: 50px">Create</div>-->
+                <!--<div id="2" class="triphome" style="color: #c7254e; font-size: 50px">Design</div>-->
+                <!--<div id="3" class="triphome" style="color: gold; font-size: 50px">Evaluate</div>-->
 
 
-            </div>
+            <!--</div>-->
 
             <!--<div id="main">-->
                 <!--<div id="2" class="triphome" style="color: #c7254e; font-size: 50px">Design</div>-->
             <!--</div>-->
+            <p id="create">Create</p>
         </div>
 
     <div id="r3">
