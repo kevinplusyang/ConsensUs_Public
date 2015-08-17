@@ -437,3 +437,12 @@ Template.sliderCell.onRendered (function () {
   })
 
 });
+
+
+Template.sliderCell.helpers({
+    dataPercent: function(){
+      //console.log(this);
+      var value=Number(this.data);
+      return (value*100).toFixed(1);
+    }
+});

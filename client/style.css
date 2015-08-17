@@ -103,7 +103,7 @@ a {
 	background-image: linear-gradient(#FFFFFF 0%, #F1F3F4 100%);
 	/* Total Score: */
 	font-family: STHeitiSC-Medium;
-	font-size: 19.54px;
+	font-size: 14px;
 	color: #1C8090;
 	line-height: 21px;
 }
@@ -147,6 +147,7 @@ a {
 .col0{
 	text-align: left !important;	
 	padding-left: 40px;
+	font-size: 24px;
 }
 .col1{
 	width: 50px;
