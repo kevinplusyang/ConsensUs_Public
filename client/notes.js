@@ -30,6 +30,38 @@ Template.noteArea.helpers({
     }
   });
 
+Template.reportNotes.helpers({
+    colhere: function(rowNo,proID){
+      return Cells.find({ $and:[
+        {isReport: true,row: rowNo,column:{$gt:0}, projectID:proID},
+        {isReport: true,row: rowNo,column:{$ne:2}, projectID:proID}]},
+        { sort:{column: 1 }});
+      
+      // return cellFindRow(rowNo,this._id);
+    }
+  });
+
+Template.reportNoteArea.helpers({
+    notelist: function(){
+      var rowNo = this.row;
+      var colNo = this.column;
+      var proID= this.projectID;
+      return Notes.find({isAdd:false,row: rowNo,column:colNo, projectID:proID},{ sort:{createdAt:1}});
+      
+      // return cellFindRow(rowNo,this._id);
+    },
+    columnWeight:function(){
+
+      return (this.column===1)+1;
+    },
+    addNoteDefault:function(){
+      var rowNo = this.row;
+      var colNo = this.column;
+      var proID= this.projectID;
+      return Notes.findOne({isAdd:true,row: rowNo,column:colNo, projectID:proID});
+    }
+  });
+
 Template.addNote.helpers({
 
     console:function(){

@@ -9,6 +9,17 @@
     	{{/each}}
     </tr>
 </template>
+<template name="reportNotes">    
+    <tr>
+        <td></td>       
+                
+        {{#each colhere row projectID}}
+        {{> reportNoteArea}}
+        
+        
+        {{/each}}
+    </tr>
+</template>
 
 <template name="noteArea">
     <!-- colspan="{{columnWeight}}" -->
@@ -29,6 +40,26 @@
     {{/with}} -->
     </td>   
    	
+</template>
+<template name="reportNoteArea">
+    <!-- colspan="{{columnWeight}}" -->
+    <td class='notebook'>
+    <ul class='list-group'>
+    
+    {{#each notelist}}
+        {{> noteList}}
+    {{/each}}
+    <li class="list-group-item">
+    {{#with addNoteDefault}}
+    {{> addNote}}
+    {{/with}}
+    </li>
+    </ul>
+<!--     {{#with row=row column=column projectID=projectID}}
+    {{> addNote}}
+    {{/with}} -->
+    </td>   
+    
 </template>
 
 <template name="addNote">
