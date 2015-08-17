@@ -95,7 +95,7 @@ a {
 .table-head{
 	text-align: center;
 	border: 0 !important;
-	width: 296px !important;
+/*	width: 296px !important;*/
 	height: 55px;
 	/* Rectangle 28 Copy 11: */
 	background-image: -webkit-linear-gradient(#FFFFFF 0%, #F1F3F4 100%);

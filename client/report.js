@@ -305,6 +305,14 @@ Template.reportcellshow.helpers({
         }
       }
     return temp;
+    },
+    notWeight:function(){
+      if(this.column===1){
+        return false;
+      }else{
+        return true;
+      }
+
     }
 });
 

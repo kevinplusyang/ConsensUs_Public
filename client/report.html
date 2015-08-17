@@ -101,7 +101,9 @@
                 {{#if showSD}}
                     <tr>
                         <td class="table-null"></td>
-                        <td colspan="2" class="table-head">Standard D</td>
+                        <!-- <td colspan="2" class="table-head">Standard D</td> -->
+                        <td class="table-head">Standard D</td>
+
                         {{#each cellFindRow -1}}
                             {{> reportSDcellshow}}
                         {{/each}}
@@ -110,7 +112,9 @@
                 <tr>
                     <td></td>
                     <!-- <td></td> -->
-                    <td colspan="2" class="table-head">Total Score</td>
+                    <!-- <td colspan="2" class="table-head">Total Score</td> -->
+                    <td class="table-head">Total Score</td>
+
                     {{#each cellFindRow -1}}
                         {{> reportcellshow}}
                     {{/each}}
@@ -118,7 +122,9 @@
 
                 <tr>
                     <td></td>
-                    <td colspan="2" class="table-row0">Weight</td>
+<!--                     <td colspan="2" class="table-row0" style="font-size:14px;width:120px;">Weight</td>
+ -->                <td class="table-row0" style="font-size:14px;width:120px;">Weight</td>
+
                     <!-- <td>Normalized Weight</td> -->
                     {{#each cellFindRow 0}}
                         {{> reportcellshow}}
@@ -267,6 +273,7 @@
 </template>
 
 <template name = "reportcellshow">
+  {{#if notWeight }}
   <td class="table-{{type}}">
     {{> editableText collection="cells" field="data" saveOnFocusout=true}}
 <!--     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}; -->
@@ -288,6 +295,7 @@
 <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
 
   </td>
+  {{/if}}
 </template>
 
 
