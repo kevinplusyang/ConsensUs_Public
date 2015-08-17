@@ -205,6 +205,7 @@ Template.setTH.onRendered (function () {
   slider.noUiSlider({
     start: this.data.sTH,
     connect:'lower',
+    step:0.1,
     range:{
       'min':0,
       'max':1
@@ -224,7 +225,7 @@ Template.setTH.onRendered (function () {
 
 Template.setTH.helpers({
     sTHpct: function(){
-    return this.sTH*100;
+    return Math.round(this.sTH*100);
       // return true;
     }
 });
