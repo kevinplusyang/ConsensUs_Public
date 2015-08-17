@@ -1,20 +1,15 @@
 <template name="reportuserInProject">
 
-
-
     <ul style="margin: 0px ; padding-left: 0px">
         <li class="projectListCell" style="list-style-type: none ;  height: 70px ;text-align: center">
 
-
             <div style="margin-top: 27px">
-
                 <a href="/project/{{this._id}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Everyone</a>
             </div>
 
-
         </li>
-        {{#each reportuserInProject}}
 
+        {{#each reportuserInProject}}
 
             <li class="projectListCell">
 
@@ -22,15 +17,10 @@
                     <a href="/project/{{pj}}/{{userId}}" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">{{username}}</a>
                 </div>
 
-
             </li>
 
-
-
-            <!-- <a href="#" class="delete-project">Delete</a> -->
         {{/each}}
+
     </ul>
 
-
-    <!--</ul>-->
 </template>
