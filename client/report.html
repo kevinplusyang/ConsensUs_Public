@@ -275,7 +275,11 @@
 <template name = "reportcellshow">
   {{#if notWeight }}
   <td class="table-{{type}}">
+    {{#if normalizedWeight }}
+    <span>{{dataPercent}}%</span>
+    {{else}}
     {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+    {{/if}}
 <!--     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}; -->
     {{#if isCandidate }}
     <a href="#" class="delete-candi"> Delete </a>

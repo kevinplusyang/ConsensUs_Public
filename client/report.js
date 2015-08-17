@@ -313,6 +313,15 @@ Template.reportcellshow.helpers({
         return true;
       }
 
+    },
+    normalizedWeight:function(){
+      return this.column===2;
+
+    },
+    dataPercent: function(){
+      //console.log(this);
+      var value=Number(this.data);
+      return (value*100).toFixed(1);
     }
 });
 
