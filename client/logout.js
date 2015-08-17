@@ -4,4 +4,4 @@ Template.logout.events({
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     }
-})
+});
