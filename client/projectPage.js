@@ -11,9 +11,9 @@ Template.project.helpers({
   });
 
 
-
 Template.project.events({
     'click #menu-toggle': function(e) {
+        //Trigger the sidebar action
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     }
