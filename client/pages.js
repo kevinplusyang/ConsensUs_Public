@@ -22,9 +22,7 @@ var updateWeight = function(proID,userID){
         var val=cellFindOne(cell.row, 1,proID,userID).data/sum;
         Cells.update(cell._id,{$set: {data: val.toFixed(3) }});
       });
-      // norWeightArray.forEach(function(cell){
-      //   cell.data=Number(cell.data)/sum;
-      // });
+
 }
 var updateTotal = function(proID,userID){
       var totalArray = cellFindRow(-1,proID,userID);
@@ -68,25 +66,15 @@ var updateFactor = function(proID){
 
 
 
-
-//var factorCo=2;
-//var candidateCo=2;
-
-// var proID='p4tETnfgHArySKLGJ';
-
 Template.matrix.helpers({
     cell: function (currentProjectt) {
-      // updateWeight(this._id,userID);
-      // updateTotal(this._id,userID);
+
       return Cells.find({projectID: currentProjectt});
     },
-    // cellthis:function(userID){
-    //   return Cells.find({isReport:false,userId:userID,projectID: this._id});
-    // },
+
     cellthis:function(userID,currentProjectt){
 
-      // updateWeight(this._id,userID);
-      // updateTotal(this._id,userID);
+
       return Cells.find({isReport:false,userID:userID,projectID: currentProjectt});
     },
 
@@ -95,15 +83,10 @@ Template.matrix.helpers({
       updateTotal(currentProjectt,userID);
       updateCandidate(currentProjectt);
       updateFactor(currentProjectt);
-      // console.log("now see this:",currentProjectt);
 
-      //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
       return cellFindRow(rowNo,currentProjectt,userID);
     },
-    // cellFindCol: function(colNo){
-    //   //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
-    //   return cellFindCol(colNo,this._id);
-    // },
+
     rowNum: function(userID,currentProjectt){
       var col0 = cellFindCol(0,currentProjectt,userID);
       
@@ -112,37 +95,23 @@ Template.matrix.helpers({
     userToSee: function(userID){
       return Meteor.users.findOne({_id:userID}).username;
     }
-    //factorCo: 2,
-    //candidateCo:2
+
   });
 var showCheckBox=[false,false];
 Session.setDefault({showNotes: showCheckBox});
 Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
-      // updateWeight(projectID,userID);
-      // updateTotal(projectID,userID);
-      // console.log("here!!");
-      // console.log(projectID);
-      // console.log(userID);
-      // console.log(cellFindRow(rowNo,projectID,userID));
+
       return cellFindRow(rowNo,projectID,userID);
      },
      showNotes: function(row){
-      // var rowNo=this.row;
-    //   console.log("@@@@@@@");
-    // console.log(Session.get('showNotes')[row-1]);
+
     return Session.get('showNotes')[row-1];
-      // return true;
+
     }
 });
 
 
-// Template.test.helpers({
-//     project: function () {
-      
-//       return Projects.find();
-//     }
-//   });
 
 Template.celllist.events({
    'click .delete-cell': function(event) {
@@ -274,29 +243,7 @@ Template.addProject.events({
     }
 });
 
-// Template.cellshow.onRendered (function () {
-//   // ...
-//   // console.log("fsfsf:",this.$(".slider"));
-//   var id=this.data._id;
-//   var slider=this.$(".sliderrr");
 
-//   slider.noUiSlider({
-//     start: this.data.data,
-//     connect:'lower',
-//     range:{
-//       'min':0,
-//       'max':1
-//     }
-//   }).on('slide', function (ev, val) {
-//     //   // set real values on 'slide' event
-//   Cells.update({_id:id}, {$set:{data:val}});
-  
-//   }).on('change',function(ev,val){
-//     Cells.update({_id:id}, {$set: {data: val}});
-    
-
-//   })
-// });
 
 Template.cellshow.helpers({
     'oi': function(UID, row, column){
@@ -323,17 +270,14 @@ Template.cellshow.helpers({
       return flag;
     },
     showNotes: function(row){
-      // var rowNo=this.row;
-    // console.log(Session.get('showNotes'));
+
     return Session.get('showNotes')[row-1];
-      // return true;
+
     },
     type:function(){
       if(this.row ===0){
         return 'row0';
-      // }else if(this.row===-1)
-      // {
-      //   return 'head';
+
       }else if(this.row===-1)
       {
         return 'rowScore';
@@ -363,11 +307,11 @@ Template.cellshow.events({
   "change .show-notes input": function (event) {
       var rowNo=Number(this.row);
 
-      // console.log(Session.get('showNotes'))
+
       var getShowNotes = Session.get('showNotes');
       var newSN = getShowNotes;
       newSN[rowNo-1] = event.target.checked;
-      // console.log(newSN);
+
       Session.set({showNotes: newSN});
 
     }
@@ -375,14 +319,10 @@ Template.cellshow.events({
   });
 
 var updateSliders=function(id){
-  //SSconsole.log('@@@@,');
+
   var thiscell = Cells.findOne({_id:id});
   var slider=$( ".noUi-origin" );//$(".sliderrr");
-       //console.log(slider);
-       //console.log(slider.val());
-        //console.log(slider[0].val());
-       // console.log(slider.val());
-      //  console.log(slider[0].vGet());
+
       slider.each(function(index){
           var cell=Cells.findOne({
             projectID:thiscell.projectID,
@@ -394,22 +334,17 @@ var updateSliders=function(id){
           var value=cell.data*100;
 
           $(this).css("left",value.toString()+"%");
-      
-       //console.log("fsf:",$(this).val());
-       //console.log("fsfdddd:",this);
-        //console.log('dfdsds:',$(this)[0]);
+
 
       })
 };
 Template.sliderCell.onRendered (function () {
-  // ...
-  // console.log("fsfsf:",this.$(".slider"));
+
   var id=this._id;
   var thiscell=this.data;
-  //console.log(thiscell);
-  //console.log(thiscell.data);
 
-  var WCell=Cells.findOne({//normalized weight cell
+
+  var WCell=Cells.findOne({
     projectID:thiscell.projectID,
     row:thiscell.row,
     column:1,
@@ -427,7 +362,7 @@ Template.sliderCell.onRendered (function () {
       'max':1
     }
   }).on('slide', function (ev, val) {
-    //   // set real values on 'slide' event
+
     Cells.update({_id:WCell._id}, {$set:{data:val}});
     updateSliders(WCell._id);
   
@@ -441,7 +376,7 @@ Template.sliderCell.onRendered (function () {
 
 Template.sliderCell.helpers({
     dataPercent: function(){
-      //console.log(this);
+
       var value=Number(this.data);
       return (value*100).toFixed(1);
     }
