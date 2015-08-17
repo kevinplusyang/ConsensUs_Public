@@ -1,140 +1,115 @@
-<template name="sdboxTrigger">
-  <a href="#"><img src="/Img-ruler.png" class="imgRuler">SD Setting</a>
-</template>
-
-<template name="sdbox">
-  <div class="SD-div">
-        {{> SDshow}}
-        <p></p>
-        {{> setTH}}
-  </div>
-</template>
-
+<!-- report template -->
 <template name = 'reportMatrix'>
-
-
-
     <div id="wrapper"  class="toggled">
-
-
-        <div id="sidebar-wrapper">
-
-
+       <div id="sidebar-wrapper">
             <div id="sidebar" style="padding: 0px; height:inherit;width: 300px;">
 
                 <div style="padding: 0px;height: inherit; width:100px;overflow: scroll; float: left; background-color: #3f9db6">
                     {{> reportuserInProject}}
+                    <!-- template file is in reportuserInProject.html -->
+                    <!-- helper and events are in reportuserInProject.js -->
                 </div>
 
                 <div style="background-color: #F1F3F4; border: 0px; margin: 0px ; padding-left: 4px; padding-top: 20px; padding: 4px; height: 94%;width: 200px; overflow: scroll; float: right; border-right: 2px solid #3e9cb5; border-bottom: 2px solid #3e9cb5">
                     {{> reportchatrooms}}
+                    <!-- template file is in reportchatrooms.html -->
+                    <!-- helper and events are in reportchatrooms.js -->
 
                 </div>
 
                 <div style="padding: 0px; float: right; height: 40px; width: 200px;position: relative; left:0px; top: 0px;border-right: 2px solid #3e9cb5; border-bottom: 2px solid #3e9cb5">
                     {{> reportnewChatItem}}
+                    <!-- template file is in reportchatrooms.html -->
+                    <!-- helper and events are in reportchatrooms.js -->
                 </div>
 
-
             </div>
-
         </div>
-
-
+        
         {{> navigation}}
-
-        <!--<div class="container-fluid">-->
-            <!--<div class="project-nav">-->
-                <!--<h2>Project {{projectName}}</h2>-->
-                <!--<div class='profile'>-->
-                    <!--<img src="/Img-project-nav-head.png">-->
-                    <!--{{userToSee.username}}-->
-                    <!--<a  class="btn btn-default" id="menu-toggle" >Chat Room</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div>-->
-            <!--{{> matrix}}-->
-        <!--</div>-->
+        <!-- template file is in navigation.html -->
 
 
         <div class="container-fluid">
+        <!-- gray nav of project page -->
             <div class="project-nav">
                 <h2>Report {{name}}</h2>
-
-
-
+                <!-- name:project attribution -->
 
                 <div class="project-tool" >
                     {{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}
-
+                    <!-- template file is in SD.html -->
                     {{ > dropdown name="sdbox" }}
+                    <!-- template file is in SD.html -->
                 </div>
-
-
-
-
-
-
-                <!-- <button href="#" class="ruler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="/Img-ruler.png" class="imgRuler">SD setting</button>
-      </div>
-
-      <div class="SD-div dropdown-menu  dropdown-menu-right">
-        {{> setTH}}
-                    {{> SDbox}}
-      </div> -->
 
                 <div style="margin-left: 200px">
                    
                     <a  class="btn btn-default" id="menu-toggle" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px"><img src="/chaticon.png" style="margin-right: 10px">Chat Room & Report</a>
                 </div>
 
-
             </div>
         </div>
 
-        <!-- id:{{_id}} -->
+        
         <div class="table-container">
+        <!-- report matrix container -->
             <table>
                 {{#if showSD}}
+                <!-- whether to show SD row -->
+                <!-- template.report.helper, in report.js -->
                     <tr>
+                    <!-- SD row -->
                         <td class="table-null"></td>
-                        <!-- <td colspan="2" class="table-head">Standard D</td> -->
-                        <td class="table-head">Standard D</td>
+                        <td class="table-head">Standard Deviation</td>
 
                         {{#each cellFindRow -1}}
+                        <!-- template.report.helper, in report.js -->
                             {{> reportSDcellshow}}
+                        
                         {{/each}}
+                        <!-- template file is in report.html -->
                     </tr>
                 {{/if}}
                 <tr>
+                <!-- score row -->
                     <td></td>
-                    <!-- <td></td> -->
-                    <!-- <td colspan="2" class="table-head">Total Score</td> -->
                     <td class="table-head">Total Score</td>
 
                     {{#each cellFindRow -1}}
+                    <!-- template.report.helper, in report.js -->
                         {{> reportcellshow}}
+                    
                     {{/each}}
+                    <!-- reportcellshow: template file is in report.html -->
+                    <!-- helpers and events are in report.js -->
                 </tr>
 
                 <tr>
+                <!-- row0: candidates -->
                     <td></td>
-<!--                     <td colspan="2" class="table-row0" style="font-size:14px;width:120px;">Weight</td>
- -->                <td class="table-row0" style="font-size:14px;width:120px;">Weight</td>
+                    <td class="table-row0" style="font-size:14px;width:120px;">Weight</td>
 
-                    <!-- <td>Normalized Weight</td> -->
                     {{#each cellFindRow 0}}
+                    <!-- template.report.helper, in report.js -->
                         {{> reportcellshow}}
                     {{/each}}
-                    <td id='addCandi'>{{> addCandidate}}</td>
+                    <!-- reportcellshow: template file is in report.html -->
+                    <!-- helpers and events are in report.js -->
+
+                    <td id='addCandi'>
+                      {{> addCandidate}}
+                      <!-- template file is in report.html -->
+                      <!-- helpers and events are in report.js -->
+                    </td>
                 </tr>
 
                 {{#each rowNum}}
+                <!-- template.report.helper, in report.js -->
                     {{> reportMatBody}}
                 {{/each}}
+                <!-- reportMatBody: template file is in report.html -->
+                <!-- helpers and events are in report.js -->
                 <tr>
                     <td id='addFac'>{{> addFactor}}</td>
                 </tr>
@@ -144,241 +119,104 @@
 
 
     </div>
-
-
-
-
-
-
-<!--<div class="container-fluid">-->
-  <!--<div class="project-nav">-->
-      <!--<h2>Report {{name}}</h2>-->
-
-      <!--<div class="project-tool" >-->
-      <!--{{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}-->
-
-      <!--{{ > dropdown name="sdbox" }}-->
-      <!--</div>-->
-
-
-
-
-      <!--&lt;!&ndash; <button href="#" class="ruler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="/Img-ruler.png" class="imgRuler">SD setting</button>-->
-      <!--</div>-->
-
-      <!--<div class="SD-div dropdown-menu  dropdown-menu-right">-->
-        <!--{{> setTH}}-->
-        <!--{{> SDbox}}-->
-      <!--</div> &ndash;&gt;-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; id:{{_id}} &ndash;&gt;-->
-<!--<div class="table-container">-->
-  <!--<table>-->
-      <!--{{#if showSD}}-->
-      <!--<tr>-->
-          <!--<td class="table-null"></td>-->
-          <!--<td colspan="2" class="table-head">Standard D</td>-->
-          <!--{{#each cellFindRow -1}}-->
-              <!--{{> reportSDcellshow}}-->
-          <!--{{/each}}-->
-      <!--</tr>-->
-      <!--{{/if}}-->
-      <!--<tr>-->
-        <!--<td></td>-->
-        <!--&lt;!&ndash; <td></td> &ndash;&gt;-->
-        <!--<td colspan="2" class="table-head">Total Score</td>-->
-        <!--{{#each cellFindRow -1}}-->
-        <!--{{> reportcellshow}}-->
-        <!--{{/each}}-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-          <!--<td></td>-->
-          <!--<td colspan="2" class="table-row0">Weight</td>-->
-          <!--&lt;!&ndash; <td>Normalized Weight</td> &ndash;&gt;-->
-          <!--{{#each cellFindRow 0}}-->
-            <!--{{> reportcellshow}}-->
-          <!--{{/each}}-->
-          <!--<td id='addCandi'>{{> addCandidate}}</td>-->
-      <!--</tr>-->
-
-       <!--{{#each rowNum}}-->
-         <!--{{> reportMatBody}}-->
-       <!--{{/each}}-->
-       <!--<tr>-->
-         <!--<td id='addFac'>{{> addFactor}}</td>-->
-       <!--</tr>-->
-
-  <!--</table>-->
-<!--</div>-->
-
-     <!--<h3>test</h3>-->
-     <!--<ul>-->
-      <!--{{#each celllist 2 1 _id}}-->
-       <!--{{> reportcelllist}}-->
-      <!--{{/each}}-->
-     <!--</ul>-->
-      <!--&lt;!&ndash; {{> addCandidate}} &ndash;&gt;-->
-
-      <!--&lt;!&ndash; {{> addFactor}} &ndash;&gt;-->
-
-
-
-
-    <!--<div id="sidebar" style="padding: 0px; height: 500px;width: 300px;">-->
-
-        <!--<div style="padding: 0px;height: 500px; width:100px;overflow: scroll; float: left; background-color: #3f9db6">-->
-            <!--{{> reportuserInProject}}-->
-        <!--</div>-->
-
-        <!--<div style="background-color: #F1F3F4; border: 0px; margin: 0px ; padding-left: 4px; padding-top: 20px; padding: 4px; height: 460px;width: 200px; overflow: scroll; float: right">-->
-            <!--{{> reportchatrooms}}-->
-
-        <!--</div>-->
-
-        <!--<div style="padding: 0px; float: right; height: 40px; width: 200px;position: relative; left:0px; top: 0px;">-->
-            <!--{{> reportnewChatItem}}-->
-        <!--</div>-->
-
-
-
-    <!--</div>-->
-
-
-
-
-    <script src="jquery-2.1.4.min.js"></script>
-    <script src="bootstrap.js"></script>
-
-
-
-
-
+  <!--   // <script src="jquery-2.1.4.min.js"></script>
+    // <script src="bootstrap.js"></script> -->
 </template> 
 
 <template name = "reportMatBody">
-      <tr>      
-<!--         {{row}}{{_id}} -->
+      <tr>
+      <!-- Row > 0 -->
         {{#each cellFindRow row projectID}}
-        
+        <!-- Template.reportMatBody.helpers, in report.js -->
         {{> reportcellshow}}
         {{/each}}
+        <!-- reportcellshow: template file is in report.html -->
+        <!-- helpers and events are in report.js -->
       </tr>
-      {{#if showNotes row}}
-      {{> reportNotes}}
-      {{/if}}
 
+      <!-- row Notes -->
+      {{#if showNotes row}}
+      <!-- whether to show this row -->
+      <!-- Template.reportMatBody.helpers, in report.js -->
+      {{> reportNotes}}
+      <!-- reportNotes: template file is in notes.html -->
+      <!-- helpers and events are in notes.js -->
+      {{/if}}
 </template>
 
 <template name = "reportcellshow">
-  {{#if notWeight }}
-  <td class="table-{{type}}">
-    {{#if normalizedWeight }}
-    <span>{{dataPercent}}%</span>
-    {{else}}
-    {{> editableText collection="cells" field="data" saveOnFocusout=true}}
-    {{/if}}
-<!--     {{> editableText collection="cells" field="isReport" saveOnFocusout=true}}; -->
-    {{#if isCandidate }}
-    <a href="#" class="delete-candi"> Delete </a>
-    {{/if}}
-    {{#if isFactor}}
-    <a href="#" class="delete-fac"> Delete </a>
-    <label class="show-notes">
-        <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden"/>
-        <!--Show Notes-->
-        <img src="/noteicon.png" style="width: 20px; height: 20px">
-    </label>
-<!--       {{#if showNotes row}}
-      {{> notes}}
-      {{/if}} -->
-    {{/if}}
+<!-- helpers and events are in report.js -->
+<!-- notWeight: to ignore unnormalized weight column in report page -->
+{{#if notWeight}}
+      <td class="table-{{type}}">
+            {{#if normalizedWeight}}
+                <span>{{dataPercent}}%</span>
+            {{else}}
+              <!-- candidates & factors are editable, with delete links; -->
 
-<!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
+              {{#if isCandidate }}
+                  {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+                  <a href="#" class="delete-candi"> Delete </a>
+              {{else}}
+
+                {{#if isFactor}}
+
+                  {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+                  <a href="#" class="delete-fac"> Delete </a>
+
+                  <!-- show-notes check boxs in factor cells -->
+                  <label class="show-notes">
+                      <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden"/>
+                      <img src="/noteicon.png" style="width: 20px; height: 20px">
+                  </label>
+
+                 {{else}}
+
+                    {{data}}
+
+                {{/if}}
+              {{/if}}
+            {{/if}}
 
   </td>
-  {{/if}}
+{{/if}}
 </template>
 
 
 <template name = "reportSDcellshow">
     <td class="table-SD">
-        {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
-        <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-<!--         {{#if isCandidate }}
-            <a href="#" class="delete-candi"> Delete </a>
-        {{/if}}
-        {{#if isFactor}}
-            <a href="#" class="delete-fac"> Delete </a>
-            <label class="show-notes">
-                <input type="checkbox" checked="{{showNotes row}}" />
-                Show Notes
-            </label> -->
-            <!--       {{#if showNotes row}}
-                {{> notes}}
-            {{/if}} -->
-<!--         {{/if}} -->
-
-        <!--     {{> editableText collection="cells" field="projectID" saveOnFocusout=true}}; -->
-
+      {{data}} 
+      <!-- of cell  -->
     </td>
 </template>
 
 
-
 <template name="addCandidate">
-  
-    <!-- Add a candidate: -->
-        <!--  <form>
-         <input type="text" placeholder="Type a candidate here..." name="canName">
-        </form> -->
-    <!-- <input type="button" value="" name="canName" class="addButton"> -->
     <a href="#" class="add"> <img src="/Btn-Add.png" class="addButton"> </a>
-
 </template>
 
 <template name="addFactor">
-<!--     <form>
-        Add a factor:
-        <input type="text" placeholder="Type a factor here..." name="facName">
-    </form> -->
     <a href="#" class="add"> <img src="/Btn-Add.png" class="addButton"> </a>
-
 </template>
 
- <!--<template name = "reportcelllist">-->
-  <!--<li>-->
-    <!--{{> editableText collection="cells" field="data" saveOnFocusout=true}};-->
-    <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-    <!--{{> editableText collection="cells" field="projectID" saveOnFocusout=true}};-->
 
-  <!--</li>-->
-<!--</template>  -->
-
-<template name = "reportcelllist">
+<!-- <template name = "reportcelllist">
     <li>
         {{> editableText collection="cells" field="data" saveOnFocusout=true}};
-        <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
+        {{> editableText collection="cells" field="isReport" saveOnFocusout=true}};
         {{> editableText collection="cells" field="projectID" saveOnFocusout=true}};
         {{> editableText collection="cells" field="SDdata" saveOnFocusout=true}};
 
     </li>
-</template>
+</template> -->
 
 
 
 
-<template name="setTH">
-<!--     <form>Setting SD threshold
-        <input type="text" placeholder="SET STH" name="sth">
-    </form> -->
-    <span>Setting SD threshold: {{sTHpct}}%</span>
-    <div class="slider-container">
-      <div id="SDSlider"></div>
-    </div>
-</template>
+
+
+
+
 
 
 
