@@ -1,37 +1,24 @@
 <template name="userInProject">
-
-
+    <!--Template to show existing users in one project-->
 
     <ul style="margin: 0px ; padding-left: 0px; width: 100%">
+
         <li class="projectListCell" style="list-style-type: none ;  height: 70px ;text-align: center;">
-
-
             <div style="margin-top: 27px">
-
                 <a href="/project/{{currentProjectt}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Everyone</a>
+                <!--Report button to jump into the report page-->
             </div>
-
-
         </li>
+
         {{#each userInProject currentProjectt}}
-            <!-- <li><a href="/project/{{_id}}">{{name}},id:{{_id}}</a></li> -->
-            <!--<li>{{username}} {{pj}} </li>-->
-
             <li class="projectListCell">
-
                 <div style="margin-top: 27px">
                     <a href="/project/{{pj}}/{{userId}}" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">{{username}}</a>
+                    <!--Show all users-->
                 </div>
-
-
             </li>
-
-
-
-            <!-- <a href="#" class="delete-project">Delete</a> -->
         {{/each}}
+
     </ul>
 
-
-    <!--</ul>-->
 </template>
