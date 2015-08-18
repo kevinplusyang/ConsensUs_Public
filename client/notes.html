@@ -52,7 +52,7 @@
 <template name="reportNoteArea">
 <!-- similar with template:NoteArea, without colspan-->
 <td class='notebook'>
-    <ul class='list-group'>
+    <ul>
         
         <!-- notelist -->
         {{#each notelist}}
@@ -62,7 +62,7 @@
         <!--helpers and events in notes.js-->
         
         <!-- 'click to add' area --> 
-        <li class="list-group-item">
+        <li>
         {{#with addNoteDefault}}
         {{> addNote}}
         {{/with}}
@@ -81,7 +81,7 @@
 </template>
 
 <template name="noteList">
-<li class="list-group-item">
+<li >
     <div class="note-head">{{name}}</div>
     <div class="note-content">{{content}}</div>
 </li>
