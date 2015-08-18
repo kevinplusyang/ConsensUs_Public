@@ -93,9 +93,13 @@
           {{#if isFactor}}
         <label class="show-notes">
           <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden" />
-            <!--Show Notes-->
+          {{# if showNotes row}}         
             <img src="/noteicon.png" style="width: 20px; height: 20px">
-          </label>
+          {{else}}
+            <!-- Show Notes -->
+            <img src="/noteIconLight.png" style="width: 20px; height: 20px">
+          {{/if}}
+        </label>
           {{/if}}
       {{else}}
          {{dataPercent}}%

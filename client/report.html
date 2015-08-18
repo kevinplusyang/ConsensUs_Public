@@ -169,7 +169,12 @@
                   <!-- show-notes check boxs in factor cells -->
                   <label class="show-notes">
                       <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden"/>
+                      {{# if showNotes row}}         
                       <img src="/noteicon.png" style="width: 20px; height: 20px">
+                    {{else}}
+                      <!-- Show Notes -->
+                      <img src="/noteIconLight.png" style="width: 20px; height: 20px">
+                    {{/if}}
                   </label>
 
                  {{else}}
