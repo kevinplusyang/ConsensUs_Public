@@ -150,6 +150,10 @@ Template.reportMatrix.helpers({
 
     showSD: function(){
     return Session.get('showSD');
+    },
+
+    UID: function(){
+        return Meteor.userId();
     }
   });
 
