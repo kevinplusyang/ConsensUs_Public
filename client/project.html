@@ -1,19 +1,20 @@
 <template name="project">
     <!--In this template, it can present the matrix and chat room-->
 
-    <div id="wrapper"  class="toggled">
+
+    <div class="sidebarUserInProject" style="position: fixed;  height: 100%; z-index: 999999">
+        {{> userInProject}}
+        <!--Html file in userInproject.html-->
+        <!--JS file in userInProject.js-->
+    </div>
+
+    <div id="wrapper"  class="toggled" style="margin-left: 100px">
         <!--All components of this page is in the div-->
 
         <div id="sidebar-wrapper">
             <!--Sidebar div. Including the chat room and user list-->
 
             <div id="sidebar" style="padding: 0px; height:inherit;width: 300px;">
-
-                <div class="sidebarUserInProject">
-                    {{> userInProject}}
-                    <!--Html file in userInproject.html-->
-                    <!--JS file in userInProject.js-->
-                </div>
 
                 <div class="sidebarChatRoom">
                     {{> chatrooms}}
@@ -30,6 +31,10 @@
             </div>
 
         </div>
+
+
+
+
 
         {{> navigation}}
         <!--Html file in navigation.html-->
@@ -60,6 +65,7 @@
         </div>
 
         <div>
+
             {{> matrix}}
             <!--Html file in matrix.html-->
             <!--JS file in pages.js-->
