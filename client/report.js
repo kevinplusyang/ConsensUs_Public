@@ -1,40 +1,67 @@
-var cellFindOne = function(rowNo, columnNo,proID){
+/**
+cellFindOne: return a single cell in report.
+**/
+var cellFindOne = function(rowNo, columnNo, proID){
       return Cells.findOne({isReport: true,row: rowNo, column:columnNo, projectID:proID});
 }
+
+/**
+cellFindCol: find cells of a certain column in report, sort by rowNumber.
+return: cells cursor.
+**/
 var cellFindCol= function(colNo,proID){
       return Cells.find({isReport: true,column: colNo, projectID:proID},{ sort:{row: 1 }});
 }
+
+/**
+cellFindRow: find cells of a certain row in report, sort by colNumber.
+return: cells cursor.
+**/
 var cellFindRow= function(rowNo,proID){
       return Cells.find({isReport: true,row: rowNo, projectID:proID},{ sort:{column: 1 }});
 }
+
+
+/**
+calculateOne: calculate the average of one cell of all the users in this project.
+return: average value.
+**/
 var calculateOne = function(rowNo, columnNo,proID){
+    //cellUserCursor: find all users' cell of certain rowNo and certain colNo.
     var cellUserCursor=Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID});
+    
     var sum = 0;
     var count = cellUserCursor.count();
+    
     cellUserCursor.forEach(function(cellUser){
       sum = sum + Number(cellUser.data);
-      // console.log("each :",cellUser.data)
+      
     });
     
     var aver = sum/count;
-    // console.log("aver:" ,aver);
     return aver;
 }
+
+/**
+updateRow: for a certain rowNo in report, 
+calculate the average of each cell of all the users in this project.
+return: average value.
+**/
 var updateRow = function(proID,rowNo){
-    // console.log("here!");
+    
     var rowCursor = cellFindRow(rowNo,proID);
-    // console.log(rowCursor.fetch());
-    // console.log(rowNo,proID);
 
     rowCursor.forEach(function(cell){
-      // console.log(cell.column);
+      
       if(rowNo>0){
           if(cell.column>0){
+            // the evaluation cells.
           var aver = calculateOne(rowNo,cell.column,proID);
           Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
         }
       }else if(rowNo===-1){
           if(cell.column>1){
+            // all the score cells.
           var aver = calculateOne(rowNo,cell.column,proID);
           Cells.update(cell._id,{$set: {data: aver.toFixed(3)}});
         }
@@ -42,8 +69,10 @@ var updateRow = function(proID,rowNo){
     })
 }
 
-
-
+/**
+calculateSD: calculate the SD of one cell of all the users in this project.
+return: variance value.
+**/
 
 var calculateSD = function(rowNo, columnNo,proID){
     var cellUserCursor=Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID});
@@ -59,19 +88,11 @@ var calculateSD = function(rowNo, columnNo,proID){
 
 
     cellUserCursor.forEach(function(cellUser){
-        // console.log("celldata");
-        // console.log(Number(cellUser.data));
-        // console.log(Number(cellUser.data)-avg);
-        // console.log("celldata");
-        //var e = (Number(cellUser.data)-avg);
-
-        sum = sum + (Number(cellUser.data)-avg)*(Number(cellUser.data)-avg);
+      sum = sum + (Number(cellUser.data)-avg)*(Number(cellUser.data)-avg);
     });
 
     var variance = sum/count;
     variance = Math.sqrt(variance);
-
-
 
     return variance;
 };
@@ -84,23 +105,7 @@ var updateRowForVariance = function(proID,rowNo){
     var rowCursor = cellFindRow(rowNo,proID);
 
     rowCursor.forEach(function(cell){
-        // console.log("cellcol");
-        // console.log(cell.column);
-
-        //
-        //if(rowNo>0){
-        //    if(cell.column>0){
-        //        var variance = calculateSD(rowNo,cell.column,proID);
-        //        Cells.update(cell._id,{$set: {SDdata : variance}});
-        //    }
-        //}
-
-
-        //var variance = calculateSD( -1 ,3 ,proID);
-        //Cells.update(cell._id,{$set: {SDdata : variance}});
-
-
-
+        
         if(rowNo>0){
             if(cell.column>0){
                 var variance = calculateSD(rowNo,cell.column,proID);
@@ -112,30 +117,9 @@ var updateRowForVariance = function(proID,rowNo){
                 var variance = calculateSD(rowNo,cell.column,proID);
                 Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
 
-                //Cells.insert({SDdata: variance, column: cell.column, createdAt:new Date(), data: variance, isReport: true, projectID: proID, row:-2, userID: null});
-
-// <<<<<<< HEAD
-// =======
-
-                // console.log("====================");
-                // console.log(rowNo);
-                // console.log(cell.column);
-                // console.log(variance);
-                // console.log("====================");
-// >>>>>>> parent of d3a2dd0... user list and chatroom sidebar V1.0
             }
         }
-
-
-
     })
-
-
-
-
-
-
-
 };
 
 Template.reportMatrix.events({
@@ -146,75 +130,58 @@ Template.reportMatrix.events({
 })
 
 
-
-
-
 Template.reportMatrix.helpers({
     cellFindRow: function(rowNo){
-      //return Cells.find({ row: rowNo },{ sort:{column: 1 }});
       updateRow(this._id,rowNo);
       return cellFindRow(rowNo,this._id);
     },
+
+    /**
+    rowNum: return column 0, to get the cursor of all the rows.
+    **/
     rowNum: function(){
       var col0 = cellFindCol(0,this._id);
       return col0;
     },
-    celllist: function(rowNo,columnNo,proID){
-      // updateOne(rowNo,columnNo,proID);
-      return Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID}); 
-    },
+    // celllist: function(rowNo,columnNo,proID){
+    //   // updateOne(rowNo,columnNo,proID);
+    //   return Cells.find({isReport:false,row: rowNo, column:columnNo, projectID:proID}); 
+    // },
+
     showSD: function(){
     return Session.get('showSD');
     }
   });
 
-/*
-to be modified later: setDefault
-Qc,150807
-*/
+
 var showCheckBox=[false,false];
 Session.setDefault({showNotes: showCheckBox});
 
 Template.reportMatBody.helpers({
     cellFindRow: function(rowNo, projectID){
       updateRow(projectID,rowNo);
-        updateRowForVariance(projectID,rowNo);
-
-        updateRowForVariance(projectID,-1);
-
-
-
+      updateRowForVariance(projectID,rowNo);
+      updateRowForVariance(projectID,-1);
 
       return cellFindRow(rowNo,projectID);
     },
+    
     showNotes: function(row){
-      // var rowNo=this.row;
-    //   console.log("@@@@@@@");
-    // console.log(Session.get('showNotes')[row-1]);
     return Session.get('showNotes')[row-1];
-      // return true;
+
     }
 });
 
 
+/**
+*findMaxSD: find the max sd for all the cells in report matrix,
+*for control the color of cells due to the SD threshold.
 
+@return: the maximum value
+**/
 
-
-// Template.setTH.events({
-//     'submit form': function (event) {
-//         event.preventDefault();
-//         var sth = $('[name=sth]').val();
-
-//         var currentProject = this._id;
-
-
-//         Projects.update({_id:currentProject},{$set:{sTH:sth}});
-
-//         $('[name=sth]').val('');
-
-//     }
-// });
 var findMaxSD = function(proID){
+    // get the SDdata field data of all the report cells
     var cellCursor = Cells.find({projectID:proID,isReport:true}, 
     {fields: {SDdata: 1}});
     var max=0;
@@ -223,12 +190,11 @@ var findMaxSD = function(proID){
         max=cell.SDdata;
       }
     });
-    //console.log("afsdfs:",max);
+
     return max;
-
-
-
 }
+
+
 Template.reportcellshow.helpers({
     isCandidate: function(){
       var flag = (this.row === 0);
@@ -239,56 +205,56 @@ Template.reportcellshow.helpers({
       return flag;
     },
     showNotes: function(row){
-      // var rowNo=this.row;
-    // console.log(Session.get('showNotes'));
+
     return Session.get('showNotes')[row-1];
-      // return true;
+      
     },
+    /*
+    type: to switch class for report cells
+    */
     type:function(){
       var temp='';
       if(this.row ===0){
         temp = 'row0';
-      // }else if(this.row===-1)
-      // {
-      //   return 'head';
-      }else if(this.row<0)
-      {
-        temp = 'rowScore';
-      }else if(this.column===0){
-        temp = 'show col0';
-      }else if(this.column===1){
-        temp = 'show col1';
-      }else
-      {
-        temp = 'show';
-        var thisProject = Projects.findOne({_id: this.projectID});
-        var maxSD=findMaxSD(this.projectID);
-        var SDth = Number(thisProject.sTH)*maxSD;
-        if(this.SDdata <= SDth){
-          var changeColor = true;
-        }else{
-          changeColor=false;
-        }
-        if(changeColor){
-          temp= 'show colorCell';
-        }
+      }else if(this.row<0){
+          temp = 'rowScore';
+        }else if(this.column===0){
+          temp = 'show col0';
+          }else if(this.column===1){
+            temp = 'show col1';
+            }else{
+              temp = 'show';
+              //whether to change color.
+              var thisProject = Projects.findOne({_id: this.projectID});
+              var maxSD=findMaxSD(this.projectID);
+              var SDth = Number(thisProject.sTH)*maxSD;
+              
+              if(this.SDdata <= SDth){
+                var changeColor = true;
+              }else{
+                changeColor=false;
+              }
+              if(changeColor){
+                temp= 'show colorCell';
+              }
       }
     return temp;
     },
+
     notWeight:function(){
       if(this.column===1){
         return false;
       }else{
         return true;
       }
-
     },
     normalizedWeight:function(){
       return this.column===2;
-
     },
+    /**
+    dataPercent: transfer to percentage for the weight column.
+    **/
     dataPercent: function(){
-      //console.log(this);
       var value=Number(this.data);
       return (value*100).toFixed(1);
     }
@@ -298,11 +264,9 @@ Template.reportcellshow.helpers({
 Template.addCandidate.events({
     'click .add': function(event){
     event.preventDefault();
-    // var thisProject = Projects.findOne({_id: proID});
-    // var canName = $('[name="canName"]').val();
     var canName='Rename';
     
-    /////////////add new columns in Report page
+    //add new columns in Report page
   
     for (var i=-1;i<=Number(this.rows);i++){
       if(i===0){     
@@ -325,6 +289,7 @@ Template.addCandidate.events({
         projectID:this._id,
             SDdata:0
         });
+        
         // insert 'placeholder' of notes
         if(i>0){
           Notes.insert({isAdd:true,
@@ -339,39 +304,38 @@ Template.addCandidate.events({
         }
       }
     }
+
     //add new columns in related user's page
+
       for(var item in this.users){
         var nowUserId=this.users[item].userId;
+        
         for (i=-1;i<=Number(this.rows);i++){
-        if(i===0){     
-        Cells.insert({userID: nowUserId,
-            isReport: false,
-            data: canName,
-            row: 0,
-            createdAt: new Date(),
-            column: Number(this.columns)+3,
-            projectID:this._id,
-            SDdata:0});
-      }else{
-
-        Cells.insert({
-        userID: nowUserId,isReport: false,
-        data: 0,
-        row: i,
-        createdAt: new Date(),
-        column: Number(this.columns)+3,
-        projectID:this._id,
-            SDdata:0
-        });
-      }
+          if(i===0){     
+          Cells.insert({userID: nowUserId,
+              isReport: false,
+              data: canName,
+              row: 0,
+              createdAt: new Date(),
+              column: Number(this.columns)+3,
+              projectID:this._id,
+              SDdata:0});
+          }else{
+          Cells.insert({
+          userID: nowUserId,isReport: false,
+          data: 0,
+          row: i,
+          createdAt: new Date(),
+          column: Number(this.columns)+3,
+          projectID:this._id,
+          SDdata:0
+          });
+        }
       }    
     }
-    
 
-
+    //project.columns++
     Projects.update(this._id,  {$set: {columns: Number(this.columns)+1}});  
-    // $('[name="canName"]').val('');
-
 
   }
 });
@@ -379,15 +343,16 @@ Template.addCandidate.events({
 Template.addFactor.events({
     'click .add': function(event){
     event.preventDefault();
-    // var facName = $('[name="facName"]').val();
+    
     var facName="Rename";
-    // report
+    
+    // add rows in report matrix
     for (var i=0;i<=Number(this.columns)+2;i++){
       if(i===0){
         Cells.insert({userID: null,isReport: true, data: facName, row: this.rows+1, createdAt: new Date(),
         column: 0,
         projectID:this._id,
-            SDdata:0
+        SDdata:0
         });
       }else{
         Cells.insert({userID: null,isReport: true,
@@ -396,27 +361,29 @@ Template.addFactor.events({
         createdAt: new Date(),
         column: i,
         projectID:this._id,
-            SDdata:0
+        SDdata:0
         });
         if(i>1){
           Notes.insert({isAdd:true,
-            row:this.rows+1,
-            column:i,
-            projectID:this._id,
-            createdAt: new Date(),
-            content:'click to add',
-            createdBy: Meteor.userId(),
-            name:Meteor.user().username,
-            url:''});
+          row:this.rows+1,
+          column:i,
+          projectID:this._id,
+          createdAt: new Date(),
+          content:'click to add',
+          createdBy: Meteor.userId(),
+          name:Meteor.user().username,
+          url:''});
         }
       }
     }
-    //personal
+    // add rows in personal matrixs of related users
      for(var item in this.users){
+
         var nowUserId=this.users[item].userId;
         for (var i=0;i<=Number(this.columns)+2;i++){
-        if(i===0){     
-        Cells.insert({userID: nowUserId,
+        
+          if(i===0){     
+            Cells.insert({userID: nowUserId,
             isReport: false,
             data: facName,
             row:this.rows+1,
@@ -424,51 +391,48 @@ Template.addFactor.events({
             column: 0,
             projectID:this._id,
             SDdata:0});
-      }else{
-        Cells.insert({
-        userID: nowUserId,isReport: false,
-
-        data: 0,
-        row: this.rows+1,
-        createdAt: new Date(),
-        column: i,
-
-        projectID:this._id,
-            SDdata:0
-        });
-      }
+          }else{
+            Cells.insert({
+            userID: nowUserId,isReport: false,
+            data: 0,
+            row: this.rows+1,
+            createdAt: new Date(),
+            column: i,
+            projectID:this._id,
+            SDdata:0});
+          }
       }    
     }
-    Projects.update(
-      this._id,
-      {$set: 
-        {rows: 
-          Number(this.rows)+1
-        }
-      }
-      );
-    // $('[name="facName"]').val('');
+    
+    //project.rows++
+    Projects.update(this._id,{$set: {rows: Number(this.rows)+1}});
+    
   }
 });
+
+
 
 Template.reportcellshow.events({
    'click .delete-candi': function(event) {
     event.preventDefault();   
-    //remove cells
+    
+    //remove cells of this column(of both report and personal matrix)
     var candidateCursor = Cells.find({projectID: this.projectID,column:this.column});
     candidateCursor.forEach(function(cell){
       Cells.remove({_id:cell._id});
     })
+
     //remove notes
     var notesCursor = Notes.find({projectID: this.projectID,column:this.column});
     notesCursor.forEach(function(note){
       Notes.remove({_id:note._id});
     })
+
     // project.columns--
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {columns: Number(thisProject.columns)-1}});  
     
-    // column-1 for those followings cells
+    // column-- for those followings columns
 
     var candiFollowingCursor = Cells.find({projectID: this.projectID,column:{$gt:this.column}});
     candiFollowingCursor.forEach(function(cell){
@@ -476,61 +440,66 @@ Template.reportcellshow.events({
       Cells.update(cell._id,{$set: {column: col}});
     });
 
-    // column-1 for those followings notes
+    // column-- for those followings notes
 
     var noteFollowingCursor = Notes.find({projectID: this.projectID,column:{$gt:this.column}});
     noteFollowingCursor.forEach(function(note){
       var col = Number(note.column)-1;
       Notes.update(note._id,{$set: {column: col}});
     });
-
     },
+
+
     'click .delete-fac': function(event) {
     event.preventDefault();  
-    //remove cells 
+    
+    //remove cells of this row(of both report and personal matrix)
     var facCursor = Cells.find({projectID: this.projectID,row:this.row});
     facCursor.forEach(function(cell){
       Cells.remove({_id:cell._id});
     });
+    
     //remove notes
     var notesCursor = Notes.find({projectID: this.projectID,row:this.row});
     notesCursor.forEach(function(note){
       Notes.remove({_id:note._id});
     })
+    
     // project.rows--
     var thisProject=Projects.findOne({_id:this.projectID });
     Projects.update(this.projectID,  {$set: {rows: Number(thisProject.rows)-1}});  
 
-    // row-1 for those following cells
-
+    // row-- for those cells of the following rows
     var facFollowingCursor = Cells.find({projectID: this.projectID,row:{$gt:this.row}});
     facFollowingCursor.forEach(function(cell){
       var ro = Number(cell.row)-1;
       Cells.update(cell._id,{$set: {row: ro}});
     });
 
-    // row-1 for those followings notes
-
+    // row-- for those followings notes
     var noteFollowingCursor = Notes.find({projectID: this.projectID,row:{$gt:this.row}});
     noteFollowingCursor.forEach(function(note){
       var ro = Number(note.row)-1;
       Notes.update(note._id,{$set: {row: ro}});
     });
 
-    // session delete this item
+    // session.shownotes delete this item
     var newSN = Session.get('showNotes');
     newSN.splice(this.row-1, 1);
     Session.set({showNotes: newSN});
 
     },
+
+/**
+toggle shownotes: set session array showNotes.
+**/
     "change .show-notes input": function (event) {
       var rowNo=Number(this.row);
 
-      // console.log(Session.get('showNotes'))
       var getShowNotes = Session.get('showNotes');
       var newSN = getShowNotes;
       newSN[rowNo-1] = event.target.checked;
-      // console.log(newSN);
+      
       Session.set({showNotes: newSN});
 
     }
