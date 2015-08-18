@@ -25,7 +25,7 @@
 <template name="noteArea">
 
 <td colspan="{{columnWeight}}" class='notebook'>
-    <ul class='list-group'>
+    <ul>
     
         <!-- notelist -->
     	{{#each notelist}}
@@ -36,7 +36,7 @@
        
 
         <!-- 'click to add' area -->    
-        <li class="list-group-item">
+        <li>
         {{#with addNoteDefault}}
         {{> addNote}}
         <!--addNote: template file in notes.html-->
@@ -83,7 +83,13 @@
 <template name="noteList">
 <li >
     <div class="note-head">{{name}}</div>
-    <div class="note-content">{{content}}</div>
+    <div class="note-content">
+        {{#if editable}}
+            {{> editableText collection="notes" field="content" saveOnFocusout=true}}
+        {{else}}
+            {{content}}
+        {{/if}}
+    </div>
 </li>
 
 </template>

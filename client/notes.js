@@ -81,6 +81,18 @@ Template.reportNoteArea.helpers({
     }
   });
 
+Template.noteList.helpers({
+    /**
+    notelist: find all the normal notes(not the adding placeholder)
+    @return: notes cursor
+    **/
+    editable: function(){
+      
+      return this.createdBy===Meteor.userId();
+      
+    }
+  });
+
 
 
 
