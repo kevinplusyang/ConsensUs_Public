@@ -1,3 +1,6 @@
+/**
+ Function: Change user's password
+ **/
 Template.changePassword.events({
     'submit form': function(event){
         event.preventDefault();
@@ -13,6 +16,9 @@ Template.changePassword.events({
 });
 
 
+/**
+ Function: Register a user
+ **/
 Template.register.events({
     'submit form': function(){
         event.preventDefault();
@@ -26,19 +32,18 @@ Template.register.events({
                     console.log(err);
                 else
                 {
-
                     var currentUserID = Meteor.userId();
-
-                    console.log(currentUserID);
-
                 }
             });
-
-
         Router.go('user');
     }
 });
 
+
+
+/**
+ Function: Navigation's click event, logout.
+ **/
 Template.navigation.events({
     'click .logout': function(event){
         event.preventDefault();
@@ -46,6 +51,12 @@ Template.navigation.events({
         Router.go('/');
     }
 });
+
+
+
+/**
+ Function: Event for logging in
+ **/
 Template.login.events({
     'submit form': function(event){
         event.preventDefault();
@@ -60,8 +71,10 @@ Template.login.events({
     }
 });
 
+
+
 /**
-function: normalization of weight columns (column 1),
+Function: normalization of weight columns (column 1),
 update cells of column 2.
 **/
 var updateWeight = function(proID,userID){
@@ -75,7 +88,10 @@ var updateWeight = function(proID,userID){
         Cells.update(cell._id,{$set: {data: cellFindOne(cell.row, 1,proID,userID).data/sum}});
     });
 
-}
+};
+
+
+
 var updateTotal = function(proID,userID){
     var totalArray = cellFindRow(-1,proID,userID);
 
@@ -90,20 +106,19 @@ var updateTotal = function(proID,userID){
         });
         Cells.update(cell._id,{$set: {data: sum}});
     });
-}
+};
+
+
+
+/**
+ Function: Initial Cell database when a user join a project by invitation code.
+ **/
 var initialPageforInv = function(proID,userID){
 
-
     var row = Projects.findOne({_id: proID}).rows;
+    //row: How many rows in the existing project
     var column = Projects.findOne({_id: proID}).columns;
-
-    console.log("rows");
-    console.log(row);
-    console.log("column");
-    console.log(column);
-    console.log("=============");
-
-
+    //column: How many columns in the existing project
 
     for(var k=3 ; k<=column+2 ; k++){
         var dataTemp = Cells.findOne({projectID: proID, isReport:true, row:-1, column:k}).data;
@@ -133,25 +148,25 @@ var initialPageforInv = function(proID,userID){
             Cells.insert({userID: userID, isReport : false ,projectID:proID,row:m,column:n,data:dataTemp,createdAt: new Date(),SDdata:0});
         }
 
-
-
-
     updateWeight(proID,userID);
     updateTotal(proID,userID);
-}
+};
 
+
+/**
+ Function: User use this event to add into a project by invitation code
+ **/
 Template.joinProject.events({
     'submit form': function(event){
         event.preventDefault();
         var name = Meteor.user().username;
-        console.log(name);
         var currentUser = Meteor.userId();
         var joinproject = $('[name=joinproject]').val();
+        //store invitation code(projectID) in joinporject
         $('[name=joinproject]').val('');
 
         Projects.update({_id:joinproject},{$push: {users: {userId:currentUser,username:name}}});
         initialPageforInv(joinproject,currentUser);
-
     }
 });
 
