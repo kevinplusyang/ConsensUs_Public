@@ -13,6 +13,7 @@
 
                 <ul class="list-group">
                     {{#each project}}
+                    <!-- Template.projectList.helpers, in pages.js -->
                         <li class="list-group-item"><a href="/project/{{_id}}/{{currentUserrr}}">{{name}}</a></li>
                         <!--Press the button, it can generate a link like: Http://XXX.com/project/<projectID>/<userID>/ -->
                     {{/each}}

@@ -105,7 +105,6 @@ var updateFactor = function(proID){
 }
 
 
-
 Template.matrix.helpers({
     cell: function (currentProjectt) {
 
@@ -113,7 +112,6 @@ Template.matrix.helpers({
     },
 
     cellthis:function(userID,currentProjectt){
-
 
       return Cells.find({isReport:false,userID:userID,projectID: currentProjectt});
     },
@@ -127,6 +125,9 @@ Template.matrix.helpers({
       return cellFindRow(rowNo,currentProjectt,userID);
     },
 
+    /**
+    rowNum: return column 0, to get the cursor of all the rows.
+    **/
     rowNum: function(userID,currentProjectt){
       var col0 = cellFindCol(0,currentProjectt,userID);
       
@@ -137,14 +138,17 @@ Template.matrix.helpers({
     }
 
   });
+
+
 var showCheckBox=[false,false];
 Session.setDefault({showNotes: showCheckBox});
+
 Template.matBody.helpers({
     cellFindRow: function(rowNo, projectID,userID){
 
       return cellFindRow(rowNo,projectID,userID);
-     },
-     showNotes: function(row){
+    },
+    showNotes: function(row){
 
     return Session.get('showNotes')[row-1];
 
@@ -153,43 +157,41 @@ Template.matBody.helpers({
 
 
 
-Template.celllist.events({
-   'click .delete-cell': function(event) {
+// Template.celllist.events({
+//    'click .delete-cell': function(event) {
  
-    event.preventDefault();
-    var documentID = this._id;
-    Cells.remove({_id: documentID});
-    }
-  });
+//     event.preventDefault();
+//     var documentID = this._id;
+//     Cells.remove({_id: documentID});
+//     }
+//   });
 
 
+// Template.adding.events({
+//     'submit form': function(event){
+//     event.preventDefault();
+
+//     var rno = Number($('[name="rowNo"]').val());
+//     var cno = Number($('[name="colNo"]').val());
+//     Cells.insert({
+//     data: 0,
+//     row: rno,
+//     createdAt: new Date(),
+//     column: cno,
+//     projectID:"p4tETnfgHArySKLGJ"
+//     });
+//   }
+// });
 
 
-Template.adding.events({
-    'submit form': function(event){
-    event.preventDefault();
+// Template.projectList.events({
+//   'click .delete-project': function(event) {
 
-    var rno = Number($('[name="rowNo"]').val());
-    var cno = Number($('[name="colNo"]').val());
-    Cells.insert({
-    data: 0,
-    row: rno,
-    createdAt: new Date(),
-    column: cno,
-    projectID:"p4tETnfgHArySKLGJ"
-    });
-  }
-});
-
-
-Template.projectList.events({
-  'click .delete-project': function(event) {
-
-   event.preventDefault();
-   var documentID = this._id;
-   Projects.remove({_id: documentID});
-   }
- });
+//    event.preventDefault();
+//    var documentID = this._id;
+//    Projects.remove({_id: documentID});
+//    }
+//  });
 
 
 Template.projectList.helpers({
@@ -208,7 +210,8 @@ Template.projectList.helpers({
 
 
 var initialProject = function(proID,userID){
-  // console.log("here");
+  
+  // insert report cells
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:-1,column:3,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:-1,column:4,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:0,column:3,data:'New York',createdAt: new Date(),SDdata:0});
@@ -224,7 +227,7 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: null,isReport : true ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
 
-    //
+  // insert users' cells
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:3,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:-1,column:4,data:0,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:0,column:3,data:'New York',createdAt: new Date(),SDdata:0});
@@ -239,25 +242,26 @@ var initialProject = function(proID,userID){
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:2,data:2,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:3,data:3,createdAt: new Date(),SDdata:0});
     Cells.insert({userID: userID, isReport : false ,projectID:proID,row:2,column:4,data:1,createdAt: new Date(),SDdata:0});
-    //
     
+  // insert showNotes flag in Session
+    
+   var showCheckBox=[false,false];
+   Session.set({showNotes: showCheckBox});
+   Session.set({showSD: false});
 
- var showCheckBox=[false,false];
- Session.set({showNotes: showCheckBox});
- Session.set({showSD: false});
+  // insert notes.
+    Notes.insert({isAdd:true,row:1,column:1,projectID:proID,createdAt: new Date(),content:'Click Here To Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:1,column:3,projectID:proID,createdAt: new Date(),content:'Click Here to Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:1,column:4,projectID:proID,createdAt: new Date(),content:'Click Here to Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:2,column:1,projectID:proID,createdAt: new Date(),content:'Click Here to Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:2,column:3,projectID:proID,createdAt: new Date(),content:'Click Here to Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
+    Notes.insert({isAdd:true,row:2,column:4,projectID:proID,createdAt: new Date(),content:'Click Here to Add Comments',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
 
-    //
-    Notes.insert({isAdd:true,row:1,column:1,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:1,column:3,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:1,column:4,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:2,column:1,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:2,column:3,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-    Notes.insert({isAdd:true,row:2,column:4,projectID:proID,createdAt: new Date(),content:'Clike To Add',createdBy: Meteor.userId(),name:Meteor.user().username,url:''});
-
-
- updateWeight(proID);
- updateTotal(proID);
+    updateWeight(proID);
+    updateTotal(proID);
 }
+
+
 Template.addProject.events({
     'submit form': function(event){
         event.preventDefault();
@@ -272,12 +276,11 @@ Template.addProject.events({
             users:[{userId:currentUser,username:names}],
             createdAt:new Date(),
             sTH:0.5
-        }, function(error, result){
-          console.log(result);
+        }, function(error, result){        
+          //call back:
           initialProject(result,currentUser);
-          console.log(result);
-          Router.go('project', {_id: result,_uid: currentUser})
-        });
+          
+          Router.go('project', {_id: result,_uid: currentUser})});
 
         $('[name=projectName]').val('');
     }

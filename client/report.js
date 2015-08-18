@@ -297,7 +297,7 @@ Template.addCandidate.events({
             column:Number(this.columns)+3,
             projectID:this._id,
             createdAt: new Date(),
-            content:'click to add',
+            content:'Click Here to Add Comments',
             createdBy: Meteor.userId(),
             name:Meteor.user().username,
             url:''});
@@ -369,7 +369,7 @@ Template.addFactor.events({
           column:i,
           projectID:this._id,
           createdAt: new Date(),
-          content:'click to add',
+          content:'Click Here to Add Comments',
           createdBy: Meteor.userId(),
           name:Meteor.user().username,
           url:''});
