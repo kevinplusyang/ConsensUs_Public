@@ -35,14 +35,13 @@
 
 <template name="register">
     <!--Template for register-->
+    <!--Template events in user.js-->
 
     <script>
     //Control an animation in home page.
     //Abandoned in the final version.
         var $elem = $('#main .triphome'), l = $elem.length, i = 0;
-
         function sleep(millis){var njf1 = njen(this,arguments,"millis");nj:while(1) {try{switch(njf1.cp) { case 0:njf1._notifier=NjsRuntime.createNotifier();setTimeout(njf1._notifier,njf1._millis);njf1.cp = 1;njf1._notifier.wait(njf1);return;case 1:break nj; }} catch(ex) { if(!njf1.except(ex,1)) return; }} njf1.pf();}
-
         function go() {
             $elem.eq(i % l).fadeIn(1100, function() {
                 $elem.eq(i % l).fadeOut(1100,go);
@@ -88,6 +87,7 @@
 
 <template name="login">
     <!--Login Template-->
+    <!--Template events in user.js-->
 
     <div id="l1" class="col-md-offset-1">
         <div>
@@ -104,6 +104,7 @@
                 <div class="col-sm-offset-2">
                     <p><input type="submit" value="Login" id="loginbtm" style="border-radius: 5px"></p>
                 </div>
+
             </form>
         </div>
 
