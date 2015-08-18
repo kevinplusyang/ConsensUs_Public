@@ -1,81 +1,89 @@
 <template name="notes">    
     <tr>
-    	<td></td>   	
-    	     	
+    	<td></td>   	    	     	
     	{{#each colhere row projectID}}
-    	{{> noteArea}}
-    	
-    	
+        <!-- Template.notes.helpers, notes.js -->
+    	{{> noteArea}}    	
     	{{/each}}
+        <!--noteArea: template file in notes.html-->
+        <!--helpers and events in notes.js-->
     </tr>
 </template>
+
 <template name="reportNotes">    
     <tr>
-        <td></td>       
-                
+        <td></td>                      
         {{#each colhere row projectID}}
+        <!-- Template.notes.helpers, notes.js -->
         {{> reportNoteArea}}
-        
-        
-        {{/each}}
+       {{/each}}
+        <!--reportNoteArea: template file in notes.html-->
+        <!--helpers and events in notes.js-->
     </tr>
 </template>
 
 <template name="noteArea">
-    <!-- colspan="{{columnWeight}}" -->
-    <td colspan="{{columnWeight}}" class='notebook'>
+
+<td colspan="{{columnWeight}}" class='notebook'>
     <ul class='list-group'>
     
-	{{#each notelist}}
-    	{{> noteList}}
-    {{/each}}
-    <li class="list-group-item">
-    {{#with addNoteDefault}}
-    {{> addNote}}
-    {{/with}}
-    </li>
+        <!-- notelist -->
+    	{{#each notelist}}
+        	{{> noteList}}
+        {{/each}}
+        <!--noteList: template file in notes.html-->
+        <!--helpers and events in notes.js-->
+       
+
+        <!-- 'click to add' area -->    
+        <li class="list-group-item">
+        {{#with addNoteDefault}}
+        {{> addNote}}
+        <!--addNote: template file in notes.html-->
+        <!--helpers and events in notes.js-->
+        {{/with}}
+        </li>
+
     </ul>
-<!--     {{#with row=row column=column projectID=projectID}}
-    {{> addNote}}
-    {{/with}} -->
-    </td>   
-   	
-</template>
-<template name="reportNoteArea">
-    <!-- colspan="{{columnWeight}}" -->
-    <td class='notebook'>
-    <ul class='list-group'>
-    
-    {{#each notelist}}
-        {{> noteList}}
-    {{/each}}
-    <li class="list-group-item">
-    {{#with addNoteDefault}}
-    {{> addNote}}
-    {{/with}}
-    </li>
-    </ul>
-<!--     {{#with row=row column=column projectID=projectID}}
-    {{> addNote}}
-    {{/with}} -->
-    </td>   
-    
+</td>   
 </template>
 
+
+<template name="reportNoteArea">
+<!-- similar with template:NoteArea, without colspan-->
+<td class='notebook'>
+    <ul class='list-group'>
+        
+        <!-- notelist -->
+        {{#each notelist}}
+            {{> noteList}}
+        {{/each}}
+        <!--noteList: template file in notes.html-->
+        <!--helpers and events in notes.js-->
+        
+        <!-- 'click to add' area --> 
+        <li class="list-group-item">
+        {{#with addNoteDefault}}
+        {{> addNote}}
+        {{/with}}
+        </li>
+    </ul>
+</td>   
+</template>
+
+
 <template name="addNote">
-<!--     <form>
-        <input type="text" placeholder="Take notes here..." name="Note{{column}}">
-    </form> -->
-    {{console}}
-    <span class="editable-text-trigger">
+
+<span class="editable-text-trigger">
 {{> editableText collection="notes" field="content" saveOnFocusout=true beforeUpdate="setIsAddBefore" afterUpdate="addInsertHolder"}}
 </span>
+<!-- setIsAddBefore&addInsertHolder: collection.js     -->
 </template>
 
 <template name="noteList">
 <li class="list-group-item">
     <div class="note-head">{{name}}</div>
-    <div class="note-content">{{content}}</div><!-- ,{{row}},{{column}} -->
+    <div class="note-content">{{content}}</div>
 </li>
 
 </template>

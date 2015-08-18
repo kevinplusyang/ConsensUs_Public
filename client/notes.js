@@ -62,13 +62,8 @@ Template.reportNoteArea.helpers({
     }
   });
 
-Template.addNote.helpers({
 
-    console:function(){
-      // console.log("jdshfifhd:",this)
-      //return this;
-    }
-  });
+
 var sum =0;
 Template.addNote.events({
     'submit form': function(event){
@@ -93,3 +88,5 @@ Template.addNote.events({
     
   }
 });
+
+
