@@ -33,20 +33,31 @@
         <div class="container-fluid">
         <!-- gray nav of project page -->
             <div class="project-nav">
-                <h2>Report {{name}}</h2>
+                <h2>Everyone: {{name}}</h2>
                 <!-- name:project attribution -->
 
-                <div class="project-tool" >
+                <a  class="btn btn-default" id="menu-toggle" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px"><img src="/chaticon.png" style="margin-right: 10px">Chat Room</a>
+                <a  href="/project/{{this._id}}/{{UID}}/" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px; margin-left: 20px"><img src="/singlePeople.png" style="margin-right: 10px;margin-bottom: 13px; height: 32px; width: 32px">Mine</a>
+
+                <a style="margin-left: 20px">
                     {{ > dropdownTrigger name="sdbox" template="sdboxTrigger" }}
                     <!-- template file is in SD.html -->
                     {{ > dropdown name="sdbox" }}
                     <!-- template file is in SD.html -->
-                </div>
+                </a>
 
-                <div style="margin-left: 200px">
-                   
-                    <a  class="btn btn-default" id="menu-toggle" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px"><img src="/chaticon.png" style="margin-right: 10px">Chat Room & Report</a>
-                </div>
+
+                <!--<div class="project-tool" >-->
+                    <!---->
+                <!--</div>-->
+
+                <!--<div style="margin-left: 250px">-->
+                    <!--<a  class="btn btn-default" id="menu-toggle" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px"><img src="/chaticon.png" style="margin-right: 10px">Chat Room & Report</a>-->
+                <!--</div>-->
+
+                <!--<div style="margin-left: 200px">-->
+                    <!--<a  class="btn btn-default" id="menu-toggle" style="background-color: #F1F3F4; border: 0px; color: #6f747e; font-size: 13px"><img src="/chaticon.png" style="margin-right: 10px">Mine</a>-->
+                <!--</div>-->
 
             </div>
         </div>
