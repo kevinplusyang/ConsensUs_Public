@@ -268,6 +268,7 @@ Template.addProject.events({
         var projectName = $('[name=projectName]').val();
         var currentUser = Meteor.userId();
         var names = Meteor.user().username;
+        
         Projects.insert({
             name : projectName,
             createdby: currentUser,
@@ -289,35 +290,36 @@ Template.addProject.events({
 
 
 Template.cellshow.helpers({
+
+    /**
+    oi: whether currentUser can edit the cell.
+    **/
     'oi': function(UID, row, column){
-
         var currentUser = Meteor.userId();
-
         if(currentUser==UID){
-
             if(row==-1||column==0||row==0||column==2){
                 return false
             }
-
             return true;
         }else{
             return false;
         }
-
-
-
         return false
     },
+
     isFactor: function(){
       var flag = (this.column === 0);
       return flag;
     },
+
     showNotes: function(row){
-
     return Session.get('showNotes')[row-1];
-
     },
-    type:function(){
+    
+    /*
+    type: to switch class for report cells
+    */
+    type: function(){
       if(this.row ===0){
         return 'row0';
 
@@ -339,54 +341,58 @@ Template.cellshow.helpers({
       }else{
         return true;
       }
-
     }
 });
 
 
-
-
+/**
+toggle checkbox: show notes
+**/
 Template.cellshow.events({
   "change .show-notes input": function (event) {
       var rowNo=Number(this.row);
-
 
       var getShowNotes = Session.get('showNotes');
       var newSN = getShowNotes;
       newSN[rowNo-1] = event.target.checked;
 
       Session.set({showNotes: newSN});
-
     }
+});
 
-  });
 
+/**
+updateSliders: update all the sliders: the same value with the normalized weight.
+**/
 var updateSliders=function(id){
 
   var thiscell = Cells.findOne({_id:id});
   var slider=$( ".noUi-origin" );//$(".sliderrr");
 
-      slider.each(function(index){
-          var cell=Cells.findOne({
-            projectID:thiscell.projectID,
-            row:index+1,
-            column:2,
-            isReport:false,
-            userID:thiscell.userID
-          });
-          var value=cell.data*100;
+  slider.each(function(index){
+      var cell=Cells.findOne({
+        projectID:thiscell.projectID,
+        row:index+1,
+        column:2,
+        isReport:false,
+        userID:thiscell.userID
+      });
+      var value=cell.data*100;
 
-          $(this).css("left",value.toString()+"%");
-
-
-      })
+      $(this).css("left",value.toString()+"%");
+  })
 };
+
+/**
+initialize the sliders. Using package: rcy:nouislider
+**/
+
 Template.sliderCell.onRendered (function () {
 
   var id=this._id;
   var thiscell=this.data;
 
-
+  // find responsively weight cell
   var WCell=Cells.findOne({
     projectID:thiscell.projectID,
     row:thiscell.row,
@@ -406,10 +412,12 @@ Template.sliderCell.onRendered (function () {
     }
   }).on('slide', function (ev, val) {
 
+    //change value of weight cells
     Cells.update({_id:WCell._id}, {$set:{data:val}});
     updateSliders(WCell._id);
   
   }).on('change',function(ev,val){
+    //change value of weight cells
     Cells.update({_id:WCell._id}, {$set: {data: val}});
 
   })
@@ -417,9 +425,11 @@ Template.sliderCell.onRendered (function () {
 });
 
 
-Template.sliderCell.helpers({
-    dataPercent: function(){
-
+Template.sliderCell.helpers({  
+/**
+dataPercent: transfer to percent form.
+**/
+dataPercent: function(){
       var value=Number(this.data);
       return (value*100).toFixed(1);
     }
