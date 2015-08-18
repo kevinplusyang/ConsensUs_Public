@@ -1,44 +1,80 @@
+/**
+to be modified: collection subscribe selectively.
+**/
 Meteor.subscribe("cells");
 Meteor.subscribe("projects");
 Meteor.subscribe("chatroom");
 Meteor.subscribe("notes");
 
+/**
+cellFindOne: return a single cell in this personal matrix.
+**/
 var cellFindOne = function(rowNo, columnNo,proID,userID){
       return Cells.findOne({isReport:false,userID: userID, row: rowNo, column:columnNo, projectID:proID});
 }
+
+/**
+cellFindCol: find cells of a certain column in this personal matrix, sort by rowNumber.
+return: cells cursor.
+**/
 var cellFindCol= function(colNo,proID,userID){
       return Cells.find({isReport:false,userID: userID,column: colNo, projectID:proID},{ sort:{row: 1 }});
 }
+
+/**
+cellFindRow: find cells of a certain row in this personal matrix, sort by colNumber.
+return: cells cursor.
+**/
 var cellFindRow= function(rowNo,proID,userID){
       return Cells.find({isReport:false,userID: userID,row: rowNo, projectID:proID},{ sort:{column: 1 }});
 }
+
+/**
+updateWeight: normalize column 1 -> update column 2.
+**/
 var updateWeight = function(proID,userID){
       var weightArray = cellFindCol(1,proID,userID);
+      
       var sum = 0;
       weightArray.forEach(function(cell){
         sum =sum + Number(cell.data);
       });
+      
       cellFindCol(2,proID,userID).forEach(function(cell){
+        
         var val=cellFindOne(cell.row, 1,proID,userID).data/sum;
         Cells.update(cell._id,{$set: {data: val.toFixed(3) }});
+
       });
 
 }
+
+/**
+updateTotal: calculate total score, update row -1.
+**/
 var updateTotal = function(proID,userID){
       var totalArray = cellFindRow(-1,proID,userID);
 
       totalArray.forEach(function(cell){
         var sum = 0;
         Col=cell.column;
+
+        // cell cursor for cells in each column:
         var scoreCol = cellFindCol(Col,proID,userID);
         scoreCol.forEach(function(cellInside){
           if (Number(cellInside.row)>= 1) {
+
+            //sum += normalized weight * cell.data
             sum =sum + Number(cellFindOne(cellInside.row,2,proID,userID).data ) * Number(cellInside.data) ;
           };
         });
         Cells.update(cell._id,{$set: {data: sum.toFixed(3)}});
      });
 }
+
+/**
+updateCandidate: syncronize candidates in personal matrix with the report matrix.
+**/
 var updateCandidate = function(proID){
     var candiUserCursor=Cells.find({isReport:false,row:0,projectID:proID});
 
@@ -46,10 +82,15 @@ var updateCandidate = function(proID){
       colNo = candiUser.column;
       if(colNo>2){
         var candiReport = Cells.findOne({isReport:true,row:0,column:colNo,projectID:proID});
+        
         Cells.update(candiUser._id,{$set: {data: candiReport.data}});       
       }
     })
 }
+
+/**
+updateFactor: syncronize factors in personal matrix with the report matrix.
+**/
 var updateFactor = function(proID){
     var facUserCursor=Cells.find({isReport:false,column:0,projectID:proID});
 
@@ -59,7 +100,6 @@ var updateFactor = function(proID){
         var facReport = Cells.findOne({isReport:true,row:rowNo,column:0,projectID:proID});
         Cells.update(facUser._id,{$set: {data: facReport.data}});       
       }
-
     })
 
 }
