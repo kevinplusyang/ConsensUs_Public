@@ -36,7 +36,7 @@ Template.newChatItem.helpers({
 
 
 Template.newChatItem.events({
-    //Add a chat item in the chatroom database events
+    //Add a chat item in the chat room database events
 
     'submit form': function(event){
         //Trigger action to add a chat item in database after press return

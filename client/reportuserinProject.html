@@ -1,26 +1,23 @@
 <template name="reportuserInProject">
+    <!--Show the existing users in the report page-->
 
     <ul style="margin: 0px ; padding-left: 0px">
         <li class="projectListCell" style="list-style-type: none ;  height: 70px ;text-align: center">
-
             <div style="margin-top: 27px">
                 <a href="/project/{{this._id}}/flag/report" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">Everyone</a>
+                <!--Generate a link like: http://xxx.com/project/<projectID>/flag/report/-->
             </div>
-
         </li>
 
         {{#each reportuserInProject}}
-
+            <!--JS file in reportuserinProject.js-->
             <li class="projectListCell">
-
                 <div style="margin-top: 27px">
                     <a href="/project/{{pj}}/{{userId}}" style="color: #ffffff; font-family: STHeitiSC-Medium; font-size: 15px">{{username}}</a>
+                    <!--Generate a link like: http://xxx.com/project/<projectID>/<UserID>/-->
                 </div>
-
             </li>
-
         {{/each}}
-
     </ul>
 
 </template>
