@@ -389,7 +389,7 @@ a {
 	padding: 0px;
 	height: inherit;
 	width:100px;
-	overflow: scroll;
+	overflow: auto;
 	float: left;
 	background-color: #3f9db6;
 	overflow-x: hidden;
@@ -404,7 +404,7 @@ a {
 	padding: 4px;
 	height: 94%;
 	width: 200px;
-	overflow: scroll;
+	overflow: auto;
 	float: right;
 	overflow-x: hidden;
 	border-right: 2px solid #3e9cb5;
