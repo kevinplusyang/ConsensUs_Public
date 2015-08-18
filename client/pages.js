@@ -341,6 +341,10 @@ Template.cellshow.helpers({
       }else{
         return true;
       }
+    },
+    dataPercent: function(){
+      var value=Number(this.data);
+      return (value*100).toFixed(1);
     }
 });
 

@@ -5,28 +5,37 @@
       <tr>
         <td class="table-null"></td>
         <td colspan="2" class="table-head" style="width:296px">Total Score</td>
+        <!-- display row -1 -->
         {{#each cellFindRow -1 currentUserr currentProjectt}}
         {{> cellshow}}
         {{/each}}
       </tr>
-
+      <!--cellshow: template file in matrix.html-->
+      <!--helpers and events in pages.js-->
+      
       <tr>
           <td></td>
           <td colspan="2" class="table-row0" style="font-size:14px">Weight</td>
+
+          <!-- display row 0 -->
           {{#each cellFindRow 0 currentUserr currentProjectt}}
             {{> cellshow}}
-          {{/each}}
+          {{/each}}         
+          <!--cellshow: template file in matrix.html-->
+          <!--helpers and events in pages.js-->
       </tr>
-       {{#each rowNum currentUserr currentProjectt}}
+      
+
+      <!-- display row >=1 -->
+      {{#each rowNum currentUserr currentProjectt}}
          {{> matBody}}
        {{/each}}
+       <!--matBody: template file in matrix.html-->
+       <!--helpers and events in pages.js-->
 
      </table>
 </div>
 
-<!--   {{> addCandidate}}
-
-  {{> addFactor}} -->
 
  <!--<h3>New test</h3>-->
   <!---->
@@ -47,58 +56,52 @@
 </template>
 
 <template name = "matBody">
-      <tr>      
-<!--         {{row}}{{_id}} -->
-<!-- {{currentProjectt}} {{currentUser}} -->
-        {{#each cellFindRow row projectID userID}}
-        
+      <!-- dispaly row>=1 -->
+      <tr>              
+        {{#each cellFindRow row projectID userID}}        
         {{> cellshow}}
         {{/each}}
       </tr>
+      <!-- whether to display notes -->
       {{#if showNotes row}}
       {{> notes}}
       {{/if}}
+      <!--notes: template file in notes.html-->
+      <!--helpers and events in notes.js-->
+
 </template>
 
 <template name = "cellshow">
-  <td class="table-{{type}}">
-        {{#if oi userID row column}}
-            {{#if notWeight}}
-              
-              {{> editableText collection="cells" field="data" saveOnFocusout=true}}
-              {{#if isFactor}}
-                <label class="show-notes">
-                  <input type="checkbox" checked="{{showNotes row}}" />
-                    Show Notes
-                  </label>
-              {{/if}}
+<!--helpers and events in pages.js-->
+<td class="table-{{type}}">
+  {{#if oi userID row column}}
+  <!-- editable or not -->
+      
+      {{#if notWeight}}
+        
+        {{> editableText collection="cells" field="data" saveOnFocusout=true}}
+      {{else}}
+        {{> sliderCell}}
+        <!--sliderCell: template file in matrix.html-->
+        <!--helpers and events in pages.js-->
+      {{/if}}
+   
+  {{else}}
+      
+      {{#if notWeight}}
+        {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
+          {{#if isFactor}}
+        <label class="show-notes">
+          <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden" />
+            <!--Show Notes-->
+            <img src="/noteicon.png" style="width: 20px; height: 20px">
+          </label>
+          {{/if}}
+      {{else}}
+         {{dataPercent}}%
+      {{/if}}
 
-            {{else}}
-                {{> sliderCell}}
-      <!--       <div class="slider-container"> -->
-              <!-- <div class="sliderrr"></div> -->
-           <!--  </div> -->
-
-            {{/if}}
-         {{else}}
-            {{#if notWeight}}
-              {{> editableText collection="cells" field="data" saveOnFocusout=true  userCanEdit=false}}
-                {{#if isFactor}}
-              <label class="show-notes">
-                <input type="checkbox" checked="{{showNotes row}}" style="visibility: hidden" />
-                  <!--Show Notes-->
-                  <img src="/noteicon.png" style="width: 20px; height: 20px">
-                </label>
-                {{/if}}
-            {{else}}
-                {{> sliderCell}}
-            {{/if}}
-
-        {{/if}}
-
-
-    <!--{{> editableText collection="cells" field="isReport" saveOnFocusout=true}};-->
-    <!--{{> editableText collection="cells" field="userID" saveOnFocusout=true}};-->
+  {{/if}}
 
   </td>
 </template>
