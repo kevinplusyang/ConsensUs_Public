@@ -438,3 +438,21 @@ dataPercent: function(){
       return (value*100).toFixed(1);
     }
 });
+
+
+Template.project.events({
+   'click #notesAll': function(event) {
+ 
+    event.preventDefault();
+    var getShowNotes = Session.get('showNotes');
+    var newSN = getShowNotes;
+    //newSN[rowNo-1] = event.target.checked;
+    console.log(newSN);
+    console.log(newSN.length);
+    for (var item in newSN){
+      newSN[item] = false;
+    }
+    console.log(newSN);
+    Session.set({showNotes: newSN});
+    }
+  });
