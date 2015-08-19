@@ -296,15 +296,14 @@ Template.cellshow.helpers({
     **/
     'oi': function(UID, row, column){
         var currentUser = Meteor.userId();
-        if(currentUser==UID){
-            if(row==-1||column==0||row==0||column==2){
-                return false
+        if(currentUser===UID){
+            if(row===-1||column===0||row==0){
+                return false;
             }
             return true;
         }else{
             return false;
         }
-        return false
     },
 
     isFactor: function(){
@@ -441,18 +440,18 @@ dataPercent: function(){
 
 
 Template.project.events({
+   /**
+  SET session.showNotes to be all false.
+   **/
+
    'click #notesAll': function(event) {
  
     event.preventDefault();
     var getShowNotes = Session.get('showNotes');
     var newSN = getShowNotes;
-    //newSN[rowNo-1] = event.target.checked;
-    console.log(newSN);
-    console.log(newSN.length);
     for (var item in newSN){
       newSN[item] = false;
     }
-    console.log(newSN);
     Session.set({showNotes: newSN});
     }
   });
