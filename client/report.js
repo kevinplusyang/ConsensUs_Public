@@ -115,6 +115,7 @@ var updateRowForVariance = function(proID,rowNo){
         }else if(rowNo===-1){
             if(cell.column>1){
                 var variance = calculateSD(rowNo,cell.column,proID);
+                console.log(variance);
                 Cells.update(cell._id,{$set: {SDdata : variance.toFixed(3)}});
 
             }
